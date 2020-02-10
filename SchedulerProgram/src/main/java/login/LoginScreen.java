@@ -37,7 +37,7 @@ public class LoginScreen extends javax.swing.JFrame {
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
-        enterUserandPwButton = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,10 +52,10 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
 
-        enterUserandPwButton.setText("Enter");
-        enterUserandPwButton.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterUserandPwButtonActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
 
@@ -76,7 +76,7 @@ public class LoginScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(enterUserandPwButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,7 +94,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     .addComponent(passwordLabel)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(enterUserandPwButton)
+                .addComponent(loginButton)
                 .addContainerGap(150, Short.MAX_VALUE))
         );
 
@@ -105,8 +105,9 @@ public class LoginScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameTextFieldActionPerformed
 
-    private void enterUserandPwButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterUserandPwButtonActionPerformed
-
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        
+        
         //Imports or creates workbook students.xlsx depending on if file exists
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
@@ -132,7 +133,7 @@ public class LoginScreen extends javax.swing.JFrame {
         //Adds input to student details sheet as entered
         XSSFRow newRow;
         String username = usernameTextField.getText();
-        newRow = sheet.createRow(0);
+        newRow = sheet.createRow(1);
         Cell cell = newRow.createCell(0);
         cell.setCellValue(username);
         
@@ -156,11 +157,7 @@ public class LoginScreen extends javax.swing.JFrame {
         }catch(IOException e){
             System.out.println("Error closing fileoutputstream.");
         }
-        
-        
-        
-        
-    }//GEN-LAST:event_enterUserandPwButtonActionPerformed
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +197,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton enterUserandPwButton;
+    private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel usernameLabel;
