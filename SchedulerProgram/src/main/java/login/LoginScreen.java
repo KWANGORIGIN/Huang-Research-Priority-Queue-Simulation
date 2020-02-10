@@ -5,6 +5,8 @@
  */
 package login;
 import java.io.*;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -12,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
- * @author wanga
+ * @author Kevin Wang
  */
 public class LoginScreen extends javax.swing.JFrame {
 
@@ -133,6 +135,13 @@ public class LoginScreen extends javax.swing.JFrame {
         newRow = sheet.createRow(0);
         Cell cell = newRow.createCell(0);
         cell.setCellValue(username);
+        
+        //Adds timestamp
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String dateTime = dtf.format(now);
+        Cell timeCell = newRow.createCell(1);
+        timeCell.setCellValue(dateTime);
         
         
         //Saves to file
