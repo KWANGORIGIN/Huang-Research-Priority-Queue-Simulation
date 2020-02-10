@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package login;
+import java.io.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -28,17 +32,17 @@ public class LoginScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
-        passwordTextField = new javax.swing.JTextField();
         enterUserandPwButton = new javax.swing.JButton();
+        passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Username:");
+        usernameLabel.setText("Username:");
 
-        jLabel2.setText("Password:");
+        passwordLabel.setText("Password:");
 
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,30 +63,34 @@ public class LoginScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(usernameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(171, 171, 171))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(passwordLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(enterUserandPwButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(passwordTextField))))
-                .addGap(171, 171, 171))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(enterUserandPwButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(usernameLabel)
                     .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordLabel)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(enterUserandPwButton)
                 .addContainerGap(150, Short.MAX_VALUE))
@@ -96,7 +104,52 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameTextFieldActionPerformed
 
     private void enterUserandPwButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterUserandPwButtonActionPerformed
+
+        //Imports or creates workbook students.xlsx depending on if file exists
         XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet();
+        try(FileInputStream in = new FileInputStream("students.xlsx")){
+            workbook = new XSSFWorkbook(in);
+            sheet = workbook.getSheet("Student Details");
+            
+            in.close();
+            System.out.println("Successfully opened students.xlsx");
+            
+        }catch(FileNotFoundException e){
+            System.out.println("File not found. Creating new file...");
+            
+            //Creates a blank workbook and sheet
+            workbook = new XSSFWorkbook();
+            sheet = workbook.createSheet("Student Details");
+            
+            System.out.println("Successfully created students.xlsx");
+        }catch(IOException e){
+            System.out.println("Unknown error opening file.");
+        }
+        
+        //Adds input to student details sheet as entered
+        XSSFRow newRow;
+        String username = usernameTextField.getText();
+        newRow = sheet.createRow(0);
+        Cell cell = newRow.createCell(0);
+        cell.setCellValue(username);
+        
+        
+        //Saves to file
+        try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+            workbook.write(out);
+            out.close();
+            
+            //Success message
+            System.out.println("Succesfully outputted to students.xlsx");
+        }catch(FileNotFoundException e){
+            System.out.println("Unable to create file.");
+        }catch(IOException e){
+            System.out.println("Error closing fileoutputstream.");
+        }
+        
+        
+        
         
     }//GEN-LAST:event_enterUserandPwButtonActionPerformed
 
@@ -133,13 +186,15 @@ public class LoginScreen extends javax.swing.JFrame {
                 new LoginScreen().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterUserandPwButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }
