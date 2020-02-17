@@ -129,11 +129,25 @@ public class LoginScreen extends javax.swing.JFrame {
             System.out.println("Unknown error opening file.");
         }
         
-        //Adds input to student details sheet as entered
+        //Creates titles for columns
         XSSFRow newRow;
-        String username = usernameTextField.getText();
-        newRow = sheet.createRow(1);
+        newRow = sheet.createRow(0);
         Cell cell = newRow.createCell(0);
+        cell.setCellValue("Username");
+        cell = newRow.createCell(1);
+        cell.setCellValue("Timestamp");
+        
+        
+        //Adds input to student details sheet as entered
+        String username = usernameTextField.getText();
+        
+        //Input validation
+        if(!username.matches("[a-z]+/d+")){
+            //JOptionPane.showMessageDialog(frame, "Invalid username");
+            username = "Invalid Username!";
+        }
+        newRow = sheet.createRow(1);
+        cell = newRow.createCell(0);
         cell.setCellValue(username);
         
         //Adds timestamp
@@ -143,6 +157,10 @@ public class LoginScreen extends javax.swing.JFrame {
         Cell timeCell = newRow.createCell(1);
         timeCell.setCellValue(dateTime);
         
+        //Autosizes columns
+        for(int count = 0; count < newRow.getLastCellNum(); count++){
+            sheet.autoSizeColumn(count);
+        }
         
         //Saves to file
         try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
