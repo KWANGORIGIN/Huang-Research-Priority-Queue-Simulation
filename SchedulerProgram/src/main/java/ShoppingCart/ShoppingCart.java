@@ -5,6 +5,9 @@
  */
 package ShoppingCart;
 
+import javax.swing.table.DefaultTableModel;
+import Course.Course;
+
 /**
  *
  * @author wanga
@@ -16,6 +19,7 @@ public class ShoppingCart extends javax.swing.JFrame {
      */
     public ShoppingCart() {
         initComponents();
+        populate_Table_with_Courses();
     }
 
     /**
@@ -27,11 +31,82 @@ public class ShoppingCart extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Course", "Date", "Room", "Instructor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setInheritsPopupMenu(true);
+        jTable1.setSelectionBackground(new java.awt.Color(0, 51, 102));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.setShowGrid(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -67,7 +142,21 @@ public class ShoppingCart extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private void populate_Table_with_Courses(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Course newCourse = new Course("CMPSC 121", 1, "Dr. Someone");
+        Object courseRow[] = new Object[4];
+        courseRow[0] = newCourse.getCourseName();
+        courseRow[1] = "Date";
+        courseRow[2] = newCourse.getRoomNum();
+        courseRow[3] = newCourse.getInstructor();
+        model.addRow(courseRow);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
