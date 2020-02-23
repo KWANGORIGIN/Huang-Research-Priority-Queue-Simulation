@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package login;
+import ShoppingCart.ShoppingCart;
+import User.User;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -141,6 +143,9 @@ public class LoginScreen extends javax.swing.JFrame {
         //Adds input to student details sheet as entered
         String username = usernameTextField.getText();
         
+        //Creates new user or imports old one
+        
+        
         //Input validation
         if(!username.matches("[a-z]+/d+")){
             //JOptionPane.showMessageDialog(frame, "Invalid username");
@@ -174,6 +179,12 @@ public class LoginScreen extends javax.swing.JFrame {
         }catch(IOException e){
             System.out.println("Error closing fileoutputstream.");
         }
+        
+        //Creates ShoppingCart screen
+        ShoppingCart cart = new ShoppingCart();
+        cart.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
