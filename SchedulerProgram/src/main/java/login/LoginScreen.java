@@ -5,7 +5,6 @@
  */
 package login;
 import ShoppingCart.ShoppingCart;
-import User.User;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
