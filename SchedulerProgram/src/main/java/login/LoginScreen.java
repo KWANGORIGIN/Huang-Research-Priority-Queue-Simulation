@@ -100,6 +100,7 @@ public class LoginScreen extends javax.swing.JFrame {
         getContentPane().add(passwordField, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
@@ -183,7 +184,7 @@ public class LoginScreen extends javax.swing.JFrame {
         //Creates ShoppingCart screen
         ShoppingCart cart = new ShoppingCart();
         cart.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);//Should probably change to closing the window?
         
     }//GEN-LAST:event_loginButtonActionPerformed
 

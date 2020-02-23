@@ -7,6 +7,7 @@ package ShoppingCart;
 
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
+import javax.swing.JTable;
 
 /**
  *
@@ -31,8 +32,7 @@ public class ShoppingCart extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        shoppingCartTable = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +42,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Course", "Date", "Room", "Instructor"
+                "Course", "Starting Date", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
@@ -71,40 +71,41 @@ public class ShoppingCart extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
-        );
+        shoppingCartTable.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        if(evt.getClickCount() == 2){//If double click on a row
+            JTable target = (JTable) evt.getSource();
+            int row = target.getSelectedRow();
+            System.out.println("Row Selected: " + row);//for debugging
+            
+            //Opens up new window with additional course information
+            new additionalCourseInfoWindow().setVisible(true);
+            
+        }
+        
         
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -143,7 +144,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
     }
     
-    private void populate_Table_with_Courses(){
+    protected void populate_Table_with_Courses(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Course newCourse = new Course("CMPSC 121", 1, "Dr. Someone");
         Object courseRow[] = new Object[4];
@@ -155,8 +156,7 @@ public class ShoppingCart extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane shoppingCartTable;
     // End of variables declaration//GEN-END:variables
 }
