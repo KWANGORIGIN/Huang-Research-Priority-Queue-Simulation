@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author wanga
  */
-public class additionalCourseInfoWindow extends javax.swing.JFrame {
+public class CourseInfoWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form additionalCourseInfoWindow
      */
-    public additionalCourseInfoWindow() {
+    public CourseInfoWindow() {
         initComponents();
         populate_Table_with_Courses();
     }
@@ -34,10 +34,12 @@ public class additionalCourseInfoWindow extends javax.swing.JFrame {
 
         courseTableScrollPane = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        addCourseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        setPreferredSize(new java.awt.Dimension(891, 300));
+        setPreferredSize(new java.awt.Dimension(891, 350));
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,11 +77,19 @@ public class additionalCourseInfoWindow extends javax.swing.JFrame {
         });
         courseTableScrollPane.setViewportView(courseTable);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        addCourseButton.setText("Add Course");
+        jPanel1.add(addCourseButton, new java.awt.GridBagConstraints());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 893, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(11, 11, 11)
@@ -88,12 +98,15 @@ public class additionalCourseInfoWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(260, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(courseTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(courseTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(55, Short.MAX_VALUE)))
         );
 
         pack();
@@ -121,20 +134,21 @@ public class additionalCourseInfoWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(additionalCourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(additionalCourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(additionalCourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(additionalCourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseInfoWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new additionalCourseInfoWindow().setVisible(true);
+                new CourseInfoWindow().setVisible(true);
             }
         });
     }
@@ -152,7 +166,9 @@ public class additionalCourseInfoWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCourseButton;
     private javax.swing.JTable courseTable;
     private javax.swing.JScrollPane courseTableScrollPane;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

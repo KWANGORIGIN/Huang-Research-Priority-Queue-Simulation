@@ -7,6 +7,7 @@ package ShoppingCart;
 
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -32,9 +33,35 @@ public class ShoppingCart extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        invalidCourseNameDialogWindow = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         shoppingCartTable = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         searchbar = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("\"Invalid course name!\"");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout invalidCourseNameDialogWindowLayout = new javax.swing.GroupLayout(invalidCourseNameDialogWindow.getContentPane());
+        invalidCourseNameDialogWindow.getContentPane().setLayout(invalidCourseNameDialogWindowLayout);
+        invalidCourseNameDialogWindowLayout.setHorizontalGroup(
+            invalidCourseNameDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(invalidCourseNameDialogWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        invalidCourseNameDialogWindowLayout.setVerticalGroup(
+            invalidCourseNameDialogWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(invalidCourseNameDialogWindowLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(148, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +101,13 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
         shoppingCartTable.setViewportView(jTable1);
 
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,16 +118,20 @@ public class ShoppingCart extends javax.swing.JFrame {
                     .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addGap(36, 36, 36))
         );
 
@@ -105,18 +143,33 @@ public class ShoppingCart extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         
-        if(evt.getClickCount() == 2){//If double click on a row
-            JTable target = (JTable) evt.getSource();
-            int row = target.getSelectedRow();
-            System.out.println("Row Selected: " + row);//for debugging
-            
-            //Opens up new window with additional course information
-            new additionalCourseInfoWindow().setVisible(true);
-            
-        }
+        //Deprecated. Misunderstood original requirements
+//        if(evt.getClickCount() == 2){//If double click on a row
+//            JTable target = (JTable) evt.getSource();
+//            int row = target.getSelectedRow();
+//            System.out.println("Row Selected: " + row);//for debugging
+//            
+//            //Opens up new window with additional course information
+//            new CourseInfoWindow().setVisible(true);
+//            
+//        }
         
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        String searchInput = searchbar.getText();
+        if(searchInput.matches("[A-Za-z]+\\s\\d+") || searchInput.matches("[A-Za-z]+\\d+")){
+            System.out.println("Success");
+        }
+        else{
+            //ISSUES here
+            invalidCourseNameDialogWindow.setVisible(true);
+        }
+        
+        
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,7 +218,11 @@ public class ShoppingCart extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog invalidCourseNameDialogWindow;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbar;
     private javax.swing.JScrollPane shoppingCartTable;
     // End of variables declaration//GEN-END:variables
