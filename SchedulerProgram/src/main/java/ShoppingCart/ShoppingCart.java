@@ -161,11 +161,12 @@ public class ShoppingCart extends javax.swing.JFrame {
         // TODO add your handling code here:
         String searchInput = searchbar.getText();
         if(searchInput.matches("[A-Za-z]+\\s\\d+") || searchInput.matches("[A-Za-z]+\\d+")){
-            System.out.println("Success");
+            CourseInfoWindow courseWindow = new CourseInfoWindow();
+            courseWindow.setVisible(true);
         }
         else{
             //ISSUES here
-            invalidCourseNameDialogWindow.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Invalid course name.");//Probably want to change null reference later
         }
         
         
