@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package login;
+package Login;
+import SchedulingSystem.*;
 import ShoppingCart.ShoppingCart;
+import Student.Student;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -18,13 +21,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Kevin Wang
  */
 public class LoginScreen extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form LoginScreen
      */
     public LoginScreen() {
         initComponents();
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +88,7 @@ public class LoginScreen extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 55;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 4, 130, 145);
@@ -108,83 +112,128 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
-       
-        //Imports or creates workbook students.xlsx depending on if file exists
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet();
-        try(FileInputStream in = new FileInputStream("students.xlsx")){
-            workbook = new XSSFWorkbook(in);
-            sheet = workbook.getSheet("Student Details");
+        if(SchedulingSystem.isAdmin(usernameTextField.getText())){
+            //Opens adminWindow to adjust the values of the Scheduling System
+            AdministratorWindow adminWindow = new AdministratorWindow();
+            this.setVisible(false);
+            adminWindow.setVisible(true);
             
-            in.close();
-            System.out.println("Successfully opened students.xlsx");
             
-        }catch(FileNotFoundException e){
-            System.out.println("File not found. Creating new file...");
             
-            //Creates a blank workbook and sheet
-            workbook = new XSSFWorkbook();
-            sheet = workbook.createSheet("Student Details");
-            
-            System.out.println("Successfully created students.xlsx");
-        }catch(IOException e){
-            System.out.println("Unknown error opening file.");
         }
-        
-        //Creates titles for columns
-        XSSFRow newRow;
-        newRow = sheet.createRow(0);
-        Cell cell = newRow.createCell(0);
-        cell.setCellValue("Username");
-        cell = newRow.createCell(1);
-        cell.setCellValue("Timestamp");
-        
-        
-        //Adds input to student details sheet as entered
-        String username = usernameTextField.getText();
-        
-        //Creates new user or imports old one
-        
-        
-        //Input validation
-        if(!username.matches("[a-z]+/d+")){
-            //JOptionPane.showMessageDialog(frame, "Invalid username");
-            username = "Invalid Username!";
-        }
-        newRow = sheet.createRow(1);
-        cell = newRow.createCell(0);
-        cell.setCellValue(username);
-        
-        //Adds timestamp
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTime = dtf.format(now);
-        Cell timeCell = newRow.createCell(1);
-        timeCell.setCellValue(dateTime);
-        
-        //Autosizes columns
-        for(int count = 0; count < newRow.getLastCellNum(); count++){
-            sheet.autoSizeColumn(count);
-        }
-        
-        //Saves to file
-        try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
-            workbook.write(out);
-            out.close();
+        else{
+            //Imports or creates workbook students.xlsx depending on if file exists
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet();
+            XSSFRow newRow;
+            Cell cell;
             
-            //Success message
-            System.out.println("Succesfully outputted to students.xlsx");
-        }catch(FileNotFoundException e){
-            System.out.println("Unable to create file.");
-        }catch(IOException e){
-            System.out.println("Error closing fileoutputstream.");
+            try(FileInputStream in = new FileInputStream("students.xlsx")){
+                workbook = new XSSFWorkbook(in);
+                sheet = workbook.getSheet("Student Details");
+
+                in.close();
+                System.out.println("Successfully opened students.xlsx");
+
+            }catch(FileNotFoundException e){
+                System.out.println("File not found. Creating new file...");
+
+                //Creates a blank workbook and sheet
+                workbook = new XSSFWorkbook();
+                sheet = workbook.createSheet("Student Details");
+                
+                //Creates titles for columns
+                newRow = sheet.createRow(0);
+                cell = newRow.createCell(0);
+                cell.setCellValue("Username");
+                cell = newRow.createCell(1);
+                cell.setCellValue("Timestamp");
+
+                System.out.println("Successfully created students.xlsx");
+            }catch(IOException e){
+                System.out.println("Unknown error opening file.");
+            }
+            
+            //Adds usernameTextField input to student details sheet as entered
+            String username = usernameTextField.getText();
+
+            //Creates new Student or imports existing Student
+            Student student = new Student();
+            int rowPosition = 0;
+            try(FileInputStream input = new FileInputStream(username + ".ser")){//attempts to load in existing Student
+                try(ObjectInputStream inputStudent = new ObjectInputStream(input)){
+
+                    student = (Student) inputStudent.readObject();
+                    
+                    rowPosition = student.getRowPosition();
+                    
+                }
+            }catch(FileNotFoundException fileNotFound){//if existing student not found, then creates new student and saves to file
+                rowPosition = SchedulingSystem.lastInputtedRow + 1;
+                student = new Student(username, rowPosition);
+                
+                //Saves new Student object
+                try(FileOutputStream outputFile = new FileOutputStream(username + ".ser")){
+                    try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+                        output.writeObject(student);
+                        System.out.println("Student " + username + " successfully saved.");
+                    }
+                }catch(FileNotFoundException noFile){
+                    System.out.println("File not found");
+                }catch(IOException ioException){
+                    System.out.println("Error saving to file.");
+                }
+                
+            }catch(ClassNotFoundException classNotFound){
+                JOptionPane.showMessageDialog(null, "Error reading Student from file.");
+            }catch(IOException e){
+                JOptionPane.showMessageDialog(null, "Unknown error trying to load in student. File possibly corrupted.");
+            }
+                
+            /*
+            Might deprecate
+            */
+            //Input validation
+            if(!username.matches("[a-z]+/d+")){
+                JOptionPane.showMessageDialog(null, "Invalid username");
+                username = "Invalid Username!";
+            }
+            
+            
+            newRow = sheet.createRow(rowPosition);
+            cell = newRow.createCell(0);
+            cell.setCellValue(username);
+
+            //Adds timestamp
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String dateTime = dtf.format(now);
+            Cell timeCell = newRow.createCell(1);
+            timeCell.setCellValue(dateTime);
+
+            //Autosizes columns
+            for(int count = 0; count < newRow.getLastCellNum(); count++){
+                sheet.autoSizeColumn(count);
+            }
+
+            //Saves to file
+            try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+                workbook.write(out);
+                out.close();
+
+                //Success message
+                System.out.println("Succesfully outputted to students.xlsx");
+            }catch(FileNotFoundException noFile){
+                System.out.println("Unable to create file.");
+            }catch(IOException e){
+                System.out.println("Error closing fileoutputstream.");
+            }
+
+            //Creates ShoppingCart screen
+            ShoppingCart cart = new ShoppingCart(student);
+            cart.setVisible(true);
+            this.setVisible(false);
         }
-        
-        //Creates ShoppingCart screen
-        ShoppingCart cart = new ShoppingCart();
-        cart.setVisible(true);
-        this.setVisible(false);//Should probably change to closing the window?
-        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

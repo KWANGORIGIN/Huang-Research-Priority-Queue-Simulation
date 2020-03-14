@@ -5,8 +5,10 @@
  */
 package ShoppingCart;
 
+import SchedulingSystem.SchedulingSystem;
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
+import Student.Student;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -15,15 +17,21 @@ import javax.swing.JTable;
  * @author wanga
  */
 public class ShoppingCart extends javax.swing.JFrame {
-
+    private Student student;
+    
     /**
      * Creates new form ShoppingCart
      */
     public ShoppingCart() {
         initComponents();
-        populate_Table_with_Courses();
+        //populate_Table_with_Courses();
     }
-
+    
+    public ShoppingCart(Student student){
+        initComponents();
+        this.student = student;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

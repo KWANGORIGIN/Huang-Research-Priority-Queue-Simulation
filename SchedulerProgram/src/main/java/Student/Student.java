@@ -3,20 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package User;
+package Student;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import Course.*;
 
 /**
  *
  * @author wanga
  */
-public class User {
+public class Student implements Serializable{
     private String username;
     private int excelRowPosition;
+    private ArrayList<Course> enrolledCourses;
     
     //Constructor (used in LoginScreen)
-    User(String username){
+    public Student(String username, int rowPosition){
         this.username = username;
-        excelRowPosition = 0;//Setting as 0 for now
+        excelRowPosition = rowPosition;
+        enrolledCourses = new ArrayList<>();
+    }
+    
+    public Student(){
+        this.username = "";
+        excelRowPosition = -1;
+        enrolledCourses = new ArrayList<>();
+    }
+    
+    /**
+     * Checks whether the username matches the username of the particular Student object
+     * @param username
+     * @return true if username matches. False if username does not match
+     */
+    public boolean isStudent(String username){
+        return this.username.matches(username);
+    }
+    
+    //
+    public void enrollCourse(){
+        
+    }
+    
+    /**
+     * Returns the integer position of the Student's username position in Excel Document
+     * @return integer position of username position in Excel document 
+     */
+    public int getRowPosition(){
+        return excelRowPosition;
     }
     
     

@@ -13,7 +13,7 @@ public class Course {
     private String courseName;
     ArrayList <Lecture> lectures = new ArrayList();
     private int roomNum;
-    private String instructor;
+    private String instructor;//Want to move to lecture class
     //private String startingDate;//Might change to another data type in the future  ¯\_(ツ)_/¯
     
     //Constructors

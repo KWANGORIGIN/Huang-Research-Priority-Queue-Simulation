@@ -11,6 +11,7 @@ package Course;
  */
 public class Lecture {
     private char dayOfWeek;
+    //private String instructor;
     private String time;
     private String starting12HourPeriod;
     private int duration;
