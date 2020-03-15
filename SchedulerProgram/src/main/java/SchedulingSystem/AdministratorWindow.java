@@ -77,10 +77,9 @@ public class AdministratorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        
-        
-        
-        
+        AddCourseWindow newAddCourseWindow = new AddCourseWindow();
+        this.setVisible(false);
+        newAddCourseWindow.setVisible(true);
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     /**

@@ -46,6 +46,19 @@ public class Student implements Serializable{
     }
     
     /**
+     * Returns an Course the Student has enrolled in
+     * @param listPosition
+     * @return An enrolled Course at position listPosition in the ArrayList 
+     */
+    public Course getEnrolledCourse(int listPosition){
+        return enrolledCourses.get(listPosition);
+    }
+    
+    public int numOfEnrolledCourses(){
+        return enrolledCourses.size();
+    }
+    
+    /**
      * Returns the integer position of the Student's username position in Excel Document
      * @return integer position of username position in Excel document 
      */

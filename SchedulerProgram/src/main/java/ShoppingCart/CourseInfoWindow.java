@@ -155,14 +155,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     
     protected void populate_Table_with_Courses(){
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
-        Course newCourse = new Course("CMPSC 121", 1, "Dr. Someone");
-        Object courseRow[] = new Object[5];
-        courseRow[0] = newCourse.getCourseName();
-        courseRow[1] = 001;
-        courseRow[2] = "Date";
-        courseRow[3] = newCourse.getRoomNum();
-        courseRow[4] = newCourse.getInstructor();
-        model.addRow(courseRow);
+        //Course newCourse = new Course("CMPSC 121", 1, "Dr. Someone");
+//        Object courseRow[] = new Object[5];
+//        courseRow[0] = newCourse.getCourseName();
+//        courseRow[1] = 001;
+//        courseRow[2] = "Date";
+//        courseRow[3] = newCourse.getLocation();
+//        courseRow[4] = newCourse.getInstructor();
+//        model.addRow(courseRow);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

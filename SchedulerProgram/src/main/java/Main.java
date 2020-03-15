@@ -36,7 +36,6 @@ public class Main {
             System.out.println("Creating new scheduling system...");
             //Initializes a few courses
             
-            
 
         }catch(ClassNotFoundException classNotFound){
             JOptionPane.showMessageDialog(null, "Error reading scheduling system from file.");

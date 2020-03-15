@@ -11,16 +11,20 @@ import java.util.ArrayList;
  */
 public class Course {
     private String courseName;
-    ArrayList <Lecture> lectures = new ArrayList();
-    private int roomNum;
-    private String instructor;//Want to move to lecture class
-    //private String startingDate;//Might change to another data type in the future  ¯\_(ツ)_/¯
+    ArrayList <Section> lectures = new ArrayList();
+    private String location;
+    private String startingDate;
     
     //Constructors
-    public Course(String courseName, int roomNum, String instructor){
+    public Course(String courseName, String location, String startingDate){
         this.courseName = courseName;
-        this.roomNum = roomNum;
-        this.instructor = instructor;
+        this.location = location;
+        this.startingDate = startingDate;
+    }
+    
+    //Setters
+    public void addLecture(){
+        
     }
     
     //Getters
@@ -28,12 +32,12 @@ public class Course {
         return courseName;
     }
     
-    public int getRoomNum(){
-        return roomNum;
+    public String getLocation(){
+        return location;
     }
     
-    public String getInstructor(){
-        return instructor;
+    public String getStartingDate(){
+        return startingDate;
     }
     
 }

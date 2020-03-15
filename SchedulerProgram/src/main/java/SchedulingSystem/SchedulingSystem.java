@@ -27,28 +27,17 @@ public class SchedulingSystem implements Serializable {
         lastInputtedRow = 0;
     }
     
-    public static void addCourse(){
-        
-        
+    /**
+     * Adds new course to the Scheduling System
+     * @param newCourse 
+     */
+    public static void addCourse(Course newCourse){
+        availableCourses.add(newCourse);
     }
     
     public static void removeCourse(){
         
     }
-    
-    /**
-     * Checks whether the username entered matches that of user already in system
-     * @param username
-     * @return true if user is already in system. False if user is not in system.
-     */
-//    public static boolean userExists(String username){
-//        for(int count = 0; count < systemUsers.size(); count++){
-//            if(systemUsers.get(count).isStudent(username)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
     
     /**
      * Checks whether the entered username is the Admin

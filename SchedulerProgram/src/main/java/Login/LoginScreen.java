@@ -113,13 +113,9 @@ public class LoginScreen extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
         if(SchedulingSystem.isAdmin(usernameTextField.getText())){
-            //Opens adminWindow to adjust the values of the Scheduling System
+            //Opens adminWindow to add and remove Courses to the Scheduling System
             AdministratorWindow adminWindow = new AdministratorWindow();
-            this.setVisible(false);
             adminWindow.setVisible(true);
-            
-            
-            
         }
         else{
             //Imports or creates workbook students.xlsx depending on if file exists
@@ -194,10 +190,10 @@ public class LoginScreen extends javax.swing.JFrame {
             Might deprecate
             */
             //Input validation
-            if(!username.matches("[a-z]+/d+")){
-                JOptionPane.showMessageDialog(null, "Invalid username");
-                username = "Invalid Username!";
-            }
+//            if(!username.matches("[a-z]+/d+")){
+//                JOptionPane.showMessageDialog(null, "Invalid username");
+//                username = "Invalid Username!";
+//            }
             
             
             newRow = sheet.createRow(rowPosition);

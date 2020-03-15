@@ -19,17 +19,19 @@ import javax.swing.JTable;
 public class ShoppingCart extends javax.swing.JFrame {
     private Student student;
     
-    /**
-     * Creates new form ShoppingCart
-     */
-    public ShoppingCart() {
+    public ShoppingCart(){
         initComponents();
-        //populate_Table_with_Courses();
+        printStudentEnrolledCourses();
     }
     
+    /**
+     * Creates new form ShoppingCart
+     * @param student
+     */
     public ShoppingCart(Student student){
         initComponents();
         this.student = student;
+        //printStudentEnrolledCourses();
     }
     
     /**
@@ -173,8 +175,7 @@ public class ShoppingCart extends javax.swing.JFrame {
             courseWindow.setVisible(true);
         }
         else{
-            //ISSUES here
-            JOptionPane.showMessageDialog(null, "Invalid course name.");//Probably want to change null reference later
+            JOptionPane.showMessageDialog(null, "Invalid course name.");
         }
         
         
@@ -215,15 +216,17 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
     }
     
-    protected void populate_Table_with_Courses(){
+    protected void printStudentEnrolledCourses(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Course newCourse = new Course("CMPSC 121", 1, "Dr. Someone");
-        Object courseRow[] = new Object[4];
-        courseRow[0] = newCourse.getCourseName();
-        courseRow[1] = "Date";
-        courseRow[2] = newCourse.getRoomNum();
-        courseRow[3] = newCourse.getInstructor();
-        model.addRow(courseRow);
+        
+        for(int count = 0; count < student.numOfEnrolledCourses(); count++){
+            Course tempCourse = student.getEnrolledCourse(count);
+            Object courseRow[] = new Object[4];
+            courseRow[0] = tempCourse.getCourseName();
+            courseRow[1] = tempCourse.getStartingDate();
+            courseRow[2] = tempCourse.getLocation();
+            model.addRow(courseRow);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
