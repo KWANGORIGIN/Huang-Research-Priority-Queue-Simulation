@@ -41,7 +41,8 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Error reading scheduling system from file.");
         }
         catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Unknown error occurred. Scheduling system file possibly corrupted. Please contact administrator.");
+            JOptionPane.showMessageDialog(null, "Unknown error occurred. Scheduling system file possibly corrupted or altered. Please contact administrator.");
+            //This exception does occur if changes are made to the SchedulingSystem class and then Main tries to load the previous SchedulingSystem.ser file
             
             //Indicates creation of new Scheduling System
             System.out.println("Creating new Scheduling System...");

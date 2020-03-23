@@ -168,16 +168,42 @@ public class ShoppingCart extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+        
         String searchInput = searchbar.getText();
-        if(searchInput.matches("[A-Za-z]+\\s\\d+") || searchInput.matches("[A-Za-z]+\\d+")){
-            CourseInfoWindow courseWindow = new CourseInfoWindow();
-            courseWindow.setVisible(true);
+        if(searchInput.matches("[A-Za-z]+\\s\\d+")){//Space between course name and number(#): courseName #
+            Course searchedCourse = SchedulingSystem.getCourse(searchInput.toUpperCase());
+            if(searchedCourse == null){
+                JOptionPane.showMessageDialog(null, "Invalid course name.");
+            }
+            else{
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse);
+               courseWindow.setVisible(true); 
+            }
+        }
+        else if(searchInput.matches("[A-Za-z]+\\d+")){//No space between course name and number(#): courseName#
+            //Add space between courseName and number
+            for(int count = 0; count < searchInput.length(); count++){
+                if(Character.isDigit(searchInput.charAt(count))){
+                    StringBuilder tempString = new StringBuilder(searchInput);
+                    tempString.insert(count, ' ');
+                    searchInput = tempString.toString();
+                    break;
+                }
+            }
+            
+            Course searchedCourse = SchedulingSystem.getCourse(searchInput.toUpperCase());
+            if(searchedCourse == null){
+                JOptionPane.showMessageDialog(null, "Invalid course name.");
+            }
+            else{
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse);
+               courseWindow.setVisible(true); 
+            }
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "Invalid course name.");
         }
-        
         
     }//GEN-LAST:event_searchButtonActionPerformed
 

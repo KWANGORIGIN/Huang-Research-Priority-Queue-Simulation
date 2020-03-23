@@ -10,14 +10,16 @@ import java.util.ArrayList;
  * @author wanga
  */
 public class Course {
+    private String officialName;
     private String courseName;
     ArrayList <Section> lectures = new ArrayList();
     private String location;
     private String startingDate;
     
     //Constructors
-    public Course(String courseName, String location, String startingDate){
+    public Course(String courseName, String officialName, String location, String startingDate){
         this.courseName = courseName;
+        this.officialName = officialName;
         this.location = location;
         this.startingDate = startingDate;
     }
@@ -30,6 +32,10 @@ public class Course {
     //Getters
     public String getCourseName(){
         return courseName;
+    }
+    
+    public String getOfficialName(){
+        return officialName;
     }
     
     public String getLocation(){

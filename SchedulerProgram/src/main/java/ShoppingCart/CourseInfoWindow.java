@@ -14,13 +14,19 @@ import javax.swing.table.DefaultTableModel;
  * @author wanga
  */
 public class CourseInfoWindow extends javax.swing.JFrame {
-
+    private Course currentCourse;
+    
     /**
      * Creates new form additionalCourseInfoWindow
      */
     public CourseInfoWindow() {
         initComponents();
-        populate_Table_with_Courses();
+    }
+    
+    public CourseInfoWindow(Course currentCourse){
+        initComponents();
+        this.currentCourse = currentCourse;
+        populate_Table_with_Course_Info();
     }
 
     /**
@@ -46,14 +52,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Course", "Section", "Starting Date", "Room", "Instructor"
+                "Course", "Starting Date", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -153,16 +159,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         });
     }
     
-    protected void populate_Table_with_Courses(){
+    protected void populate_Table_with_Course_Info(){
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
-        //Course newCourse = new Course("CMPSC 121", 1, "Dr. Someone");
-//        Object courseRow[] = new Object[5];
-//        courseRow[0] = newCourse.getCourseName();
-//        courseRow[1] = 001;
-//        courseRow[2] = "Date";
-//        courseRow[3] = newCourse.getLocation();
-//        courseRow[4] = newCourse.getInstructor();
-//        model.addRow(courseRow);
+        Object courseRow[] = new Object[4];
+        courseRow[0] = currentCourse.getCourseName();
+        courseRow[1] = currentCourse.getStartingDate();
+        courseRow[2] = currentCourse.getLocation();
+        courseRow[3] = "Instructor";
+        model.addRow(courseRow);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

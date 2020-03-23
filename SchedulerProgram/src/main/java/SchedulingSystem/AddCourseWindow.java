@@ -135,11 +135,12 @@ public class AddCourseWindow extends javax.swing.JFrame {
     private void getCourseInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getCourseInfoButtonActionPerformed
         
         String courseName = courseNameTextField.getText();
+        String officialName = "TEMP"; //definitely need to update
         String courseLocation = courseLocationTextField.getText();
         String startingDate = startingDateTextField.getText();
         int numOfLectures = Integer.parseInt(numberOfLecturesTextField.getText());
         
-        Course newCourse = new Course(courseName, courseLocation, startingDate);
+        Course newCourse = new Course(courseName, officialName, courseLocation, startingDate);
         
         //adds Lectures (if any)
         AddSectionsWindow lectureWindow = new AddSectionsWindow(newCourse, numOfLectures);

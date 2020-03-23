@@ -25,6 +25,11 @@ public class SchedulingSystem implements Serializable {
         systemUsers = new ArrayList<>();
         adminUsername = "administrator";
         lastInputtedRow = 0;
+        
+        //Hard coding in course info for now
+        Course tempCourse = new Course("CMPSC 121", "Introduction to Programming Techniques", "Burke 101", "08/31/2020");
+        availableCourses.add(tempCourse);
+        
     }
     
     /**
@@ -46,6 +51,27 @@ public class SchedulingSystem implements Serializable {
      */
     public static boolean isAdmin(String username){
         return username.equals(adminUsername);
+    }
+    
+    //Getters
+    /**
+     * Gets a Course based on its name
+     * @param courseName
+     * @return Course if Course was found by course name, null if Course was not found
+     */
+    public static Course getCourse(String courseName){
+        /*
+        Need to implement string matching in case courseName is structured like
+        courseName# with no space between courseName and #
+        */
+        
+        
+        for(int count = 0; count < availableCourses.size(); count++){
+            if(availableCourses.get(count).getCourseName().matches(courseName)){
+                return availableCourses.get(count);
+            }
+        }
+        return null;
     }
     
     
