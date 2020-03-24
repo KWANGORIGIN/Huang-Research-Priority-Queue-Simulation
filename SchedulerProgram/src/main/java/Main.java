@@ -48,21 +48,15 @@ public class Main {
             System.out.println("Creating new Scheduling System...");
         }
         
-        
-        Course newCourse = schedulingSystem.getCourse("CMPSC 121");
-        if(newCourse != null){
-            System.out.println(newCourse.getDeptName());
-        }
-        else{
-            System.out.println("Oof");
-        }
-        
         //Creates LoginScreen and makes it visible to user
         LoginScreen loginScreen = new LoginScreen(schedulingSystem);
         loginScreen.setVisible(true);
         
         //When loginScreen closes the entire system is saved
         /*Currently handling in login Screen
+        
+        
+        ...not really. Need to find another way for the Main program to end. Because WindowClosing method doesn't work unless LoginScreen is disposed not Exit_on_Close()
         */
         
         

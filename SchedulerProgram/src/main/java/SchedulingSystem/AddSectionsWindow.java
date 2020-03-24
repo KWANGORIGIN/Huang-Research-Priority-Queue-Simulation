@@ -7,6 +7,11 @@ package SchedulingSystem;
 
 import Course.Course;
 import Course.Section;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -56,6 +61,11 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         currentSection = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         sectionNameLabel.setText("Section Name:");
@@ -173,10 +183,8 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         Then clear data as many times as there are sections and update counter so that I know how many more sections to add data for
         */
         
-        System.out.println("YEET: " + currentSectionNum);
         //Updates which section number the admin is currently adding to the working course
-        currentSection.setText("Current Section Num being added: " + currentSectionNum + " out of " + numOfSections + " Sections.");
-        currentSectionNum += 1;
+        currentSection.setText("Current Section Num being added: " + (currentSectionNum + 1) + " out of " + numOfSections + " Sections.");
 
         //Gets info
         String sectionName = sectionNameTextField.getText();
@@ -192,15 +200,14 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         dateTimeTextField.setText("");
         roomTextField.setText("");
         instructorTextField.setText("");
-        currentSection.setText("Current Section Num being added: " + currentSectionNum + " out of " + numOfSections + " Sections.");
+        currentSectionNum++;
         
         if(currentSectionNum > numOfSections){
             //Add Course to Scheduling System
             schedulingSystem.addCourse(workingCourse);
+            //Close window
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
-        //Close window
-        
-        
     }//GEN-LAST:event_addSectionButtonActionPerformed
 
     private void sectionNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sectionNameTextFieldActionPerformed
@@ -210,6 +217,22 @@ public class AddSectionsWindow extends javax.swing.JFrame {
     private void dateTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateTimeTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateTimeTextFieldActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //Outputs scheduling system to file
+        
+        try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
+            try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+                output.writeObject(schedulingSystem);
+                System.out.println("Changes from this session have been saved.");
+            }
+            
+        }catch(FileNotFoundException fileNotFound){
+            System.out.println("File not found");
+        }catch(IOException ioException){
+            System.out.println("Error saving to file.");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

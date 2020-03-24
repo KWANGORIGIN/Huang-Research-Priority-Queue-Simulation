@@ -52,8 +52,11 @@ public class LoginScreen extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -237,13 +240,17 @@ public class LoginScreen extends javax.swing.JFrame {
             }
 
             //Creates ShoppingCart screen
-            ShoppingCart cart = new ShoppingCart(student);
+            ShoppingCart cart = new ShoppingCart(student, schedulingSystem);
             cart.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //Maybe put here?
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         //Outputs scheduling system to file
         
         try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
@@ -257,7 +264,7 @@ public class LoginScreen extends javax.swing.JFrame {
         }catch(IOException ioException){
             System.out.println("Error saving to file.");
         }
-    }//GEN-LAST:event_formWindowClosing
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

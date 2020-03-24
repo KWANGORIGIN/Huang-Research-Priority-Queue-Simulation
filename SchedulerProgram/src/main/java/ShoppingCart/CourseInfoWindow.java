@@ -25,11 +25,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CourseInfoWindow(SchedulingSystem schedulingSystem){
-        initComponents();
-        this.schedulingSystem = schedulingSystem;
-    }
-    
     public CourseInfoWindow(Course currentCourse){
         initComponents();
         this.currentCourse = currentCourse;
@@ -52,6 +47,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(891, 350));
         setPreferredSize(new java.awt.Dimension(891, 350));
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -59,7 +55,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Course", "Starting Date", "Room", "Instructor"
+                "Class", "Starting Date", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
@@ -159,12 +155,17 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     
     protected void populate_Table_with_Course_Info(){
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
-        Object courseRow[] = new Object[currentCourse.getNumOfSections()];
-        courseRow[0] = currentCourse.getCourseName();
-//        courseRow[1] = currentCourse.getStartingDate();
-//        courseRow[2] = currentCourse.getLocation();
-        courseRow[3] = "Instructor";
-        model.addRow(courseRow);
+        this.setTitle(currentCourse.getDeptName() + ": " + currentCourse.getCourseName());
+        for(int count = 0; count < currentCourse.getNumOfSections(); count++){
+            Object courseRow[] = new Object[4];
+            courseRow[0] = currentCourse.getSection(count).getSectionName();
+            courseRow[1] = currentCourse.getSection(count).getDateTime();
+            courseRow[2] = currentCourse.getSection(count).getRoom();
+            courseRow[3] = currentCourse.getSection(count).getInstructor();
+            model.addRow(courseRow);
+        }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

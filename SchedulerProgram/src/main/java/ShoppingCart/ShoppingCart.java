@@ -34,10 +34,12 @@ public class ShoppingCart extends javax.swing.JFrame {
     /**
      * Creates new form ShoppingCart
      * @param student
+     * @param schedulingSystem
      */
-    public ShoppingCart(Student student){
+    public ShoppingCart(Student student, SchedulingSystem schedulingSystem){
         initComponents();
         this.student = student;
+        this.schedulingSystem = schedulingSystem;
         //printStudentEnrolledCourses();
     }
     

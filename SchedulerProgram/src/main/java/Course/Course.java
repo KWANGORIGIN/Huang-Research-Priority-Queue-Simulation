@@ -39,6 +39,10 @@ public class Course implements Serializable{
         return sections.size();
     }
     
+    public Section getSection(int sectionNum){
+        return sections.get(sectionNum);
+    }
+    
     
     
 }

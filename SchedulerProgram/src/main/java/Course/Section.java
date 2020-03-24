@@ -27,5 +27,22 @@ public class Section implements Serializable {
         this.instructor = instructor;
     }
     
+    //Getters
+    public String getSectionName(){
+        return sectionName;
+    }
+    
+    public String getDateTime(){
+        return dateTime;
+    }
+    
+    public String getRoom(){
+        return room;
+    }
+    
+    public String getInstructor(){
+        return instructor;
+    }
+    
     
 }
