@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 package Course;
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  *
  * @author wanga
  */
-public class Course {
+public class Course implements Serializable{
     private String courseName;
     private String deptName;
     ArrayList <Section> sections = new ArrayList();

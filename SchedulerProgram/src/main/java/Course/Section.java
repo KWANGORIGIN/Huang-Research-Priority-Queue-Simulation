@@ -5,13 +5,14 @@
  */
 package Course;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author wanga
  */
-public class Section {
+public class Section implements Serializable {
     
     private String sectionName;
     private String dateTime;
