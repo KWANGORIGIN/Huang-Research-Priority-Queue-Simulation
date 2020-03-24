@@ -52,7 +52,7 @@ public class LoginScreen extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -125,7 +125,7 @@ public class LoginScreen extends javax.swing.JFrame {
         
         if(SchedulingSystem.isAdmin(usernameTextField.getText())){
             //Opens adminWindow to add and remove Courses to the Scheduling System
-            AdministratorWindow adminWindow = new AdministratorWindow();
+            AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
             adminWindow.setVisible(true);
         }
         else{

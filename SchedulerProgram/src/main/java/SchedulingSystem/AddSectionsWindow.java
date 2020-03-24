@@ -16,7 +16,7 @@ public class AddSectionsWindow extends javax.swing.JFrame {
     private Course workingCourse;
     private int numOfSections;
     private int currentSectionNum;
-    private SchedulingSystem schedulingSystem = null;
+    private SchedulingSystem schedulingSystem;
     
     /**
      * Creates new form addLectureWindow
@@ -172,33 +172,32 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         /*Insert info
         Then clear data as many times as there are sections and update counter so that I know how many more sections to add data for
         */
-        if(currentSectionNum + 1 <= numOfSections){
-            
-            //Updates which section number the admin is currently adding to the working course
-            currentSection.setText("Current Section Num being added: " + (currentSectionNum++) + " out of " + numOfSections + " Sections.");
-            
-            //Gets info
-            String sectionName = sectionNameTextField.getText();
-            String dateTime = dateTimeTextField.getText();
-            String room = roomTextField.getText();
-            String instructor = instructorTextField.getText();
-            
-            Section newSection = new Section(sectionName, dateTime, room, instructor);
-            workingCourse.addSection(newSection);
-            
-            //Clears inputs
-            sectionNameTextField.setText("");
-            dateTimeTextField.setText("");
-            roomTextField.setText("");
-            instructorTextField.setText("");
+        
+        System.out.println("YEET: " + currentSectionNum);
+        //Updates which section number the admin is currently adding to the working course
+        currentSection.setText("Current Section Num being added: " + currentSectionNum + " out of " + numOfSections + " Sections.");
+        currentSectionNum += 1;
+
+        //Gets info
+        String sectionName = sectionNameTextField.getText();
+        String dateTime = dateTimeTextField.getText();
+        String room = roomTextField.getText();
+        String instructor = instructorTextField.getText();
+
+        Section newSection = new Section(sectionName, dateTime, room, instructor);
+        workingCourse.addSection(newSection);
+
+        //Clears inputs
+        sectionNameTextField.setText("");
+        dateTimeTextField.setText("");
+        roomTextField.setText("");
+        instructorTextField.setText("");
+        currentSection.setText("Current Section Num being added: " + currentSectionNum + " out of " + numOfSections + " Sections.");
+        
+        if(currentSectionNum > numOfSections){
+            //Add Course to Scheduling System
+            schedulingSystem.addCourse(workingCourse);
         }
-        
-        //Add Course to Scheduling System
-        System.out.println("YEET");
-        schedulingSystem = new SchedulingSystem();
-        schedulingSystem.addCourse(workingCourse);//nullPointerException thrown here
-        
-        
         //Close window
         
         
