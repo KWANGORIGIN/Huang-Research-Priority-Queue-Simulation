@@ -6,6 +6,7 @@
 package SchedulingSystem;
 
 import Course.Course;
+import Course.Section;
 
 /**
  *
@@ -13,7 +14,9 @@ import Course.Course;
  */
 public class AddSectionsWindow extends javax.swing.JFrame {
     private Course workingCourse;
-    private int numOfLectures;
+    private int numOfSections;
+    private int currentSectionNum;
+    private SchedulingSystem schedulingSystem = null;
     
     /**
      * Creates new form addLectureWindow
@@ -22,10 +25,13 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public AddSectionsWindow(Course newCourse, int numOfLectures){
+    public AddSectionsWindow(Course newCourse, int numOfSections, SchedulingSystem schedulingSystem){
         initComponents();
         workingCourse = newCourse;
-        this.numOfLectures = numOfLectures;
+        this.numOfSections = numOfSections;
+        currentSectionNum = 1;
+        currentSection.setText("Current Section Num being added: " + currentSectionNum + " out of " + numOfSections + " Sections.");
+        this.schedulingSystem = schedulingSystem;
     }
 
     /**
@@ -36,53 +42,175 @@ public class AddSectionsWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        numOfLecturesToAddLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        sectionNameLabel = new javax.swing.JLabel();
+        sectionNameTextField = new javax.swing.JTextField();
+        dateTimeLabel = new javax.swing.JLabel();
+        addSectionButton = new javax.swing.JButton();
+        dateTimeTextField = new javax.swing.JTextField();
+        roomLabel = new javax.swing.JLabel();
+        roomTextField = new javax.swing.JTextField();
+        instructorLabel = new javax.swing.JLabel();
+        instructorTextField = new javax.swing.JTextField();
+        currentSection = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        numOfLecturesToAddLabel.setText("Number of Lectures/Labs to Add: ");
+        sectionNameLabel.setText("Section Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
+        getContentPane().add(sectionNameLabel, gridBagConstraints);
 
-        jLabel1.setText("Class Number:");
+        sectionNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sectionNameTextFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 93;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 0, 0, 204);
+        getContentPane().add(sectionNameTextField, gridBagConstraints);
 
-        jTextField1.setText("jTextField1");
+        dateTimeLabel.setText("Date/Time:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 205, 0, 0);
+        getContentPane().add(dateTimeLabel, gridBagConstraints);
 
-        jLabel2.setText("Day of Week:");
+        addSectionButton.setText("Add Section");
+        addSectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSectionButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 205, 98, 0);
+        getContentPane().add(addSectionButton, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(numOfLecturesToAddLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(213, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(numOfLecturesToAddLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(162, Short.MAX_VALUE))
-        );
+        dateTimeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateTimeTextFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 125;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 4, 0, 204);
+        getContentPane().add(dateTimeTextField, gridBagConstraints);
+
+        roomLabel.setText("Room:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
+        getContentPane().add(roomLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 147;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 4, 0, 204);
+        getContentPane().add(roomTextField, gridBagConstraints);
+
+        instructorLabel.setText("Instructor:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
+        getContentPane().add(instructorLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 126;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 3, 0, 204);
+        getContentPane().add(instructorTextField, gridBagConstraints);
+
+        currentSection.setText("jLabel1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.ipadx = 155;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(86, 205, 0, 204);
+        getContentPane().add(currentSection, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addSectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSectionButtonActionPerformed
+        /*Insert info
+        Then clear data as many times as there are sections and update counter so that I know how many more sections to add data for
+        */
+        if(currentSectionNum + 1 <= numOfSections){
+            
+            //Updates which section number the admin is currently adding to the working course
+            currentSection.setText("Current Section Num being added: " + (currentSectionNum++) + " out of " + numOfSections + " Sections.");
+            
+            //Gets info
+            String sectionName = sectionNameTextField.getText();
+            String dateTime = dateTimeTextField.getText();
+            String room = roomTextField.getText();
+            String instructor = instructorTextField.getText();
+            
+            Section newSection = new Section(sectionName, dateTime, room, instructor);
+            workingCourse.addSection(newSection);
+            
+            //Clears inputs
+            sectionNameTextField.setText("");
+            dateTimeTextField.setText("");
+            roomTextField.setText("");
+            instructorTextField.setText("");
+        }
+        
+        //Add Course to Scheduling System
+        System.out.println("YEET");
+        schedulingSystem = new SchedulingSystem();
+        schedulingSystem.addCourse(workingCourse);//nullPointerException thrown here
+        
+        
+        //Close window
+        
+        
+    }//GEN-LAST:event_addSectionButtonActionPerformed
+
+    private void sectionNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sectionNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sectionNameTextFieldActionPerformed
+
+    private void dateTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateTimeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateTimeTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,9 +255,15 @@ public class AddSectionsWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel numOfLecturesToAddLabel;
+    private javax.swing.JButton addSectionButton;
+    private javax.swing.JLabel currentSection;
+    private javax.swing.JLabel dateTimeLabel;
+    private javax.swing.JTextField dateTimeTextField;
+    private javax.swing.JLabel instructorLabel;
+    private javax.swing.JTextField instructorTextField;
+    private javax.swing.JLabel roomLabel;
+    private javax.swing.JTextField roomTextField;
+    private javax.swing.JLabel sectionNameLabel;
+    private javax.swing.JTextField sectionNameTextField;
     // End of variables declaration//GEN-END:variables
 }

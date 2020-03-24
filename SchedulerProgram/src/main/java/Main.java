@@ -48,32 +48,36 @@ public class Main {
             System.out.println("Creating new Scheduling System...");
         }
         
-        //Creates LoginScreen and makes it visible to user
-        LoginScreen loginScreen = new LoginScreen();
-        loginScreen.setVisible(true);
         
-        
-        
-        
-        
-        
-        
-        
-        
-       
-        //Outputs scheduling system to file
-        try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
-            try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
-                output.writeObject(schedulingSystem);
-                System.out.println("Changes from this session have been saved.");
-            }
-            
-        }catch(FileNotFoundException fileNotFound){
-            System.out.println("File not found");
-        }catch(IOException ioException){
-            System.out.println("Error saving to file.");
+        Course newCourse = schedulingSystem.getCourse("CMPSC 121");
+        if(newCourse != null){
+            System.out.println(newCourse.getDeptName());
+        }
+        else{
+            System.out.println("Oof");
         }
         
+        //Creates LoginScreen and makes it visible to user
+        LoginScreen loginScreen = new LoginScreen(schedulingSystem);
+        loginScreen.setVisible(true);
+        
+        //When loginScreen closes the entire system is saved
+        /*Currently handling in login Screen
+        */
+        
+        
+//        //Outputs scheduling system to file
+//         try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
+//             try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+//                 output.writeObject(schedulingSystem);
+//                 System.out.println("Changes from this session have been saved...");
+//             }
+//
+//         }catch(FileNotFoundException fileNotFound){
+//             System.out.println("File not found");
+//         }catch(IOException ioException){
+//             System.out.println("Error saving to file.");
+//         } 
         
     }
 }

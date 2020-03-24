@@ -10,12 +10,18 @@ package SchedulingSystem;
  * @author wanga
  */
 public class AdministratorWindow extends javax.swing.JFrame {
+    private SchedulingSystem schedulingSystem;
     
     /**
      * Creates new form adminWindow
      */
     public AdministratorWindow() {
         initComponents();
+    }
+    
+    public AdministratorWindow(SchedulingSystem schedulingSystem){
+        initComponents();
+        this.schedulingSystem = schedulingSystem;
     }
       
     /**
@@ -77,7 +83,7 @@ public class AdministratorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        AddCourseWindow newAddCourseWindow = new AddCourseWindow();
+        AddCourseWindow newAddCourseWindow = new AddCourseWindow(schedulingSystem);
         this.setVisible(false);
         newAddCourseWindow.setVisible(true);
     }//GEN-LAST:event_addCourseButtonActionPerformed

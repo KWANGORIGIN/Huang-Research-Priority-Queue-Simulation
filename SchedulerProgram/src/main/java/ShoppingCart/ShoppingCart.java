@@ -18,10 +18,17 @@ import javax.swing.JTable;
  */
 public class ShoppingCart extends javax.swing.JFrame {
     private Student student;
+    SchedulingSystem schedulingSystem;
     
     public ShoppingCart(){
         initComponents();
         printStudentEnrolledCourses();
+    }
+    
+    public ShoppingCart(SchedulingSystem schedulingSystem){
+        initComponents();
+        printStudentEnrolledCourses();
+        this.schedulingSystem = schedulingSystem;
     }
     
     /**
@@ -171,7 +178,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         
         String searchInput = searchbar.getText();
         if(searchInput.matches("[A-Za-z]+\\s\\d+")){//Space between course name and number(#): courseName #
-            Course searchedCourse = SchedulingSystem.getCourse(searchInput.toUpperCase());
+            Course searchedCourse = schedulingSystem.getCourse(searchInput.toUpperCase());
             if(searchedCourse == null){
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
@@ -191,7 +198,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                 }
             }
             
-            Course searchedCourse = SchedulingSystem.getCourse(searchInput.toUpperCase());
+            Course searchedCourse = schedulingSystem.getCourse(searchInput.toUpperCase());
             if(searchedCourse == null){
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
@@ -249,8 +256,8 @@ public class ShoppingCart extends javax.swing.JFrame {
             Course tempCourse = student.getEnrolledCourse(count);
             Object courseRow[] = new Object[4];
             courseRow[0] = tempCourse.getCourseName();
-            courseRow[1] = tempCourse.getStartingDate();
-            courseRow[2] = tempCourse.getLocation();
+//            courseRow[1] = tempCourse.getStartingDate();
+//            courseRow[2] = tempCourse.getLocation();
             model.addRow(courseRow);
         }
     }

@@ -6,6 +6,7 @@
 package ShoppingCart;
 
 import Course.Course;
+import SchedulingSystem.SchedulingSystem;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,12 +16,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CourseInfoWindow extends javax.swing.JFrame {
     private Course currentCourse;
+    private SchedulingSystem schedulingSystem;
     
     /**
      * Creates new form additionalCourseInfoWindow
      */
     public CourseInfoWindow() {
         initComponents();
+    }
+    
+    public CourseInfoWindow(SchedulingSystem schedulingSystem){
+        initComponents();
+        this.schedulingSystem = schedulingSystem;
     }
     
     public CourseInfoWindow(Course currentCourse){
@@ -76,11 +83,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         courseTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         courseTable.setShowGrid(true);
         courseTable.getTableHeader().setReorderingAllowed(false);
-        courseTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                courseTableMouseClicked(evt);
-            }
-        });
         courseTableScrollPane.setViewportView(courseTable);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -118,10 +120,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void courseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseTableMouseClicked
-        //TODO
-    }//GEN-LAST:event_courseTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -161,10 +159,10 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     
     protected void populate_Table_with_Course_Info(){
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
-        Object courseRow[] = new Object[4];
+        Object courseRow[] = new Object[currentCourse.getNumOfSections()];
         courseRow[0] = currentCourse.getCourseName();
-        courseRow[1] = currentCourse.getStartingDate();
-        courseRow[2] = currentCourse.getLocation();
+//        courseRow[1] = currentCourse.getStartingDate();
+//        courseRow[2] = currentCourse.getLocation();
         courseRow[3] = "Instructor";
         model.addRow(courseRow);
     }

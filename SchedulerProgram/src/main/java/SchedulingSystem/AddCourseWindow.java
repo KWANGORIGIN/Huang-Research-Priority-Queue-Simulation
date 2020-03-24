@@ -12,12 +12,18 @@ import Course.*;
  * @author wanga
  */
 public class AddCourseWindow extends javax.swing.JFrame {
+    private SchedulingSystem schedulingSystem;
 
     /**
      * Creates new form addCourseWindow
      */
     public AddCourseWindow() {
         initComponents();
+    }
+    
+    public AddCourseWindow(SchedulingSystem schedulingSystem) {
+        initComponents();
+        this.schedulingSystem = schedulingSystem;
     }
 
     /**
@@ -31,130 +37,111 @@ public class AddCourseWindow extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         courseNameTextField = new javax.swing.JTextField();
-        courseLocationTextField = new javax.swing.JTextField();
-        startingDateTextField = new javax.swing.JTextField();
         enterCourseNameLabel = new javax.swing.JLabel();
-        enterCourseLocationLabel = new javax.swing.JLabel();
-        enterStartingDateLabel = new javax.swing.JLabel();
-        getCourseInfoButton = new javax.swing.JButton();
-        numberOfLecturesTextField = new javax.swing.JTextField();
-        numberOfLecturesLabel = new javax.swing.JLabel();
+        addCourseButton = new javax.swing.JButton();
+        numberOfSectionsTextField = new javax.swing.JTextField();
+        numberOfSectionsLabel = new javax.swing.JLabel();
+        deptNameLabel = new javax.swing.JLabel();
+        deptNameTextField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(438, 300));
         getContentPane().setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 6;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 152;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(78, 5, 0, 75);
+        gridBagConstraints.insets = new java.awt.Insets(18, 5, 0, 0);
         getContentPane().add(courseNameTextField, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(23, 18, 0, 75);
-        getContentPane().add(courseLocationTextField, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 93;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 4, 0, 75);
-        getContentPane().add(startingDateTextField, gridBagConstraints);
 
         enterCourseNameLabel.setText("Enter Course Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(81, 79, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(21, 70, 0, 0);
         getContentPane().add(enterCourseNameLabel, gridBagConstraints);
 
-        enterCourseLocationLabel.setText("Enter Course Location:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(26, 79, 0, 0);
-        getContentPane().add(enterCourseLocationLabel, gridBagConstraints);
-
-        enterStartingDateLabel.setText("Enter Starting Date (MM/DD/YYYY):");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 79, 0, 0);
-        getContentPane().add(enterStartingDateLabel, gridBagConstraints);
-
-        getCourseInfoButton.setText("Enter");
-        getCourseInfoButton.addActionListener(new java.awt.event.ActionListener() {
+        addCourseButton.setText("Add Course");
+        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getCourseInfoButtonActionPerformed(evt);
+                addCourseButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 7;
         gridBagConstraints.ipadx = 41;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 4, 57, 75);
-        getContentPane().add(getCourseInfoButton, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(11, 4, 76, 66);
+        getContentPane().add(addCourseButton, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 133;
+        gridBagConstraints.ipadx = 120;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 0, 75);
-        getContentPane().add(numberOfLecturesTextField, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(14, 4, 0, 0);
+        getContentPane().add(numberOfSectionsTextField, gridBagConstraints);
 
-        numberOfLecturesLabel.setText("Number of lectures or labs:");
+        numberOfSectionsLabel.setText("Number of Sections:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 79, 0, 0);
-        getContentPane().add(numberOfLecturesLabel, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(17, 70, 0, 0);
+        getContentPane().add(numberOfSectionsLabel, gridBagConstraints);
+
+        deptNameLabel.setText("Department Name:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(101, 70, 0, 0);
+        getContentPane().add(deptNameLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 152;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(98, 4, 0, 0);
+        getContentPane().add(deptNameTextField, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void getCourseInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getCourseInfoButtonActionPerformed
+    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         
+        String deptName = deptNameTextField.getText();
         String courseName = courseNameTextField.getText();
-        String officialName = "TEMP"; //definitely need to update
-        String courseLocation = courseLocationTextField.getText();
-        String startingDate = startingDateTextField.getText();
-        int numOfLectures = Integer.parseInt(numberOfLecturesTextField.getText());
+        int numOfSections = Integer.parseInt(numberOfSectionsTextField.getText());
+        Course newCourse = new Course(deptName, courseName);
         
-        Course newCourse = new Course(courseName, officialName, courseLocation, startingDate);
-        
-        //adds Lectures (if any)
-        AddSectionsWindow lectureWindow = new AddSectionsWindow(newCourse, numOfLectures);
+        //adds Sections
+        AddSectionsWindow sectionWindow = new AddSectionsWindow(newCourse, numOfSections, schedulingSystem);
+        sectionWindow.setVisible(true);
+        this.setVisible(false);//Might change to close
         
         
         
-    }//GEN-LAST:event_getCourseInfoButtonActionPerformed
+    }//GEN-LAST:event_addCourseButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        //<editor-fold defaultstate="collapsed" desc=" Look aaddCourseButtone (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -186,14 +173,12 @@ public class AddCourseWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField courseLocationTextField;
+    private javax.swing.JButton addCourseButton;
     private javax.swing.JTextField courseNameTextField;
-    private javax.swing.JLabel enterCourseLocationLabel;
+    private javax.swing.JLabel deptNameLabel;
+    private javax.swing.JTextField deptNameTextField;
     private javax.swing.JLabel enterCourseNameLabel;
-    private javax.swing.JLabel enterStartingDateLabel;
-    private javax.swing.JButton getCourseInfoButton;
-    private javax.swing.JLabel numberOfLecturesLabel;
-    private javax.swing.JTextField numberOfLecturesTextField;
-    private javax.swing.JTextField startingDateTextField;
+    private javax.swing.JLabel numberOfSectionsLabel;
+    private javax.swing.JTextField numberOfSectionsTextField;
     // End of variables declaration//GEN-END:variables
 }

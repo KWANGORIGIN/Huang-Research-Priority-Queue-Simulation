@@ -21,12 +21,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Kevin Wang
  */
 public class LoginScreen extends javax.swing.JFrame {
+    private SchedulingSystem schedulingSystem;
     
     /**
      * Creates new form LoginScreen
      */
     public LoginScreen() {
         initComponents();
+    }
+    
+    public LoginScreen(SchedulingSystem schedulingSystem){
+        initComponents();
+        this.schedulingSystem = schedulingSystem;
     }
    
 
@@ -47,6 +53,11 @@ public class LoginScreen extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         usernameLabel.setText("Username:");
@@ -231,6 +242,22 @@ public class LoginScreen extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        //Outputs scheduling system to file
+        
+        try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
+            try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+                output.writeObject(schedulingSystem);
+                System.out.println("Changes from this session have been saved.");
+            }
+            
+        }catch(FileNotFoundException fileNotFound){
+            System.out.println("File not found");
+        }catch(IOException ioException){
+            System.out.println("Error saving to file.");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

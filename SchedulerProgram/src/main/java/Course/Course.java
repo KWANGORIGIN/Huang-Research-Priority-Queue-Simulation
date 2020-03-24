@@ -10,23 +10,19 @@ import java.util.ArrayList;
  * @author wanga
  */
 public class Course {
-    private String officialName;
     private String courseName;
-    ArrayList <Section> lectures = new ArrayList();
-    private String location;
-    private String startingDate;
+    private String deptName;
+    ArrayList <Section> sections = new ArrayList();
     
     //Constructors
-    public Course(String courseName, String officialName, String location, String startingDate){
+    public Course(String deptName, String courseName){
+        this.deptName = deptName;
         this.courseName = courseName;
-        this.officialName = officialName;
-        this.location = location;
-        this.startingDate = startingDate;
     }
     
     //Setters
-    public void addLecture(){
-        
+    public void addSection(Section newSection){
+        sections.add(newSection);
     }
     
     //Getters
@@ -34,16 +30,14 @@ public class Course {
         return courseName;
     }
     
-    public String getOfficialName(){
-        return officialName;
+    public String getDeptName(){
+        return deptName;
     }
     
-    public String getLocation(){
-        return location;
+    public int getNumOfSections(){
+        return sections.size();
     }
     
-    public String getStartingDate(){
-        return startingDate;
-    }
+    
     
 }

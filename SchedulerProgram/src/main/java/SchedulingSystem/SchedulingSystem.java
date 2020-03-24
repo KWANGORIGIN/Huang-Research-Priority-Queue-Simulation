@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @author wanga
  */
 public class SchedulingSystem implements Serializable {
-    public static ArrayList<Course> availableCourses;
+    private final ArrayList<Course> availableCourses;
     private static ArrayList<Student> systemUsers;
     private static String adminUsername;
     public static int lastInputtedRow;
@@ -25,19 +25,15 @@ public class SchedulingSystem implements Serializable {
         systemUsers = new ArrayList<>();
         adminUsername = "administrator";
         lastInputtedRow = 0;
-        
-        //Hard coding in course info for now
-        Course tempCourse = new Course("CMPSC 121", "Introduction to Programming Techniques", "Burke 101", "08/31/2020");
-        availableCourses.add(tempCourse);
-        
     }
     
     /**
      * Adds new course to the Scheduling System
      * @param newCourse 
      */
-    public static void addCourse(Course newCourse){
+    public void addCourse(Course newCourse){
         availableCourses.add(newCourse);
+        System.out.println("Successfully added: " + newCourse.getDeptName());
     }
     
     public static void removeCourse(){
@@ -56,18 +52,12 @@ public class SchedulingSystem implements Serializable {
     //Getters
     /**
      * Gets a Course based on its name
-     * @param courseName
-     * @return Course if Course was found by course name, null if Course was not found
+     * @param deptName
+     * @return Course if Course was found by department name, null if Course was not found
      */
-    public static Course getCourse(String courseName){
-        /*
-        Need to implement string matching in case courseName is structured like
-        courseName# with no space between courseName and #
-        */
-        
-        
+    public Course getCourse(String deptName){
         for(int count = 0; count < availableCourses.size(); count++){
-            if(availableCourses.get(count).getCourseName().matches(courseName)){
+            if(availableCourses.get(count).getDeptName().matches(deptName)){
                 return availableCourses.get(count);
             }
         }
