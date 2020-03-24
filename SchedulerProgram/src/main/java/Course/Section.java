@@ -18,6 +18,7 @@ public class Section implements Serializable {
     private String dateTime;
     private String room;
     private String instructor;
+    //Add ArrayList of Student objects? Maybe in Sections?
     
     //Constructor
     public Section(String sectionName, String dateTime, String room, String instructor){

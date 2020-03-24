@@ -7,7 +7,7 @@ package ShoppingCart;
 
 import Course.Course;
 import SchedulingSystem.SchedulingSystem;
-import javax.swing.JTable;
+import Student.Student;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CourseInfoWindow extends javax.swing.JFrame {
     private Course currentCourse;
+    private Student currentStudent;
     private SchedulingSystem schedulingSystem;
     
     /**
@@ -25,9 +26,10 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CourseInfoWindow(Course currentCourse){
+    public CourseInfoWindow(Course currentCourse, Student currentStudent){
         initComponents();
         this.currentCourse = currentCourse;
+        this.currentStudent = currentStudent;
         populate_Table_with_Course_Info();
     }
 
@@ -55,14 +57,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Class", "Starting Date", "Room", "Instructor"
+                "", "Class", "Starting Date", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -80,10 +82,19 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         courseTable.setShowGrid(true);
         courseTable.getTableHeader().setReorderingAllowed(false);
         courseTableScrollPane.setViewportView(courseTable);
+        if (courseTable.getColumnModel().getColumnCount() > 0) {
+            courseTable.getColumnModel().getColumn(0).setResizable(false);
+            courseTable.getColumnModel().getColumn(0).setPreferredWidth(1);
+        }
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         addCourseButton.setText("Add Course");
+        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCourseButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(addCourseButton, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,6 +127,16 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
+        /*
+        Add course to Student object based on checkmarks
+        */
+        
+        
+        
+        
+    }//GEN-LAST:event_addCourseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,15 +177,16 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     protected void populate_Table_with_Course_Info(){
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
         this.setTitle(currentCourse.getDeptName() + ": " + currentCourse.getCourseName());
+        
         for(int count = 0; count < currentCourse.getNumOfSections(); count++){
-            Object courseRow[] = new Object[4];
-            courseRow[0] = currentCourse.getSection(count).getSectionName();
-            courseRow[1] = currentCourse.getSection(count).getDateTime();
-            courseRow[2] = currentCourse.getSection(count).getRoom();
-            courseRow[3] = currentCourse.getSection(count).getInstructor();
+            Object courseRow[] = new Object[5];
+            courseRow[0] = false;
+            courseRow[1] = currentCourse.getSection(count).getSectionName();
+            courseRow[2] = currentCourse.getSection(count).getDateTime();
+            courseRow[3] = currentCourse.getSection(count).getRoom();
+            courseRow[4] = currentCourse.getSection(count).getInstructor();
             model.addRow(courseRow);
         }
-        
         
     }
 

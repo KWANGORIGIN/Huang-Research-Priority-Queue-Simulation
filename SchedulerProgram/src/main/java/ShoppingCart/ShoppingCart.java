@@ -185,7 +185,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse);
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student);
                courseWindow.setVisible(true); 
             }
         }
@@ -205,7 +205,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse);
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student);
                courseWindow.setVisible(true); 
             }
             

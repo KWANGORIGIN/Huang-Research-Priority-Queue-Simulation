@@ -14,6 +14,7 @@ public class Course implements Serializable{
     private String courseName;
     private String deptName;
     ArrayList <Section> sections = new ArrayList();
+    //Add ArrayList of Student objects? Maybe in Sections?
     
     //Constructors
     public Course(String deptName, String courseName){

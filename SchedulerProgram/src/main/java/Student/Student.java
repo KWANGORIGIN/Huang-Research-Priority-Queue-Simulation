@@ -41,8 +41,8 @@ public class Student implements Serializable{
     }
     
     //
-    public void enrollCourse(){
-        
+    public void enrollCourse(Course newCourse){
+        enrolledCourses.add(newCourse);
     }
     
     /**
