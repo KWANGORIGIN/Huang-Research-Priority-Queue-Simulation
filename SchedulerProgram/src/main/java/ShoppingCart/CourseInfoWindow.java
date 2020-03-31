@@ -175,7 +175,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             Object courseRow[] = new Object[5];
             courseRow[0] = false;
             courseRow[1] = currentCourse.getSection(count).getSectionName();
-            courseRow[2] = currentCourse.getSection(count).getDateTime();
+            courseRow[2] = currentCourse.getSection(count).getDays() + "              " + currentCourse.getSection(count).getTime();//Change spacing later
             courseRow[3] = currentCourse.getSection(count).getRoom();
             courseRow[4] = currentCourse.getSection(count).getInstructor();
             model.addRow(courseRow);

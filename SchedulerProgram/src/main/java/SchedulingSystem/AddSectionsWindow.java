@@ -51,14 +51,16 @@ public class AddSectionsWindow extends javax.swing.JFrame {
 
         sectionNameLabel = new javax.swing.JLabel();
         sectionNameTextField = new javax.swing.JTextField();
-        dateTimeLabel = new javax.swing.JLabel();
+        daysLabel = new javax.swing.JLabel();
         addSectionButton = new javax.swing.JButton();
-        dateTimeTextField = new javax.swing.JTextField();
+        daysTextField = new javax.swing.JTextField();
         roomLabel = new javax.swing.JLabel();
         roomTextField = new javax.swing.JTextField();
         instructorLabel = new javax.swing.JLabel();
         instructorTextField = new javax.swing.JTextField();
         currentSection = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
+        timeTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -72,33 +74,27 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
         getContentPane().add(sectionNameLabel, gridBagConstraints);
-
-        sectionNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sectionNameTextFieldActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 93;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 0, 0, 204);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 204);
         getContentPane().add(sectionNameTextField, gridBagConstraints);
 
-        dateTimeLabel.setText("Date/Time:");
+        daysLabel.setText("Days:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 205, 0, 0);
-        getContentPane().add(dateTimeLabel, gridBagConstraints);
+        getContentPane().add(daysLabel, gridBagConstraints);
 
         addSectionButton.setText("Add Section");
         addSectionButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,72 +103,83 @@ public class AddSectionsWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 205, 98, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 31, 64, 204);
         getContentPane().add(addSectionButton, gridBagConstraints);
-
-        dateTimeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dateTimeTextFieldActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 125;
+        gridBagConstraints.ipadx = 151;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 4, 0, 204);
-        getContentPane().add(dateTimeTextField, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(17, 0, 0, 204);
+        getContentPane().add(daysTextField, gridBagConstraints);
 
         roomLabel.setText("Room:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(17, 205, 0, 0);
         getContentPane().add(roomLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 11;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 147;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 4, 0, 204);
+        gridBagConstraints.insets = new java.awt.Insets(14, 4, 0, 204);
         getContentPane().add(roomTextField, gridBagConstraints);
 
         instructorLabel.setText("Instructor:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
         getContentPane().add(instructorLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 8;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 126;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 3, 0, 204);
+        gridBagConstraints.insets = new java.awt.Insets(18, 4, 0, 204);
         getContentPane().add(instructorTextField, gridBagConstraints);
 
         currentSection.setText("jLabel1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridwidth = 14;
         gridBagConstraints.ipadx = 155;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(86, 205, 0, 204);
         getContentPane().add(currentSection, gridBagConstraints);
+
+        timeLabel.setText("Time:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 205, 0, 0);
+        getContentPane().add(timeLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 152;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 3, 0, 204);
+        getContentPane().add(timeTextField, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -188,16 +195,17 @@ public class AddSectionsWindow extends javax.swing.JFrame {
 
         //Gets info
         String sectionName = sectionNameTextField.getText();
-        String dateTime = dateTimeTextField.getText();
+        String days = daysTextField.getText();
+        String time = timeTextField.getText();
         String room = roomTextField.getText();
         String instructor = instructorTextField.getText();
 
-        Section newSection = new Section(sectionName, dateTime, room, instructor);
+        Section newSection = new Section(sectionName, days, time, room, instructor);
         workingCourse.addSection(newSection);
 
         //Clears inputs
         sectionNameTextField.setText("");
-        dateTimeTextField.setText("");
+        daysTextField.setText("");
         roomTextField.setText("");
         instructorTextField.setText("");
         currentSectionNum++;
@@ -209,14 +217,6 @@ public class AddSectionsWindow extends javax.swing.JFrame {
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_addSectionButtonActionPerformed
-
-    private void sectionNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sectionNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sectionNameTextFieldActionPerformed
-
-    private void dateTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateTimeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dateTimeTextFieldActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //Outputs scheduling system to file
@@ -279,13 +279,15 @@ public class AddSectionsWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addSectionButton;
     private javax.swing.JLabel currentSection;
-    private javax.swing.JLabel dateTimeLabel;
-    private javax.swing.JTextField dateTimeTextField;
+    private javax.swing.JLabel daysLabel;
+    private javax.swing.JTextField daysTextField;
     private javax.swing.JLabel instructorLabel;
     private javax.swing.JTextField instructorTextField;
     private javax.swing.JLabel roomLabel;
     private javax.swing.JTextField roomTextField;
     private javax.swing.JLabel sectionNameLabel;
     private javax.swing.JTextField sectionNameTextField;
+    private javax.swing.JLabel timeLabel;
+    private javax.swing.JTextField timeTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -181,6 +181,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         String searchInput = searchbar.getText();
         if(searchInput.matches("[A-Za-z]+\\s\\d+")){//Space between course name and number(#): courseName #
             Course searchedCourse = schedulingSystem.getCourse(searchInput.toUpperCase());
+            //System.out.println(searchedCourse.getCourseName());
             if(searchedCourse == null){
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
