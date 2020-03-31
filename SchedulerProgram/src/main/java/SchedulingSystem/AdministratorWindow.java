@@ -32,15 +32,14 @@ public class AdministratorWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         addCourseButton = new javax.swing.JButton();
         removeCourseButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        changeQueueTime = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         addCourseButton.setText("Add Course");
         addCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -48,11 +47,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
                 addCourseButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        getContentPane().add(addCourseButton, gridBagConstraints);
 
         removeCourseButton.setText("Remove Course");
         removeCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,19 +54,43 @@ public class AdministratorWindow extends javax.swing.JFrame {
                 removeCourseButtonActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        getContentPane().add(removeCourseButton, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Source Code Pro Semibold", 0, 14)); // NOI18N
         jLabel1.setText("Welcome Admin. What would you like to do?");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 16;
-        getContentPane().add(jLabel1, gridBagConstraints);
+
+        changeQueueTime.setText("Change Queue Time");
+        changeQueueTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeQueueTimeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(changeQueueTime, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(addCourseButton)
+                .addGap(0, 0, 0)
+                .addComponent(removeCourseButton)
+                .addGap(0, 0, 0)
+                .addComponent(changeQueueTime)
+                .addGap(110, 110, 110))
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -87,6 +105,10 @@ public class AdministratorWindow extends javax.swing.JFrame {
         this.setVisible(false);
         newAddCourseWindow.setVisible(true);
     }//GEN-LAST:event_addCourseButtonActionPerformed
+
+    private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changeQueueTimeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,6 +148,7 @@ public class AdministratorWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseButton;
+    private javax.swing.JButton changeQueueTime;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton removeCourseButton;
     // End of variables declaration//GEN-END:variables

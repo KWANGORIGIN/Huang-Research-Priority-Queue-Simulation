@@ -206,6 +206,7 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         //Clears inputs
         sectionNameTextField.setText("");
         daysTextField.setText("");
+        timeTextField.setText("");
         roomTextField.setText("");
         instructorTextField.setText("");
         currentSectionNum++;

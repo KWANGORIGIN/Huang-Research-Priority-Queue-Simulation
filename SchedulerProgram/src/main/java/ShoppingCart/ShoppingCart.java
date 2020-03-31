@@ -22,12 +22,12 @@ public class ShoppingCart extends javax.swing.JFrame {
     
     public ShoppingCart(){
         initComponents();
-        printStudentEnrolledCourses();
+        //printStudentEnrolledCourses();
     }
     
     public ShoppingCart(SchedulingSystem schedulingSystem){
         initComponents();
-        printStudentEnrolledCourses();
+        //printStudentEnrolledCourses();
         this.schedulingSystem = schedulingSystem;
     }
     
@@ -40,7 +40,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         initComponents();
         this.student = student;
         this.schedulingSystem = schedulingSystem;
-        //printStudentEnrolledCourses();
+        printStudentEnrolledCourses();
     }
     
     /**
@@ -89,7 +89,7 @@ public class ShoppingCart extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Course", "Starting Date", "Room", "Instructor"
+                "Course", "Date/Time", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
@@ -254,13 +254,16 @@ public class ShoppingCart extends javax.swing.JFrame {
     
     protected void printStudentEnrolledCourses(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        System.out.println(student.numOfEnrolledCourses());
         
         for(int count = 0; count < student.numOfEnrolledCourses(); count++){
             Course tempCourse = student.getEnrolledCourse(count);
+            System.out.println(tempCourse.getCourseName());
             Object courseRow[] = new Object[4];
-            courseRow[0] = tempCourse.getCourseName();
-//            courseRow[1] = tempCourse.getStartingDate();
-//            courseRow[2] = tempCourse.getLocation();
+            courseRow[0] = tempCourse.getDeptName();
+            courseRow[1] = tempCourse.getSection(count).getDays() + "              " + tempCourse.getSection(count).getTime();//Change spacing later
+            courseRow[2] = tempCourse.getSection(count).getRoom();
+            courseRow[3] = tempCourse.getSection(count).getInstructor();
             model.addRow(courseRow);
         }
     }

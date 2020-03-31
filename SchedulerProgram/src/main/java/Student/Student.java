@@ -17,12 +17,14 @@ public class Student implements Serializable{
     private String username;
     private int excelRowPosition;
     private ArrayList<Course> enrolledCourses;
+    private ArrayList<Section> enrolledSections;//maybe try to hash it with enrolledCourses? So that if an enrolledCourse is removed the section is removed as well
     
     //Constructor (used in LoginScreen)
     public Student(String username, int rowPosition){
         this.username = username;
         excelRowPosition = rowPosition;
         enrolledCourses = new ArrayList<>();
+        enrolledSections = new ArrayList<>();
     }
     
     public Student(){
@@ -41,8 +43,9 @@ public class Student implements Serializable{
     }
     
     //
-    public void enrollCourse(Course newCourse){
+    public void enrollCourse(Course newCourse, Section enrolledSection){
         enrolledCourses.add(newCourse);
+        enrolledSections.add(enrolledSection);
     }
     
     /**
@@ -66,5 +69,8 @@ public class Student implements Serializable{
         return excelRowPosition;
     }
     
+    public String getUsername(){
+        return username;
+    }
     
 }

@@ -6,9 +6,25 @@
 package ShoppingCart;
 
 import Course.Course;
+import Course.Section;
 import SchedulingSystem.SchedulingSystem;
 import Student.Student;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -16,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CourseInfoWindow extends javax.swing.JFrame {
     private Course currentCourse;
+    private Section enrolledSection;
     private Student currentStudent;
     private SchedulingSystem schedulingSystem;
     
@@ -54,6 +71,11 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(891, 350));
         setPreferredSize(new java.awt.Dimension(891, 350));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,6 +120,11 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         addCourseButton.setText("Add Course");
+        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCourseButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(addCourseButton, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +157,99 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
+        //Add timestamp to Excel sheet for when student signs up for course
+        //Imports or creates workbook students.xlsx depending on if file exists
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet();
+            XSSFRow newRow;
+            Cell cell;
+            
+            try(FileInputStream in = new FileInputStream("students.xlsx")){
+                workbook = new XSSFWorkbook(in);
+                sheet = workbook.getSheet("Student Details");
+
+                in.close();
+                System.out.println("Successfully opened students.xlsx");
+
+            }catch(FileNotFoundException e){
+                System.out.println("File not found. Creating new file...");
+
+                //Creates a blank workbook and sheet
+                workbook = new XSSFWorkbook();
+                sheet = workbook.createSheet("Student Details");
+                
+                //Creates titles for columns
+                newRow = sheet.createRow(0);
+                cell = newRow.createCell(0);
+                cell.setCellValue("Username");
+                cell = newRow.createCell(1);
+                cell.setCellValue("Login Timestamp");
+                cell = newRow.createCell(2);
+                cell.setCellValue("Course Added TimeStamp");
+
+                System.out.println("Successfully created students.xlsx");
+            }catch(IOException e){
+                System.out.println("Unknown error opening file.");
+            }
+            
+            XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
+
+            //Adds timestamp
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String dateTime = dtf.format(now);
+            Cell timeCell = currentStudentRow.createCell(2);
+            timeCell.setCellValue(dateTime);
+
+            //Autosizes columns
+            for(int count = 0; count < currentStudentRow.getLastCellNum(); count++){//changed from newRow...add contingencies later
+                sheet.autoSizeColumn(count);
+            }
+
+            //Saves to file
+            try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+                workbook.write(out);
+                out.close();
+
+                //Success message
+                System.out.println("Succesfully outputted to students.xlsx");
+            }catch(FileNotFoundException noFile){
+                System.out.println("Unable to create file.");
+            }catch(IOException e){
+                System.out.println("Error closing fileoutputstream.");
+            }
+        
+        
+        //Gets enrolledSection
+        int sectionRow = courseTable.getSelectedRow();//I don't think this gets the row based off checkmark...gotta sort that out
+        System.out.println(sectionRow);
+        if(sectionRow != -1){//getSelectedRow returns -1 if no row is selected
+            enrolledSection = currentCourse.getSection(sectionRow);
+            
+            //Add Course to student file
+            currentStudent.enrollCourse(currentCourse, enrolledSection);
+            
+            //Close window
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+        
+    }//GEN-LAST:event_addCourseButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        //Updates student file
+        try(FileOutputStream outputFile = new FileOutputStream(currentStudent.getUsername() + ".ser")){
+                    try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+                        output.writeObject(currentStudent);
+                        System.out.println("Student " + currentStudent.getUsername() + " successfully saved.");
+                    }
+                }catch(FileNotFoundException noFile){
+                    System.out.println("File not found");
+                }catch(IOException ioException){
+                    System.out.println("Error saving to file.");
+                }
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

@@ -157,7 +157,12 @@ public class LoginScreen extends javax.swing.JFrame {
                 cell = newRow.createCell(0);
                 cell.setCellValue("Username");
                 cell = newRow.createCell(1);
-                cell.setCellValue("Timestamp");
+                cell.setCellValue("Login Timestamp");
+                cell = newRow.createCell(2);
+                cell.setCellValue("Course Added TimeStamp");
+                
+//                //Resets last inputted row to 0
+//                SchedulingSystem.lastInputtedRow = 0;
 
                 System.out.println("Successfully created students.xlsx");
             }catch(IOException e){
