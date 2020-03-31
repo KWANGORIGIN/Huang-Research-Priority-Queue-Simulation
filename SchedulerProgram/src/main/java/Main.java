@@ -34,7 +34,6 @@ public class Main {
         }catch(FileNotFoundException fileNotFound){
             //creates new scheduling system if file not found
             System.out.println("Creating new scheduling system...");
-            //Initializes a few courses
             
 
         }catch(ClassNotFoundException classNotFound){

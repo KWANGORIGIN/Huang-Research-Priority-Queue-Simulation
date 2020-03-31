@@ -20,7 +20,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
     
     /**
-     * Creates new form additionalCourseInfoWindow
+     * Creates new form CourseInfoWindow
      */
     public CourseInfoWindow() {
         initComponents();
@@ -28,6 +28,8 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     
     public CourseInfoWindow(Course currentCourse, Student currentStudent){
         initComponents();
+//        courseTable.getColumnModel().getColumn(0).setPreferredWidth(1);
+//        courseTable.getColumnModel().getColumn(1).setPreferredWidth(999);
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
         populate_Table_with_Course_Info();
@@ -51,13 +53,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(891, 350));
         setPreferredSize(new java.awt.Dimension(891, 350));
+        setResizable(false);
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "", "Class", "Starting Date", "Room", "Instructor"
+                "", "Class", "Date/Time", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
@@ -77,24 +80,24 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         });
         courseTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         courseTable.setInheritsPopupMenu(true);
-        courseTable.setSelectionBackground(new java.awt.Color(0, 51, 102));
+        courseTable.setSelectionBackground(java.awt.SystemColor.textHighlightText);
         courseTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         courseTable.setShowGrid(true);
         courseTable.getTableHeader().setReorderingAllowed(false);
         courseTableScrollPane.setViewportView(courseTable);
         if (courseTable.getColumnModel().getColumnCount() > 0) {
-            courseTable.getColumnModel().getColumn(0).setResizable(false);
-            courseTable.getColumnModel().getColumn(0).setPreferredWidth(1);
+            courseTable.getColumnModel().getColumn(0).setMinWidth(30);
+            courseTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+            courseTable.getColumnModel().getColumn(0).setMaxWidth(30);
+            courseTable.getColumnModel().getColumn(1).setResizable(false);
+            courseTable.getColumnModel().getColumn(2).setResizable(false);
+            courseTable.getColumnModel().getColumn(3).setResizable(false);
+            courseTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         addCourseButton.setText("Add Course");
-        addCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCourseButtonActionPerformed(evt);
-            }
-        });
         jPanel1.add(addCourseButton, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,16 +130,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        /*
-        Add course to Student object based on checkmarks
-        */
-        
-        
-        
-        
-    }//GEN-LAST:event_addCourseButtonActionPerformed
 
     /**
      * @param args the command line arguments
