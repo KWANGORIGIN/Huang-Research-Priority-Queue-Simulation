@@ -109,7 +109,7 @@ public class ShoppingCart extends javax.swing.JFrame {
         });
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable1.setInheritsPopupMenu(true);
-        jTable1.setSelectionBackground(new java.awt.Color(0, 51, 102));
+        jTable1.setSelectionBackground(java.awt.SystemColor.textHighlightText);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setShowGrid(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
@@ -261,7 +261,7 @@ public class ShoppingCart extends javax.swing.JFrame {
             System.out.println(tempCourse.getCourseName());
             Object courseRow[] = new Object[4];
             courseRow[0] = tempCourse.getDeptName();
-            courseRow[1] = tempCourse.getSection(count).getDays() + "              " + tempCourse.getSection(count).getTime();//Change spacing later
+            courseRow[1] = tempCourse.getSection(count).getDays() + "          " + tempCourse.getSection(count).getTime();//Change spacing later
             courseRow[2] = tempCourse.getSection(count).getRoom();
             courseRow[3] = tempCourse.getSection(count).getInstructor();
             model.addRow(courseRow);

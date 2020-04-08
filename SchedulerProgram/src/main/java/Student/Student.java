@@ -43,9 +43,15 @@ public class Student implements Serializable{
     }
     
     //
-    public void enrollCourse(Course newCourse, Section enrolledSection){
-        enrolledCourses.add(newCourse);
-        enrolledSections.add(enrolledSection);
+    public boolean enrollCourse(Course newCourse, Section enrolledSection){
+        if(!enrolledCourses.contains(newCourse)){
+            if(!enrolledSections.contains(enrolledSection)){
+                enrolledCourses.add(newCourse);
+                enrolledSections.add(enrolledSection);
+                return true;
+            }
+        }
+        return false;
     }
     
     /**

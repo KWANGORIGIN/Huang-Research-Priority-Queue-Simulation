@@ -107,7 +107,12 @@ public class AdministratorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed
-        // TODO add your handling code here:
+        //Create Timer object and run it
+        
+        
+        
+        
+        
     }//GEN-LAST:event_changeQueueTimeActionPerformed
 
     /**

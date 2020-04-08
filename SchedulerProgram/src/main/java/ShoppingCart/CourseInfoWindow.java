@@ -45,8 +45,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     
     public CourseInfoWindow(Course currentCourse, Student currentStudent){
         initComponents();
-//        courseTable.getColumnModel().getColumn(0).setPreferredWidth(1);
-//        courseTable.getColumnModel().getColumn(1).setPreferredWidth(999);
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
         populate_Table_with_Course_Info();
@@ -117,6 +115,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             courseTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         addCourseButton.setText("Add Course");
@@ -159,68 +158,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        //Add timestamp to Excel sheet for when student signs up for course
-        //Imports or creates workbook students.xlsx depending on if file exists
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            XSSFSheet sheet = workbook.createSheet();
-            XSSFRow newRow;
-            Cell cell;
-            
-            try(FileInputStream in = new FileInputStream("students.xlsx")){
-                workbook = new XSSFWorkbook(in);
-                sheet = workbook.getSheet("Student Details");
-
-                in.close();
-                System.out.println("Successfully opened students.xlsx");
-
-            }catch(FileNotFoundException e){
-                System.out.println("File not found. Creating new file...");
-
-                //Creates a blank workbook and sheet
-                workbook = new XSSFWorkbook();
-                sheet = workbook.createSheet("Student Details");
-                
-                //Creates titles for columns
-                newRow = sheet.createRow(0);
-                cell = newRow.createCell(0);
-                cell.setCellValue("Username");
-                cell = newRow.createCell(1);
-                cell.setCellValue("Login Timestamp");
-                cell = newRow.createCell(2);
-                cell.setCellValue("Course Added TimeStamp");
-
-                System.out.println("Successfully created students.xlsx");
-            }catch(IOException e){
-                System.out.println("Unknown error opening file.");
-            }
-            
-            XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
-
-            //Adds timestamp
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            String dateTime = dtf.format(now);
-            Cell timeCell = currentStudentRow.createCell(2);
-            timeCell.setCellValue(dateTime);
-
-            //Autosizes columns
-            for(int count = 0; count < currentStudentRow.getLastCellNum(); count++){//changed from newRow...add contingencies later
-                sheet.autoSizeColumn(count);
-            }
-
-            //Saves to file
-            try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
-                workbook.write(out);
-                out.close();
-
-                //Success message
-                System.out.println("Succesfully outputted to students.xlsx");
-            }catch(FileNotFoundException noFile){
-                System.out.println("Unable to create file.");
-            }catch(IOException e){
-                System.out.println("Error closing fileoutputstream.");
-            }
-        
         
         //Gets enrolledSection
         int sectionRow = courseTable.getSelectedRow();//I don't think this gets the row based off checkmark...gotta sort that out
@@ -229,7 +166,74 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             enrolledSection = currentCourse.getSection(sectionRow);
             
             //Add Course to student file
-            currentStudent.enrollCourse(currentCourse, enrolledSection);
+            boolean test = currentStudent.enrollCourse(currentCourse, enrolledSection);
+            System.out.println("Test: " + test);//debugging purposes. Not working as expected. Need to update.
+            if(!test){//If course is already in Shopping Cart
+                JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
+            }
+            else{
+                //Add timestamp to Excel sheet for when student signs up for course
+                //Imports or creates workbook students.xlsx depending on if file exists
+                XSSFWorkbook workbook = new XSSFWorkbook();
+                XSSFSheet sheet = workbook.createSheet();
+                XSSFRow newRow;
+                Cell cell;
+
+                try(FileInputStream in = new FileInputStream("students.xlsx")){
+                    workbook = new XSSFWorkbook(in);
+                    sheet = workbook.getSheet("Student Details");
+
+                    in.close();
+                    System.out.println("Successfully opened students.xlsx");
+
+                }catch(FileNotFoundException e){
+                    System.out.println("File not found. Creating new file...");
+
+                    //Creates a blank workbook and sheet
+                    workbook = new XSSFWorkbook();
+                    sheet = workbook.createSheet("Student Details");
+
+                    //Creates titles for columns
+                    newRow = sheet.createRow(0);
+                    cell = newRow.createCell(0);
+                    cell.setCellValue("Username");
+                    cell = newRow.createCell(1);
+                    cell.setCellValue("Login Timestamp");
+                    cell = newRow.createCell(2);
+                    cell.setCellValue("Course Added TimeStamp");
+
+                    System.out.println("Successfully created students.xlsx");
+                }catch(IOException e){
+                    System.out.println("Unknown error opening file.");
+                }
+
+                XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
+
+                //Adds timestamp
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                String dateTime = dtf.format(now);
+                Cell timeCell = currentStudentRow.createCell(2);
+                timeCell.setCellValue(dateTime);
+
+                //Autosizes columns
+                for(int count = 0; count < currentStudentRow.getLastCellNum(); count++){//changed from newRow...add contingencies later
+                    sheet.autoSizeColumn(count);
+                }
+
+                //Saves to file
+                try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+                    workbook.write(out);
+                    out.close();
+
+                    //Success message
+                    System.out.println("Succesfully outputted to students.xlsx");
+                }catch(FileNotFoundException noFile){
+                    System.out.println("Unable to create file.");
+                }catch(IOException e){
+                    System.out.println("Error closing fileoutputstream.");
+                }
+            }
             
             //Close window
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -295,7 +299,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             Object courseRow[] = new Object[5];
             courseRow[0] = false;
             courseRow[1] = currentCourse.getSection(count).getSectionName();
-            courseRow[2] = currentCourse.getSection(count).getDays() + "              " + currentCourse.getSection(count).getTime();//Change spacing later
+            courseRow[2] = currentCourse.getSection(count).getDays() + "          " + currentCourse.getSection(count).getTime();//Change spacing later
             courseRow[3] = currentCourse.getSection(count).getRoom();
             courseRow[4] = currentCourse.getSection(count).getInstructor();
             model.addRow(courseRow);
