@@ -20,21 +20,23 @@ public class CountdownTimer {
     private final ScheduledExecutorService CountdownTimer = Executors.newScheduledThreadPool(1);
     int timeInSeconds;
     
-    CountdownTimer(int timeInSeconds){
+    public CountdownTimer(int timeInSeconds){
        this.timeInSeconds = timeInSeconds;
     }
     
-    public void runCountdownTimer(){
+    public void runCountdownTimer(CountdownWindow timerWindow){
         
         int amountOfTime = timeInSeconds;
         while(true){
             
-            ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(amountOfTime), 1, TimeUnit.SECONDS);
+            ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(amountOfTime, timerWindow), 1, TimeUnit.SECONDS);
             
             try{
                 amountOfTime = updatedTime.get();
                 if(amountOfTime == 0){
                     CountdownTimer.shutdown();
+                    //CountdownTimer.awaitTermination(1, TimeUnit.SECONDS);
+                    timerWindow.dispose();
                     break;
                 }
             }catch(Exception e){
@@ -50,15 +52,9 @@ public class CountdownTimer {
         timerWindow.setVisible(true);
         
         CountdownTimer testTimer = new CountdownTimer(5);
-        
-        
-        
-        
-        
+        testTimer.runCountdownTimer(timerWindow);
         
     }
-    
-    
     
     
 }
@@ -66,13 +62,16 @@ public class CountdownTimer {
 class TimeUpdater implements Callable<Integer>{
     
     private int currentTime;
-    TimeUpdater(int currentTime){
+    private CountdownWindow timerWindow;
+    TimeUpdater(int currentTime, CountdownWindow timerWindow){
         this.currentTime = currentTime;
+        this.timerWindow = timerWindow;
     }
     
     @Override
     public Integer call() throws Exception{
-        System.out.println(currentTime);
+        timerWindow.updateTimer(currentTime);
+        System.out.println("Updated timer with current time: " + currentTime + " at time: " + LocalDateTime.now().toString());
         return --currentTime;
     }
     

@@ -24,11 +24,8 @@ public class CountdownWindow extends javax.swing.JFrame {
         this.timer = timer;
     }
     
-    public void updateTimer(){
-        
-        
-        
-        
+    public void updateTimer(Integer currentTime){
+        timerDisplay.setText(currentTime.toString());
     }
     
 

@@ -5,6 +5,8 @@
  */
 package SchedulingSystem;
 
+import Timer.CountdownTimer;
+
 /**
  *
  * @author wanga
@@ -107,8 +109,12 @@ public class AdministratorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed
-        //Create Timer object and run it
-        
+        //Get number of minutes and seconds for Timer countdown
+        SetCountdownWindow newCountdownWindow = new SetCountdownWindow(schedulingSystem);
+        newCountdownWindow.setVisible(true);
+        /*
+        For this version currently just asking for seconds
+        */
         
         
         
