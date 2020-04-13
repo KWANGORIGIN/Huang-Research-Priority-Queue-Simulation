@@ -1,3 +1,5 @@
+package Login;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,7 +37,7 @@ public class Main {
             //creates new scheduling system if file not found
             System.out.println("Creating new scheduling system...");
             
-
+ 
         }catch(ClassNotFoundException classNotFound){
             JOptionPane.showMessageDialog(null, "Error reading scheduling system from file.");
         }
