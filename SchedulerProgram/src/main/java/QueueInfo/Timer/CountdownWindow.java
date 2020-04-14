@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Timer;
+package QueueInfo.Timer;
+
+import QueueInfo.Timer.CountdownTimer;
 
 /**
  *
@@ -27,7 +29,6 @@ public class CountdownWindow extends javax.swing.JFrame {
     public void updateTimer(Integer currentTime){
         timerDisplay.setText(currentTime.toString());
     }
-    
 
     
     

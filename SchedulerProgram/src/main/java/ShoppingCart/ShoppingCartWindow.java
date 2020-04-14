@@ -9,6 +9,7 @@ import SchedulingSystem.SchedulingSystem;
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
 import Student.Student;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -16,16 +17,15 @@ import javax.swing.JTable;
  *
  * @author wanga
  */
-public class ShoppingCart extends javax.swing.JFrame {
+public class ShoppingCartWindow extends javax.swing.JFrame {
     private Student student;
     SchedulingSystem schedulingSystem;
     
-    public ShoppingCart(){
+    public ShoppingCartWindow(){
         initComponents();
-        //printStudentEnrolledCourses();
     }
     
-    public ShoppingCart(SchedulingSystem schedulingSystem){
+    public ShoppingCartWindow(SchedulingSystem schedulingSystem){
         initComponents();
         //printStudentEnrolledCourses();
         this.schedulingSystem = schedulingSystem;
@@ -36,7 +36,7 @@ public class ShoppingCart extends javax.swing.JFrame {
      * @param student
      * @param schedulingSystem
      */
-    public ShoppingCart(Student student, SchedulingSystem schedulingSystem){
+    public ShoppingCartWindow(Student student, SchedulingSystem schedulingSystem){
         initComponents();
         this.student = student;
         this.schedulingSystem = schedulingSystem;
@@ -186,7 +186,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student);
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this);
                courseWindow.setVisible(true); 
             }
         }
@@ -206,7 +206,7 @@ public class ShoppingCart extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student);
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this);
                courseWindow.setVisible(true); 
             }
             
@@ -234,20 +234,21 @@ public class ShoppingCart extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShoppingCart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShoppingCartWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShoppingCart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShoppingCartWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShoppingCart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShoppingCartWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShoppingCart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShoppingCartWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShoppingCart().setVisible(true);
+                new ShoppingCartWindow().setVisible(true);
             }
         });
     }
@@ -261,9 +262,9 @@ public class ShoppingCart extends javax.swing.JFrame {
             System.out.println(tempCourse.getCourseName());
             Object courseRow[] = new Object[4];
             courseRow[0] = tempCourse.getDeptName();
-            courseRow[1] = tempCourse.getSection(count).getDays() + "          " + tempCourse.getSection(count).getTime();//Change spacing later
-            courseRow[2] = tempCourse.getSection(count).getRoom();
-            courseRow[3] = tempCourse.getSection(count).getInstructor();
+            courseRow[1] = student.getEnrolledSection(count).getDays() + "          " + tempCourse.getSection(count).getTime();//Change spacing later
+            courseRow[2] = student.getEnrolledSection(count).getRoom();
+            courseRow[3] = student.getEnrolledSection(count).getInstructor();
             model.addRow(courseRow);
         }
     }

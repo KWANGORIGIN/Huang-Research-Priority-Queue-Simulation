@@ -15,7 +15,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,7 +33,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     private Course currentCourse;
     private Section enrolledSection;
     private Student currentStudent;
-    private SchedulingSystem schedulingSystem;
+    private ShoppingCartWindow Cart;
     
     /**
      * Creates new form CourseInfoWindow
@@ -43,10 +42,11 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CourseInfoWindow(Course currentCourse, Student currentStudent){
+    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow Cart){
         initComponents();
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
+        this.Cart = Cart;
         populate_Table_with_Course_Info();
     }
 
@@ -161,7 +161,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         
         //Gets enrolledSection
         int sectionRow = courseTable.getSelectedRow();//I don't think this gets the row based off checkmark...gotta sort that out
-        System.out.println(sectionRow);
+        System.out.println("Section row selected: " + sectionRow);
         if(sectionRow != -1){//getSelectedRow returns -1 if no row is selected
             enrolledSection = currentCourse.getSection(sectionRow);
             
@@ -229,7 +229,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                     //Success message
                     System.out.println("Succesfully outputted to students.xlsx");
                 }catch(FileNotFoundException noFile){
-                    System.out.println("Unable to create file.");
+                    System.out.println("Unable to create Student file.");
                 }catch(IOException e){
                     System.out.println("Error closing fileoutputstream.");
                 }
@@ -253,6 +253,9 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                 }catch(IOException ioException){
                     System.out.println("Error saving to file.");
                 }
+        
+        //Updates ShoppingCartWindow with changes
+        Cart.printStudentEnrolledCourses();
     }//GEN-LAST:event_formWindowClosed
 
     /**

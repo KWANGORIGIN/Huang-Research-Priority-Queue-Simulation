@@ -44,14 +44,15 @@ public class Student implements Serializable{
     
     //
     public boolean enrollCourse(Course newCourse, Section enrolledSection){
-        if(!enrolledCourses.contains(newCourse)){
-            if(!enrolledSections.contains(enrolledSection)){
+//        if(!enrolledCourses.contains(newCourse)){
+//            System.out.println("Contains Course: " + enrolledCourses.contains(newCourse));
+//            if(!enrolledSections.contains(enrolledSection)){
                 enrolledCourses.add(newCourse);
                 enrolledSections.add(enrolledSection);
                 return true;
-            }
-        }
-        return false;
+//            }
+//        }
+        //return false;
     }
     
     /**
@@ -61,6 +62,10 @@ public class Student implements Serializable{
      */
     public Course getEnrolledCourse(int listPosition){
         return enrolledCourses.get(listPosition);
+    }
+    
+    public Section getEnrolledSection(int listPosition){
+        return enrolledSections.get(listPosition);
     }
     
     public int numOfEnrolledCourses(){

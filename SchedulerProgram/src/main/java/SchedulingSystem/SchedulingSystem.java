@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import Course.Course;
 import Student.Student;
 import java.io.Serializable;
-import Timer.CountdownTimer;
+import QueueInfo.Timer.CountdownTimer;
 
 /**
  *

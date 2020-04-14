@@ -5,7 +5,7 @@
  */
 package Login;
 import SchedulingSystem.*;
-import ShoppingCart.ShoppingCart;
+import ShoppingCart.ShoppingCartWindow;
 import Student.Student;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
@@ -56,9 +56,6 @@ public class LoginScreen extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
             }
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -240,20 +237,22 @@ public class LoginScreen extends javax.swing.JFrame {
                 System.out.println("Succesfully outputted to students.xlsx");
             }catch(FileNotFoundException noFile){
                 System.out.println("Unable to create file.");
+                /*
+                Include Error dialog message asking user if Excel file is open
+                
+                */
+                
+                
             }catch(IOException e){
                 System.out.println("Error closing fileoutputstream.");
             }
 
-            //Creates ShoppingCart screen
-            ShoppingCart cart = new ShoppingCart(student, schedulingSystem);
+            //Creates ShoppingCartWindow screen
+            ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
             cart.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        //Maybe put here?
-    }//GEN-LAST:event_formWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         //Outputs scheduling system to file

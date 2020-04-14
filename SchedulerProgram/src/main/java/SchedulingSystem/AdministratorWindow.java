@@ -5,7 +5,7 @@
  */
 package SchedulingSystem;
 
-import Timer.CountdownTimer;
+import QueueInfo.Timer.CountdownTimer;
 
 /**
  *

@@ -12,10 +12,7 @@ package Login;
  */
 
 import java.util.Scanner;
-import Course.*;
 import SchedulingSystem.*;
-import ShoppingCart.*;
-import Login.*;
 import java.io.*;
 import javax.swing.JOptionPane;
 
@@ -54,25 +51,7 @@ public class Main {
         loginScreen.setVisible(true);
         
         //When loginScreen closes the entire system is saved
-        /*Currently handling in login Screen
-        
-        
-        ...not really. Need to find another way for the Main program to end. Because WindowClosing method doesn't work unless LoginScreen is disposed not Exit_on_Close()
-        */
-        
-        
-//        //Outputs scheduling system to file
-//         try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
-//             try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
-//                 output.writeObject(schedulingSystem);
-//                 System.out.println("Changes from this session have been saved...");
-//             }
-//
-//         }catch(FileNotFoundException fileNotFound){
-//             System.out.println("File not found");
-//         }catch(IOException ioException){
-//             System.out.println("Error saving to file.");
-//         } 
+        //Currently handling in login Screen
         
     }
 }
