@@ -256,13 +256,14 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     protected void printStudentEnrolledCourses(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         System.out.println(student.numOfEnrolledCourses());
+        model.setRowCount(0);//This initializes the number of rows to 0 in case updating rows in table. Essentially clears jTable data
         
         for(int count = 0; count < student.numOfEnrolledCourses(); count++){
             Course tempCourse = student.getEnrolledCourse(count);
             System.out.println(tempCourse.getCourseName());
             Object courseRow[] = new Object[4];
             courseRow[0] = tempCourse.getDeptName();
-            courseRow[1] = student.getEnrolledSection(count).getDays() + "          " + tempCourse.getSection(count).getTime();//Change spacing later
+            courseRow[1] = student.getEnrolledSection(count).getDays() + "          " + student.getEnrolledSection(count).getTime();//Change spacing later
             courseRow[2] = student.getEnrolledSection(count).getRoom();
             courseRow[3] = student.getEnrolledSection(count).getInstructor();
             model.addRow(courseRow);

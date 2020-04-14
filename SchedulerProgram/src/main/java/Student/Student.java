@@ -18,6 +18,9 @@ public class Student implements Serializable{
     private int excelRowPosition;
     private ArrayList<Course> enrolledCourses;
     private ArrayList<Section> enrolledSections;//maybe try to hash it with enrolledCourses? So that if an enrolledCourse is removed the section is removed as well
+    /*
+    4/14/20: Create a class that combines Course and Section together so only need one ArrayList to parse?
+    */
     
     //Constructor (used in LoginScreen)
     public Student(String username, int rowPosition){
