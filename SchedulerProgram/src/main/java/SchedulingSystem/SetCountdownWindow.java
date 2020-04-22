@@ -5,7 +5,7 @@
  */
 package SchedulingSystem;
 
-import QueueInfo.Timer.CountdownTimer;
+import QueueInfo.CountdownTimer.CountdownTimer;
 import java.awt.event.WindowEvent;
 
 /**
@@ -36,14 +36,14 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        secondsLabel = new javax.swing.JLabel();
-        secondsTextField = new javax.swing.JTextField();
+        minutesLabel = new javax.swing.JLabel();
+        minutesTextField = new javax.swing.JTextField();
         setTimer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
 
-        secondsLabel.setText("Seconds:");
+        minutesLabel.setText("Minutes:");
 
         setTimer.setText("Set");
         setTimer.addActionListener(new java.awt.event.ActionListener() {
@@ -58,20 +58,20 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
-                .addComponent(secondsLabel)
+                .addComponent(minutesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(setTimer, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                    .addComponent(secondsTextField))
-                .addContainerGap(162, Short.MAX_VALUE))
+                    .addComponent(minutesTextField))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(secondsLabel)
-                    .addComponent(secondsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(minutesLabel)
+                    .addComponent(minutesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(setTimer)
                 .addContainerGap(179, Short.MAX_VALUE))
@@ -82,7 +82,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTimerActionPerformed
-        int numOfSeconds = Integer.parseInt(secondsTextField.getText());
+        int numOfSeconds = Integer.parseInt(minutesTextField.getText());
         CountdownTimer timer = new CountdownTimer(numOfSeconds);
         schedulingSystem.setTimer(timer);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -124,8 +124,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel secondsLabel;
-    private javax.swing.JTextField secondsTextField;
+    private javax.swing.JLabel minutesLabel;
+    private javax.swing.JTextField minutesTextField;
     private javax.swing.JButton setTimer;
     // End of variables declaration//GEN-END:variables
 }

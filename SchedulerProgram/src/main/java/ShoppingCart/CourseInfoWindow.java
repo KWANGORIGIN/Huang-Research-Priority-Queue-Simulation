@@ -7,6 +7,7 @@ package ShoppingCart;
 
 import Course.Course;
 import Course.Section;
+import QueueInfo.CountdownTimer.CountdownTimer;
 import SchedulingSystem.SchedulingSystem;
 import Student.Student;
 import java.awt.event.WindowEvent;
@@ -34,6 +35,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     private Section enrolledSection;
     private Student currentStudent;
     private ShoppingCartWindow Cart;
+    private SchedulingSystem schedulingSystem;
     
     /**
      * Creates new form CourseInfoWindow
@@ -42,11 +44,12 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow Cart){
+    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow Cart, SchedulingSystem schedulingSystem){
         initComponents();
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
         this.Cart = Cart;
+        this.schedulingSystem = schedulingSystem;
         populate_Table_with_Course_Info();
     }
 
@@ -242,6 +245,11 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        CountdownTimer timer = schedulingSystem.getTimer();
+        if(timer != null){
+            timer.runCountdownTimer();
+        }
+
         //Updates student file
         try(FileOutputStream outputFile = new FileOutputStream(currentStudent.getUsername() + ".ser")){
                     try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){

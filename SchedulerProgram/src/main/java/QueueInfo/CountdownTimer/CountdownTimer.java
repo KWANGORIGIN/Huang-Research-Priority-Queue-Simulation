@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package QueueInfo.Timer;
+package QueueInfo.CountdownTimer;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
@@ -11,21 +11,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author wanga
  */
 public class CountdownTimer {
     
-    private final ScheduledExecutorService CountdownTimer = Executors.newScheduledThreadPool(1);
+    private ScheduledExecutorService CountdownTimer; 
     int timeInSeconds;
     
     public CountdownTimer(int timeInSeconds){
        this.timeInSeconds = timeInSeconds;
     }
     
-    public void runCountdownTimer(CountdownWindow timerWindow){
+    public void runCountdownTimer(){
         
+        CountdownTimer = Executors.newScheduledThreadPool(1);
+        
+        CountdownWindow timerWindow = new CountdownWindow();
+        timerWindow.setVisible(true);
         int amountOfTime = timeInSeconds;
         while(true){
             
@@ -35,7 +40,7 @@ public class CountdownTimer {
                 amountOfTime = updatedTime.get();
                 if(amountOfTime == 0){
                     CountdownTimer.shutdown();
-                    //CountdownTimer.awaitTermination(1, TimeUnit.SECONDS);
+                    //CountdownTimer.awaitTermination(5, TimeUnit.SECONDS);
                     timerWindow.dispose();
                     break;
                 }
@@ -48,11 +53,11 @@ public class CountdownTimer {
     }
     
     public static void main(String[] args){
-        CountdownWindow timerWindow = new CountdownWindow();
-        timerWindow.setVisible(true);
+//        CountdownWindow timerWindow = new CountdownWindow();
+//        timerWindow.setVisible(true);
         
         CountdownTimer testTimer = new CountdownTimer(5);
-        testTimer.runCountdownTimer(timerWindow);
+        testTimer.runCountdownTimer();
         
     }
     

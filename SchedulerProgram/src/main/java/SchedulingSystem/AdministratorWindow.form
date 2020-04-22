@@ -79,7 +79,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="changeQueueTime">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Change Queue Time"/>
+        <Property name="text" type="java.lang.String" value="Change Queue Timer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeQueueTimeActionPerformed"/>

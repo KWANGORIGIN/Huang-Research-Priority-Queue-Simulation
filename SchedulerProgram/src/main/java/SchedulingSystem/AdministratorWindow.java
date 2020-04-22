@@ -5,7 +5,7 @@
  */
 package SchedulingSystem;
 
-import QueueInfo.Timer.CountdownTimer;
+import QueueInfo.CountdownTimer.CountdownTimer;
 
 /**
  *
@@ -60,7 +60,7 @@ public class AdministratorWindow extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Source Code Pro Semibold", 0, 14)); // NOI18N
         jLabel1.setText("Welcome Admin. What would you like to do?");
 
-        changeQueueTime.setText("Change Queue Time");
+        changeQueueTime.setText("Change Queue Timer");
         changeQueueTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeQueueTimeActionPerformed(evt);
@@ -111,13 +111,8 @@ public class AdministratorWindow extends javax.swing.JFrame {
     private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed
         //Get number of minutes and seconds for Timer countdown
         SetCountdownWindow newCountdownWindow = new SetCountdownWindow(schedulingSystem);
+        this.setVisible(false);
         newCountdownWindow.setVisible(true);
-        /*
-        For this version currently just asking for seconds
-        */
-        
-        
-        
         
     }//GEN-LAST:event_changeQueueTimeActionPerformed
 

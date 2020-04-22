@@ -8,7 +8,10 @@ package ShoppingCart;
 import SchedulingSystem.SchedulingSystem;
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
+import QueueInfo.CountdownTimer.CountdownTimer;
 import Student.Student;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -40,6 +43,17 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         initComponents();
         this.student = student;
         this.schedulingSystem = schedulingSystem;
+        
+        searchbar.addKeyListener(new KeyAdapter(){
+            
+            @Override
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    searchButton.doClick();
+                }
+            }
+            
+        }); 
         printStudentEnrolledCourses();
     }
     
@@ -177,6 +191,8 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        CountdownTimer timer = schedulingSystem.getTimer();
+        timer.runCountdownTimer();
         
         String searchInput = searchbar.getText();
         if(searchInput.matches("[A-Za-z]+\\s\\d+")){//Space between course name and number(#): courseName #
@@ -186,7 +202,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this);
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this, schedulingSystem);
                courseWindow.setVisible(true); 
             }
         }
@@ -206,7 +222,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this);
+               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this, schedulingSystem);
                courseWindow.setVisible(true); 
             }
             

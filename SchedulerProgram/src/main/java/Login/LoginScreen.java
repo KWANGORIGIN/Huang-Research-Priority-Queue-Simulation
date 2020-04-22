@@ -7,6 +7,8 @@ package Login;
 import SchedulingSystem.*;
 import ShoppingCart.ShoppingCartWindow;
 import Student.Student;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -33,6 +35,29 @@ public class LoginScreen extends javax.swing.JFrame {
     public LoginScreen(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
+        
+        usernameTextField.addKeyListener(new KeyAdapter(){
+                
+            @Override
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    loginButton.doClick();
+                }
+            }
+            
+        });
+        
+        passwordField.addKeyListener(new KeyAdapter(){
+                
+            @Override
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    loginButton.doClick();
+                }
+            }
+            
+        });
+        
     }
    
 
@@ -122,7 +147,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
+
         if(SchedulingSystem.isAdmin(usernameTextField.getText())){
             //Opens adminWindow to add and remove Courses to the Scheduling System
             AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
@@ -241,7 +266,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 Include Error dialog message asking user if Excel file is open
                 
                 */
-                
+                JOptionPane.showMessageDialog(null, "Error: Unable to write to students.xlsx. Please close students.xlsx if it is currently open.");
                 
             }catch(IOException e){
                 System.out.println("Error closing fileoutputstream.");
