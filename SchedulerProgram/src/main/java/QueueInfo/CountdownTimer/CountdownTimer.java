@@ -19,10 +19,12 @@ import javax.swing.SwingUtilities;
 public class CountdownTimer {
     
     private ScheduledExecutorService CountdownTimer; 
-    int timeInSeconds;
+    private int timeInSeconds;
+    private int timeInMinutes;
     
-    public CountdownTimer(int timeInSeconds){
-       this.timeInSeconds = timeInSeconds;
+    public CountdownTimer(int timeInMinutes){
+       this.timeInMinutes = timeInMinutes;
+       this.timeInSeconds = timeInMinutes * 60;
     }
     
     public void runCountdownTimer(){
@@ -31,14 +33,15 @@ public class CountdownTimer {
         
         CountdownWindow timerWindow = new CountdownWindow();
         timerWindow.setVisible(true);
-        int amountOfTime = timeInSeconds;
+        int remainingSeconds = timeInSeconds;
+        int remainingMinutes = timeInMinutes;
         while(true){
             
-            ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(amountOfTime, timerWindow), 1, TimeUnit.SECONDS);
+            ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
             
             try{
-                amountOfTime = updatedTime.get();
-                if(amountOfTime == 0){
+                remainingSeconds = updatedTime.get();
+                if(remainingSeconds == 0){
                     CountdownTimer.shutdown();
                     //CountdownTimer.awaitTermination(5, TimeUnit.SECONDS);
                     timerWindow.dispose();
@@ -56,28 +59,32 @@ public class CountdownTimer {
 //        CountdownWindow timerWindow = new CountdownWindow();
 //        timerWindow.setVisible(true);
         
-        CountdownTimer testTimer = new CountdownTimer(5);
+        CountdownTimer testTimer = new CountdownTimer(2);
         testTimer.runCountdownTimer();
         
+    }
+    
+    class TimeUpdater implements Callable<Integer>{
+        private int currentSeconds;
+        private int currentMinutes;
+        private CountdownWindow timerWindow;
+        TimeUpdater(int remainingSeconds, CountdownWindow timerWindow){
+            this.currentSeconds = remainingSeconds;
+            this.currentMinutes = remainingSeconds / 60;
+            this.timerWindow = timerWindow;
+        }
+
+        @Override
+        public Integer call() throws Exception{
+            System.out.println("Updated timer with current second: " + currentSeconds + " at time: " + LocalDateTime.now().toString());
+            if(currentSeconds % 60 == 0){//Updates timerWindow every minute
+                timerWindow.updateTimer(currentMinutes);
+            }
+            return --currentSeconds;
+        }
+
     }
     
     
 }
 
-class TimeUpdater implements Callable<Integer>{
-    
-    private int currentTime;
-    private CountdownWindow timerWindow;
-    TimeUpdater(int currentTime, CountdownWindow timerWindow){
-        this.currentTime = currentTime;
-        this.timerWindow = timerWindow;
-    }
-    
-    @Override
-    public Integer call() throws Exception{
-        timerWindow.updateTimer(currentTime);
-        System.out.println("Updated timer with current time: " + currentTime + " at time: " + LocalDateTime.now().toString());
-        return --currentTime;
-    }
-    
-}

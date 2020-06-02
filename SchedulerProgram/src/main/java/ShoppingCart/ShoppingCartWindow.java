@@ -44,7 +44,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         this.student = student;
         this.schedulingSystem = schedulingSystem;
         
-        searchbar.addKeyListener(new KeyAdapter(){
+        searchbar.addKeyListener(new KeyAdapter(){//Anonymous inner class
             
             @Override
             public void keyPressed(KeyEvent e){
@@ -191,8 +191,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        CountdownTimer timer = schedulingSystem.getTimer();
-        timer.runCountdownTimer();
+        //CountdownTimer timer = schedulingSystem.getTimer();
         
         String searchInput = searchbar.getText();
         if(searchInput.matches("[A-Za-z]+\\s\\d+")){//Space between course name and number(#): courseName #

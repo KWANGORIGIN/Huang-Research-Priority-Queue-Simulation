@@ -6,6 +6,7 @@
 package SchedulingSystem;
 import java.util.ArrayList;
 import Course.Course;
+import Course.Section;
 import Student.Student;
 import java.io.Serializable;
 import QueueInfo.CountdownTimer.CountdownTimer;
@@ -38,8 +39,31 @@ public class SchedulingSystem implements Serializable {
         System.out.println("Successfully added: " + newCourse.getDeptName());
     }
     
-    public static void removeCourse(){
+    public void removeCourse(){
         
+    }
+    
+    /**
+     * Prints all courses and their respective sections to the console
+     */
+    public void printCourses(){
+        for (Course availableCourse : availableCourses) {
+            System.out.println("/********************************");
+            System.out.println("COURSE");
+            System.out.println("********************************/");
+            System.out.println(availableCourse.getDeptName() + ": " + availableCourse.getCourseName());
+            for(int sectionNum = 0; sectionNum < availableCourse.getNumOfSections(); sectionNum++){
+                System.out.println("/********************************");
+                System.out.println("SECTION: " + sectionNum);
+                System.out.println("********************************/");
+                Section tempSection = availableCourse.getSection(sectionNum);
+                System.out.println("Section Name: " + tempSection.getSectionName());
+                System.out.println("Section Days of Week: " + tempSection.getDays());
+                System.out.println("Section Meeting times: " + tempSection.getTime());
+                System.out.println("Section Room: " + tempSection.getRoom());
+                System.out.println("Section Instructor: " + tempSection.getInstructor());
+            }
+        }
     }
     
     /**

@@ -148,135 +148,139 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
 
-        if(SchedulingSystem.isAdmin(usernameTextField.getText())){
-            //Opens adminWindow to add and remove Courses to the Scheduling System
-            AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
-            adminWindow.setVisible(true);
-        }
-        else{
-            //Imports or creates workbook students.xlsx depending on if file exists
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            XSSFSheet sheet = workbook.createSheet();
-            XSSFRow newRow;
-            Cell cell;
-            
-            try(FileInputStream in = new FileInputStream("students.xlsx")){
-                workbook = new XSSFWorkbook(in);
-                sheet = workbook.getSheet("Student Details");
+          /**
+           * Deprecated. Admin window now opens on startup
+           */
+//        if(SchedulingSystem.isAdmin(usernameTextField.getText())){
+//            //Opens adminWindow to add and remove Courses to the Scheduling System
+//            AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+//            adminWindow.setVisible(true);
+//        }
+        
+        //Imports or creates workbook students.xlsx depending on if file exists
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet();
+        XSSFRow newRow;
+        Cell cell;
 
-                in.close();
-                System.out.println("Successfully opened students.xlsx");
+        try(FileInputStream in = new FileInputStream("students.xlsx")){
+            workbook = new XSSFWorkbook(in);
+            sheet = workbook.getSheet("Student Details");
 
-            }catch(FileNotFoundException e){
-                System.out.println("File not found. Creating new file...");
+            in.close();
+            System.out.println("Successfully opened students.xlsx");
 
-                //Creates a blank workbook and sheet
-                workbook = new XSSFWorkbook();
-                sheet = workbook.createSheet("Student Details");
-                
-                //Creates titles for columns
-                newRow = sheet.createRow(0);
-                cell = newRow.createCell(0);
-                cell.setCellValue("Username");
-                cell = newRow.createCell(1);
-                cell.setCellValue("Login Timestamp");
-                cell = newRow.createCell(2);
-                cell.setCellValue("Course Added TimeStamp");
-                
+        }catch(FileNotFoundException e){
+            System.out.println("File not found. Creating new file...");
+
+            //Creates a blank workbook and sheet
+            workbook = new XSSFWorkbook();
+            sheet = workbook.createSheet("Student Details");
+
+            //Creates titles for columns
+            newRow = sheet.createRow(0);
+            cell = newRow.createCell(0);
+            cell.setCellValue("Username");
+            cell = newRow.createCell(1);
+            cell.setCellValue("Login Timestamp");
+            cell = newRow.createCell(2);
+            cell.setCellValue("Course Added TimeStamp");
+
 //                //Resets last inputted row to 0
 //                SchedulingSystem.lastInputtedRow = 0;
 
-                System.out.println("Successfully created students.xlsx");
-            }catch(IOException e){
-                System.out.println("Unknown error opening file.");
-            }
-            
-            //Adds usernameTextField input to student details sheet as entered
-            String username = usernameTextField.getText();
+            System.out.println("Successfully created students.xlsx");
+        }catch(IOException e){
+            System.out.println("Unknown error opening file.");
+        }
 
-            //Creates new Student or imports existing Student
-            Student student = new Student();
-            int rowPosition = 0;
-            try(FileInputStream input = new FileInputStream(username + ".ser")){//attempts to load in existing Student
-                try(ObjectInputStream inputStudent = new ObjectInputStream(input)){
+        //Adds usernameTextField input to student details sheet as entered
+        String username = usernameTextField.getText();
 
-                    student = (Student) inputStudent.readObject();
-                    
-                    rowPosition = student.getRowPosition();
-                    
-                }
-            }catch(FileNotFoundException fileNotFound){//if existing student not found, then creates new student and saves to file
-                rowPosition = SchedulingSystem.lastInputtedRow + 1;
-                student = new Student(username, rowPosition);
-                
-                //Saves new Student object
-                try(FileOutputStream outputFile = new FileOutputStream(username + ".ser")){
-                    try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
-                        output.writeObject(student);
-                        System.out.println("Student " + username + " successfully saved.");
-                    }
-                }catch(FileNotFoundException noFile){
-                    System.out.println("File not found");
-                }catch(IOException ioException){
-                    System.out.println("Error saving to file.");
-                }
-                
-            }catch(ClassNotFoundException classNotFound){
-                JOptionPane.showMessageDialog(null, "Error reading Student from file.");
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(null, "Unknown error trying to load in student. File possibly corrupted.");
+        //Creates new Student or imports existing Student
+        Student student = new Student();
+        int rowPosition = 0;
+        try(FileInputStream input = new FileInputStream(username + ".ser")){//attempts to load in existing Student
+            try(ObjectInputStream inputStudent = new ObjectInputStream(input)){
+
+                student = (Student) inputStudent.readObject();
+
+                rowPosition = student.getRowPosition();
+
             }
-                
-            /*
-            Might deprecate
-            */
-            //Input validation
+        }catch(FileNotFoundException fileNotFound){//if existing student not found, then creates new student and saves to file
+            rowPosition = SchedulingSystem.lastInputtedRow + 1;
+            student = new Student(username, rowPosition);
+
+            //Saves new Student object
+            try(FileOutputStream outputFile = new FileOutputStream(username + ".ser")){
+                try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+                    output.writeObject(student);
+                    System.out.println("Student " + username + " successfully saved.");
+                }
+            }catch(FileNotFoundException noFile){
+                System.out.println("File not found");
+            }catch(IOException ioException){
+                System.out.println("Error saving to file.");
+            }
+
+        }catch(ClassNotFoundException classNotFound){
+            JOptionPane.showMessageDialog(null, "Error reading Student from file.");
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Unknown error trying to load in student. File possibly corrupted.");
+        }
+
+        /*
+        Might deprecate
+        Checks if user puts in username in standard Penn State username format
+        */
+        //Input validation
 //            if(!username.matches("[a-z]+/d+")){
 //                JOptionPane.showMessageDialog(null, "Invalid username");
 //                username = "Invalid Username!";
 //            }
-            
-            
-            newRow = sheet.createRow(rowPosition);
-            cell = newRow.createCell(0);
-            cell.setCellValue(username);
 
-            //Adds timestamp
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            String dateTime = dtf.format(now);
-            Cell timeCell = newRow.createCell(1);
-            timeCell.setCellValue(dateTime);
 
-            //Autosizes columns
-            for(int count = 0; count < newRow.getLastCellNum(); count++){
-                sheet.autoSizeColumn(count);
-            }
+        newRow = sheet.createRow(rowPosition);
+        cell = newRow.createCell(0);
+        cell.setCellValue(username);
 
-            //Saves to file
-            try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
-                workbook.write(out);
-                out.close();
+        //Adds timestamp
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String dateTime = dtf.format(now);
+        Cell timeCell = newRow.createCell(1);
+        timeCell.setCellValue(dateTime);
 
-                //Success message
-                System.out.println("Succesfully outputted to students.xlsx");
-            }catch(FileNotFoundException noFile){
-                System.out.println("Unable to create file.");
-                /*
-                Include Error dialog message asking user if Excel file is open
-                
-                */
-                JOptionPane.showMessageDialog(null, "Error: Unable to write to students.xlsx. Please close students.xlsx if it is currently open.");
-                
-            }catch(IOException e){
-                System.out.println("Error closing fileoutputstream.");
-            }
-
-            //Creates ShoppingCartWindow screen
-            ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
-            cart.setVisible(true);
-            this.setVisible(false);
+        //Autosizes columns
+        for(int count = 0; count < newRow.getLastCellNum(); count++){
+            sheet.autoSizeColumn(count);
         }
+
+        //Saves to file
+        try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+            workbook.write(out);
+            out.close();
+
+            //Success message
+            System.out.println("Succesfully outputted to students.xlsx");
+        }catch(FileNotFoundException noFile){
+            System.out.println("Unable to create file.");
+            /*
+            Include Error dialog message asking user if Excel file is open
+
+            */
+            JOptionPane.showMessageDialog(null, "Error: Unable to write to students.xlsx. Please close students.xlsx if it is currently open.");
+
+        }catch(IOException e){
+            System.out.println("Error closing fileoutputstream.");
+        }
+
+        //Creates ShoppingCartWindow screen
+        ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
+        cart.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -289,7 +293,7 @@ public class LoginScreen extends javax.swing.JFrame {
             }
             
         }catch(FileNotFoundException fileNotFound){
-            System.out.println("File not found");
+            System.out.println("File not found"); 
         }catch(IOException ioException){
             System.out.println("Error saving to file.");
         }

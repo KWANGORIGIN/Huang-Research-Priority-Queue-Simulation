@@ -5,7 +5,11 @@
  */
 package SchedulingSystem;
 
-import QueueInfo.CountdownTimer.CountdownTimer;
+import Login.LoginScreen;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -37,11 +41,18 @@ public class AdministratorWindow extends javax.swing.JFrame {
 
         addCourseButton = new javax.swing.JButton();
         removeCourseButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        adminWelcomeLabel = new javax.swing.JLabel();
         changeQueueTime = new javax.swing.JButton();
+        listAllCoursesButton = new javax.swing.JButton();
+        startExperiment = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         addCourseButton.setText("Add Course");
         addCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -57,13 +68,27 @@ public class AdministratorWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Source Code Pro Semibold", 0, 14)); // NOI18N
-        jLabel1.setText("Welcome Admin. What would you like to do?");
+        adminWelcomeLabel.setFont(new java.awt.Font("Source Code Pro Semibold", 0, 14)); // NOI18N
+        adminWelcomeLabel.setText("Welcome Admin. What would you like to do?");
 
         changeQueueTime.setText("Change Queue Timer");
         changeQueueTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeQueueTimeActionPerformed(evt);
+            }
+        });
+
+        listAllCoursesButton.setText("List all Courses");
+        listAllCoursesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listAllCoursesButtonActionPerformed(evt);
+            }
+        });
+
+        startExperiment.setText("Start Experiment");
+        startExperiment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startExperimentActionPerformed(evt);
             }
         });
 
@@ -74,24 +99,30 @@ public class AdministratorWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(startExperiment, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(adminWelcomeLabel)
                     .addComponent(addCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removeCourseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(changeQueueTime, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(changeQueueTime, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listAllCoursesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87)
+                .addComponent(adminWelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(addCourseButton)
-                .addGap(0, 0, 0)
+                .addGap(6, 6, 6)
                 .addComponent(removeCourseButton)
-                .addGap(0, 0, 0)
+                .addGap(5, 5, 5)
                 .addComponent(changeQueueTime)
-                .addGap(110, 110, 110))
+                .addGap(6, 6, 6)
+                .addComponent(listAllCoursesButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startExperiment)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,10 +142,32 @@ public class AdministratorWindow extends javax.swing.JFrame {
     private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed
         //Get number of minutes and seconds for Timer countdown
         SetCountdownWindow newCountdownWindow = new SetCountdownWindow(schedulingSystem);
-        this.setVisible(false);
         newCountdownWindow.setVisible(true);
         
+        //Closes this administrator window instance
+        this.dispose();
+        
     }//GEN-LAST:event_changeQueueTimeActionPerformed
+
+    private void listAllCoursesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAllCoursesButtonActionPerformed
+        schedulingSystem.printCourses();
+    }//GEN-LAST:event_listAllCoursesButtonActionPerformed
+
+    private void startExperimentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startExperimentActionPerformed
+        //Creates LoginScreen and makes it visible to user
+        LoginScreen loginScreen = new LoginScreen(schedulingSystem);
+        loginScreen.setVisible(true);
+        
+        //Closes this administrator window instance
+        this.dispose();
+    }//GEN-LAST:event_startExperimentActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+                                        
+        //Outputs info to Excel sheet
+        
+        
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -154,8 +207,10 @@ public class AdministratorWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseButton;
+    private javax.swing.JLabel adminWelcomeLabel;
     private javax.swing.JButton changeQueueTime;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton listAllCoursesButton;
     private javax.swing.JButton removeCourseButton;
+    private javax.swing.JButton startExperiment;
     // End of variables declaration//GEN-END:variables
 }

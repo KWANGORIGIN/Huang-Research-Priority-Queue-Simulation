@@ -82,9 +82,12 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTimerActionPerformed
-        int numOfSeconds = Integer.parseInt(minutesTextField.getText());
-        CountdownTimer timer = new CountdownTimer(numOfSeconds);
+        int numOfMinutes = Integer.parseInt(minutesTextField.getText());
+        CountdownTimer timer = new CountdownTimer(numOfMinutes);
         schedulingSystem.setTimer(timer);
+        
+        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+        adminWindow.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_setTimerActionPerformed
 

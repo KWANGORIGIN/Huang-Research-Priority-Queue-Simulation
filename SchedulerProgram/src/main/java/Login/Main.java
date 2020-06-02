@@ -46,12 +46,10 @@ public class Main {
             System.out.println("Creating new Scheduling System...");
         }
         
-        //Creates LoginScreen and makes it visible to user
-        LoginScreen loginScreen = new LoginScreen(schedulingSystem);
-        loginScreen.setVisible(true);
         
-        //When loginScreen closes the entire system is saved
-        //Currently handling in login Screen
+        //Creates AdministratorWindow to set up attributes of experiment
+        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+        adminWindow.setVisible(true);
         
     }
 }

@@ -58,6 +58,10 @@ public class Student implements Serializable{
         //return false;
     }
     
+//    public boolean enrolledInCourse(Course testCourse, Section testSection){
+//        
+//    }
+    
     /**
      * Returns an Course the Student has enrolled in
      * @param listPosition

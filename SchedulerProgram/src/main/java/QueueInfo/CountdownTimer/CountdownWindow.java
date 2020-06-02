@@ -5,6 +5,7 @@
  */
 package QueueInfo.CountdownTimer;
 
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.SwingUtilities;
 
 /**
@@ -27,7 +28,11 @@ public class CountdownWindow extends javax.swing.JFrame {
     }
     
     public void updateTimer(Integer currentTime){
-        timerDisplay.setText("yeet: " + currentTime.toString());
+        timerDisplay.setText(currentTime.toString() + " Minute(s) Left");
+        timerDisplay.repaint();
+        
+        //Bad implementation. Temporary solution. Still probably an issue with threads where window does not update
+        timerDisplay.paintImmediately(timerDisplay.getVisibleRect());
     }
 
     
@@ -62,9 +67,9 @@ public class CountdownWindow extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(timerDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(timerDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
