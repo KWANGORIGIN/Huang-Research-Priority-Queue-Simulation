@@ -5,7 +5,6 @@
  */
 package QueueInfo;
 
-import Timer.CountdownWindow;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 

@@ -7,7 +7,7 @@ package ShoppingCart;
 
 import Course.Course;
 import Course.Section;
-import Timer.CountdownTimer;
+import QueueInfo.CountdownTimer;
 import SchedulingSystem.SchedulingSystem;
 import Student.Student;
 import java.awt.event.WindowEvent;

@@ -8,7 +8,7 @@ package ShoppingCart;
 import SchedulingSystem.SchedulingSystem;
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
-import Timer.CountdownTimer;
+import QueueInfo.CountdownTimer;
 import Student.Student;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
