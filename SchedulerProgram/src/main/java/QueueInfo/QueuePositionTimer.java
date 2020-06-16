@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package QueueInfo;
 
 /**
  *
- * @author Kevin Wang
+ * @author wanga
  */
-public class TimeInfoTime extends CountdownTimer{
+public class QueuePositionTimer extends CountdownTimer{
     
-    public TimeInfoTime(int timeInMinutes){
+    public QueuePositionTimer(int timeInMinutes){
         super(timeInMinutes);
     }
     
@@ -19,14 +14,14 @@ public class TimeInfoTime extends CountdownTimer{
 //        CountdownWindow timerWindow = new CountdownWindow();
 //        timerWindow.setVisible(true);
         
-        CountdownTimer testTimer = new TimeInfoTime(2);
+        CountdownTimer testTimer = new QueuePositionTimer(2);
         testTimer.runCountdownTimer();
         
     }
 
     @Override
     protected QueueInfo.TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
-        return new TimeInfoUpdater(initialTimeInSeconds, remainingSeconds, timerWindow);
+        return new QueuePositionTimeUpdater(initialTimeInSeconds, remainingSeconds, timerWindow);
     }
     
 }
