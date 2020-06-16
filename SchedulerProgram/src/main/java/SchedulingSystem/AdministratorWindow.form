@@ -29,15 +29,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="startExperiment" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
-                  <Component id="adminWelcomeLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="addCourseButton" min="-2" pref="328" max="-2" attributes="0"/>
-                  <Component id="removeCourseButton" min="-2" pref="328" max="-2" attributes="0"/>
-                  <Component id="changeQueueTime" min="-2" pref="328" max="-2" attributes="0"/>
-                  <Component id="listAllCoursesButton" min="-2" pref="328" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="listAllCoursesButton" max="32767" attributes="0"/>
+                  <Component id="startExperiment" alignment="0" max="32767" attributes="0"/>
+                  <Component id="adminWelcomeLabel" max="32767" attributes="0"/>
+                  <Component id="addCourseButton" max="32767" attributes="0"/>
+                  <Component id="removeCourseButton" max="32767" attributes="0"/>
+                  <Component id="changeQueueTime" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,11 +52,11 @@
               <Component id="removeCourseButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
               <Component id="changeQueueTime" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="listAllCoursesButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="startExperiment" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="63" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,7 +88,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="changeQueueTime">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Change Queue Timer"/>
+        <Property name="text" type="java.lang.String" value="Set Queue Info"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="changeQueueTimeActionPerformed"/>

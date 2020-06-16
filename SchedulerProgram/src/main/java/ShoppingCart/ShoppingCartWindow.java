@@ -8,7 +8,7 @@ package ShoppingCart;
 import SchedulingSystem.SchedulingSystem;
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
-import QueueInfo.CountdownTimer.CountdownTimer;
+import QueueInfo.CountdownTimer;
 import Student.Student;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -73,6 +73,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         searchbar = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -141,6 +142,8 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,6 +158,10 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                         .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(385, 385, 385)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +172,9 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                     .addComponent(searchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(7, 7, 7))
         );
 
         searchbar.getAccessibleContext().setAccessibleName("");
@@ -287,6 +296,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog invalidCourseNameDialogWindow;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;

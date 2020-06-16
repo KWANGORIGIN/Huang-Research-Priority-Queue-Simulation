@@ -5,7 +5,7 @@
  */
 package SchedulingSystem;
 
-import QueueInfo.CountdownTimer.CountdownTimer;
+import QueueInfo.CountdownTimer;
 import java.awt.event.WindowEvent;
 
 /**
@@ -39,11 +39,14 @@ public class SetCountdownWindow extends javax.swing.JFrame {
         minutesLabel = new javax.swing.JLabel();
         minutesTextField = new javax.swing.JTextField();
         setTimer = new javax.swing.JButton();
+        timerCheckbox = new javax.swing.JCheckBox();
+        positionCheckbox = new javax.swing.JCheckBox();
+        noInfoCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
 
-        minutesLabel.setText("Minutes:");
+        minutesLabel.setText("Minutes/Queue Position:");
 
         setTimer.setText("Set");
         setTimer.addActionListener(new java.awt.event.ActionListener() {
@@ -52,29 +55,61 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             }
         });
 
+        timerCheckbox.setText("Timer");
+        timerCheckbox.setBorderPaintedFlat(true);
+        timerCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timerCheckboxActionPerformed(evt);
+            }
+        });
+
+        positionCheckbox.setText("Queue Position");
+        positionCheckbox.setBorderPaintedFlat(true);
+        positionCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                positionCheckboxActionPerformed(evt);
+            }
+        });
+
+        noInfoCheckbox.setText("No Info");
+        noInfoCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noInfoCheckboxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(88, 88, 88)
                 .addComponent(minutesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(setTimer, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                    .addComponent(minutesTextField))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(noInfoCheckbox)
+                    .addComponent(positionCheckbox)
+                    .addComponent(setTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timerCheckbox)
+                    .addComponent(minutesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(132, 132, 132)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(minutesLabel)
                     .addComponent(minutesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(timerCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(positionCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(noInfoCheckbox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(setTimer)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,11 +120,45 @@ public class SetCountdownWindow extends javax.swing.JFrame {
         int numOfMinutes = Integer.parseInt(minutesTextField.getText());
         CountdownTimer timer = new CountdownTimer(numOfMinutes);
         schedulingSystem.setTimer(timer);
-        
+
         AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
         adminWindow.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_setTimerActionPerformed
+
+    private void timerCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerCheckboxActionPerformed
+        
+        if(positionCheckbox.isSelected()){
+            positionCheckbox.setSelected(false);
+        }
+        
+        if(noInfoCheckbox.isSelected()){
+            noInfoCheckbox.setSelected(false);
+        }
+        
+    }//GEN-LAST:event_timerCheckboxActionPerformed
+
+    private void positionCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionCheckboxActionPerformed
+        
+        if(timerCheckbox.isSelected()){
+            timerCheckbox.setSelected(false);
+        }
+        
+        if(noInfoCheckbox.isSelected()){
+            noInfoCheckbox.setSelected(false);
+        }
+        
+    }//GEN-LAST:event_positionCheckboxActionPerformed
+
+    private void noInfoCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noInfoCheckboxActionPerformed
+        if(positionCheckbox.isSelected()){
+            positionCheckbox.setSelected(false);
+        }
+        
+        if(timerCheckbox.isSelected()){
+            timerCheckbox.setSelected(false);
+        }
+    }//GEN-LAST:event_noInfoCheckboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,6 +198,9 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JTextField minutesTextField;
+    private javax.swing.JCheckBox noInfoCheckbox;
+    private javax.swing.JCheckBox positionCheckbox;
     private javax.swing.JButton setTimer;
+    private javax.swing.JCheckBox timerCheckbox;
     // End of variables declaration//GEN-END:variables
 }

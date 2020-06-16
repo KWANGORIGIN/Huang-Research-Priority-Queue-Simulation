@@ -9,7 +9,7 @@ import Course.Course;
 import Course.Section;
 import Student.Student;
 import java.io.Serializable;
-import QueueInfo.CountdownTimer.CountdownTimer;
+import QueueInfo.CountdownTimer;
 
 /**
  *
@@ -20,6 +20,7 @@ public class SchedulingSystem implements Serializable {
     private static ArrayList<Student> systemUsers;
     private static String adminUsername;
     public static int lastInputtedRow;
+    private boolean timerOrPosition;
     private CountdownTimer countdownTimer;//not currently serialized so not being saved
     
     //No-argument constructor
@@ -88,6 +89,14 @@ public class SchedulingSystem implements Serializable {
             }
         }
         return null;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public boolean getTimerOrPosition(){
+        return timerOrPosition;
     }
     
     public void setTimer(CountdownTimer countdownTimer){
