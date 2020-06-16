@@ -5,15 +5,10 @@
  */
 package QueueInfo;
 
-import QueueInfo.QueueJumpWindow;
-import QueueInfo.TimeUpdater;
-import java.time.LocalDateTime;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JOptionPane;
 /**
  *
  * @author wanga

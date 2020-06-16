@@ -5,9 +5,7 @@
  */
 package QueueInfo;
 
-import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
 
 /**
  *
