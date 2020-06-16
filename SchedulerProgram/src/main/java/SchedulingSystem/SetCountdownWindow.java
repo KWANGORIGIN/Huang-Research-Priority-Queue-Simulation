@@ -5,10 +5,10 @@
  */
 package SchedulingSystem;
 
-import QueueInfo.CountdownTimer;
-import QueueInfo.NoInfoTimer;
-import QueueInfo.QueuePositionTimer;
-import QueueInfo.TimeInfoTimer;
+import Timer.CountdownTimer;
+import Timer.NoInfoTimer;
+import Timer.QueuePositionTimer;
+import Timer.TimeInfoTimer;
 import java.awt.event.WindowEvent;
 
 /**

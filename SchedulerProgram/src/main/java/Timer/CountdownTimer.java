@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package QueueInfo;
+package Timer;
 
+import QueueInfo.QueueJumpWindow;
+import QueueInfo.TimeUpdater;
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;

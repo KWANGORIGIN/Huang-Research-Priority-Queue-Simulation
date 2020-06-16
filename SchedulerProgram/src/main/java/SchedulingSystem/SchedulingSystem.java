@@ -9,7 +9,7 @@ import Course.Course;
 import Course.Section;
 import Student.Student;
 import java.io.Serializable;
-import QueueInfo.CountdownTimer;
+import Timer.CountdownTimer;
 
 /**
  *

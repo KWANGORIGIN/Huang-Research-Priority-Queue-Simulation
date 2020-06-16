@@ -1,4 +1,8 @@
-package QueueInfo;
+package Timer;
+
+import QueueInfo.QueuePositionTimeUpdater;
+import Timer.CountdownWindow;
+import Timer.CountdownTimer;
 
 /**
  *
