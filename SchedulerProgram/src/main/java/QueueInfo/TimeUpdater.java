@@ -8,6 +8,7 @@ package QueueInfo;
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -50,6 +51,8 @@ public abstract class TimeUpdater implements Callable<Integer> {
     }   
     
     abstract void showDialog();
+    
+    //abstract void updateDisplay(JTextPane textPane);
     
     void updateTimer() {
         timerWindow.updateTimer(currentMinutes);
