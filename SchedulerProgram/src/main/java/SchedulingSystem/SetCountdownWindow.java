@@ -6,6 +6,9 @@
 package SchedulingSystem;
 
 import QueueInfo.CountdownTimer;
+import QueueInfo.NoInfoTimer;
+import QueueInfo.QueuePositionTimer;
+import QueueInfo.TimeInfoTimer;
 import java.awt.event.WindowEvent;
 
 /**
@@ -14,17 +17,21 @@ import java.awt.event.WindowEvent;
  */
 public class SetCountdownWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
+    CountdownTimer timer;
+    int numOfMinutes;
     
     /**
      * Creates new form SetCountdownWindow
      */
     public SetCountdownWindow() {
         initComponents();
+        timer = null;
     }
     
     public SetCountdownWindow(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
+        timer = null;
     }
 
     /**
@@ -117,13 +124,14 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTimerActionPerformed
-        int numOfMinutes = Integer.parseInt(minutesTextField.getText());
-        CountdownTimer timer = new CountdownTimer(numOfMinutes);
-        schedulingSystem.setTimer(timer);
+        numOfMinutes = Integer.parseInt(minutesTextField.getText());
+        if(timer != null){
+            schedulingSystem.setTimer(timer);
 
-        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
-        adminWindow.setVisible(true);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+            adminWindow.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
     }//GEN-LAST:event_setTimerActionPerformed
 
     private void timerCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerCheckboxActionPerformed
@@ -135,6 +143,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
         if(noInfoCheckbox.isSelected()){
             noInfoCheckbox.setSelected(false);
         }
+        
+        timer = new TimeInfoTimer(numOfMinutes);
         
     }//GEN-LAST:event_timerCheckboxActionPerformed
 
@@ -148,6 +158,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             noInfoCheckbox.setSelected(false);
         }
         
+        timer = new QueuePositionTimer(numOfMinutes);
+        
     }//GEN-LAST:event_positionCheckboxActionPerformed
 
     private void noInfoCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noInfoCheckboxActionPerformed
@@ -158,6 +170,9 @@ public class SetCountdownWindow extends javax.swing.JFrame {
         if(timerCheckbox.isSelected()){
             timerCheckbox.setSelected(false);
         }
+        
+        timer = new NoInfoTimer(numOfMinutes);
+        
     }//GEN-LAST:event_noInfoCheckboxActionPerformed
 
     /**

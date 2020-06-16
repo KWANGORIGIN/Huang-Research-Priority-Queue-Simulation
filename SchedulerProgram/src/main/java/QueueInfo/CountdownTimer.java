@@ -16,15 +16,17 @@ import javax.swing.JOptionPane;
  *
  * @author wanga
  */
-public class CountdownTimer {
+public abstract class CountdownTimer {
     
     protected ScheduledExecutorService CountdownTimer; 
     protected int timeInSeconds;
     protected int timeInMinutes;
+    protected boolean queueJump;
     
     public CountdownTimer(int timeInMinutes){
        this.timeInMinutes = timeInMinutes;
        this.timeInSeconds = timeInMinutes * 60;
+       queueJump = false;
     }
     
     public void runCountdownTimer(){
@@ -33,10 +35,16 @@ public class CountdownTimer {
         
         CountdownWindow timerWindow = new CountdownWindow(this);
         timerWindow.setVisible(true);
+        
+        if(this instanceof NoInfoTimer){
+            timerWindow.updateTimer(0);
+        }
+        
         int remainingSeconds = timeInSeconds;
         while(true){
             
-            ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
+            ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(createTimeUpdater(timeInSeconds, remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
+            //ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
             
             try{
                 remainingSeconds = updatedTime.get();
@@ -46,6 +54,13 @@ public class CountdownTimer {
                     timerWindow.dispose();
                     break;
                 }
+                else if(((timeInSeconds - 120) == remainingSeconds) && !queueJump){
+                    queueJump = true;
+                    timeInSeconds += 120;
+                    QueueJumpWindow jumpWindow = new QueueJumpWindow();
+                    jumpWindow.setVisible(true);
+                }
+                
             }catch(Exception e){
                 System.out.println("Oops");
             }
@@ -54,47 +69,7 @@ public class CountdownTimer {
         
     }
     
-    public static void main(String[] args){
-//        CountdownWindow timerWindow = new CountdownWindow();
-//        timerWindow.setVisible(true);
-        
-        CountdownTimer testTimer = new CountdownTimer(2);
-        testTimer.runCountdownTimer();
-        
-    }
-    
-    class TimeUpdater implements Callable<Integer>{
-        private int currentSeconds;
-        private int currentMinutes;
-        private CountdownWindow timerWindow;
-        TimeUpdater(int remainingSeconds, CountdownWindow timerWindow){
-            this.currentSeconds = remainingSeconds;
-            this.currentMinutes = remainingSeconds / 60;
-            this.timerWindow = timerWindow;
-        }
-        
-        TimeUpdater(int remainingSeconds){
-            this.currentSeconds = remainingSeconds;
-            this.currentMinutes = remainingSeconds / 60;
-        }
-
-        @Override
-        public Integer call() throws Exception{
-            System.out.println("Updated timer with current second: " + currentSeconds + " at time: " + LocalDateTime.now().toString());
-            if(currentSeconds % 60 == 0){//Updates timerWindow every minute
-                timerWindow.updateTimer(currentMinutes);
-                
-                /*
-                Current Issue with this implementation: seconds are not counting down until user hits "Ok" in the message dialog.
-                Probably going to have to resolve with opening another window on another thread
-                */
-                JOptionPane.showMessageDialog(timerWindow, "Currently " + currentMinutes + " minutes left before you can register for course.", "Update", 1);
-            }
-            return --currentSeconds;
-        }
-
-    }
-    
-    
+    protected abstract TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow);
+      
 }
 
