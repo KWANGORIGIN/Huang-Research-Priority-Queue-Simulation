@@ -36,7 +36,7 @@ public abstract class CountdownTimer {
         CountdownWindow timerWindow = new CountdownWindow(this);
         timerWindow.setVisible(true);
         
-        if(this instanceof NoInfoTimer){
+        if(this instanceof NoInfoTime){
             timerWindow.updateTimer(0);
         }
         

@@ -4,14 +4,14 @@ package QueueInfo;
  *
  * @author wanga
  */
-public class NoInfoTimer extends CountdownTimer {
+public class NoInfoTime extends CountdownTimer {
     
-    public NoInfoTimer(int timeInMinutes){
+    public NoInfoTime(int timeInMinutes){
         super(timeInMinutes);
     }
     
     public static void main(String[] args){
-        CountdownTimer testTimer = new NoInfoTimer(2);
+        CountdownTimer testTimer = new NoInfoTime(2);
         testTimer.runCountdownTimer();
     }
 

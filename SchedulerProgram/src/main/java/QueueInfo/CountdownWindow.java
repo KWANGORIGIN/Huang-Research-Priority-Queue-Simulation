@@ -72,13 +72,13 @@ public class CountdownWindow extends javax.swing.JDialog {
     }
     
     public void updateTimer(Integer currentTime){
-        if(timer instanceof NoInfoTimer){
+        if(timer instanceof NoInfoTime){
             timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay for registration for the class.");
         }
-        else if(timer instanceof QueuePositionTimer){
+        else if(timer instanceof QueuePositionTime){
             timerDisplay.setText("Due to some seniors that are considering the course,\nyou are in position " + currentTime.toString() + " of the line.");
         }
-        else if(timer instanceof TimeInfoTimer){
+        else if(timer instanceof TimeInfoTime){
             timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay of about "+ currentTime.toString() + " minute(s).");
         }
         else{//Throw noTimerException

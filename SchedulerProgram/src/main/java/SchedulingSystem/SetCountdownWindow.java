@@ -6,9 +6,9 @@
 package SchedulingSystem;
 
 import QueueInfo.CountdownTimer;
-import QueueInfo.NoInfoTimer;
-import QueueInfo.QueuePositionTimer;
-import QueueInfo.TimeInfoTimer;
+import QueueInfo.NoInfoTime;
+import QueueInfo.QueuePositionTime;
+import QueueInfo.TimeInfoTime;
 import java.awt.event.WindowEvent;
 
 /**
@@ -144,7 +144,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             noInfoCheckbox.setSelected(false);
         }
         
-        timer = new TimeInfoTimer(numOfMinutes);
+        timer = new TimeInfoTime(numOfMinutes);
         
     }//GEN-LAST:event_timerCheckboxActionPerformed
 
@@ -158,7 +158,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             noInfoCheckbox.setSelected(false);
         }
         
-        timer = new QueuePositionTimer(numOfMinutes);
+        timer = new QueuePositionTime(numOfMinutes);
         
     }//GEN-LAST:event_positionCheckboxActionPerformed
 
@@ -171,7 +171,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             timerCheckbox.setSelected(false);
         }
         
-        timer = new NoInfoTimer(numOfMinutes);
+        timer = new NoInfoTime(numOfMinutes);
         
     }//GEN-LAST:event_noInfoCheckboxActionPerformed
 
