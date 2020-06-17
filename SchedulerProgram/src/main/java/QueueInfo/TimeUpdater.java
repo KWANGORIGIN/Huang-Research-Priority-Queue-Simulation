@@ -7,7 +7,6 @@ package QueueInfo;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
-import javax.swing.JTextPane;
 
 /**
  *
