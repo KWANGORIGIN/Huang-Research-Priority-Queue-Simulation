@@ -135,8 +135,9 @@ public class AdministratorWindow extends javax.swing.JFrame {
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         AddCourseWindow newAddCourseWindow = new AddCourseWindow(schedulingSystem);
-        this.setVisible(false);
         newAddCourseWindow.setVisible(true);
+        
+        this.dispose();
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed

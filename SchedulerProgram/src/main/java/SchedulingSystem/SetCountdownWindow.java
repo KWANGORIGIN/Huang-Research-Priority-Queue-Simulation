@@ -52,6 +52,11 @@ public class SetCountdownWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         minutesLabel.setText("Minutes/Queue Position:");
 
@@ -174,6 +179,11 @@ public class SetCountdownWindow extends javax.swing.JFrame {
         timer = new NoInfoTimer(numOfMinutes);
         
     }//GEN-LAST:event_noInfoCheckboxActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+        adminWindow.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

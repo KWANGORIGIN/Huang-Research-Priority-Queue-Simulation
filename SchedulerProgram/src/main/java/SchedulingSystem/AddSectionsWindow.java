@@ -233,6 +233,8 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         }catch(IOException ioException){
             System.out.println("Error saving to file.");
         }
+        
+        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
     }//GEN-LAST:event_formWindowClosing
 
     /**
