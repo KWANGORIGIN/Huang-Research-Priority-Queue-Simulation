@@ -23,9 +23,4 @@ public class TimeInfoUpdater extends TimeUpdater{
         JOptionPane.showMessageDialog(timerWindow, "Now " + currentMinutes + " minutes remaining.", "Update", 1);
     }
     
-//    @Override
-//    void updateDisplay(JTextPane textPane){
-//        textPane.setText("Due to some seniors that are considering the course,\nthere will be a delay of about "+ currentTime.toString() + " minute(s).");
-//    }
-    
 }

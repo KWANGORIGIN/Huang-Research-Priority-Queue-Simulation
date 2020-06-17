@@ -7,7 +7,6 @@ package QueueInfo;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
-import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 
 /**
@@ -36,24 +35,22 @@ public abstract class TimeUpdater implements Callable<Integer> {
     @Override
     public Integer call() throws Exception{
         System.out.println("Updated timer with current second: " + currentSeconds + " at time: " + LocalDateTime.now().toString());
-            if(currentSeconds % 60 == 0){
-                updateTimer();
-                if(initialTimeInSeconds != currentSeconds){
-                    /*
-                    Current Issue with this implementation: seconds are not counting down until user hits "Ok" in the message dialog.
-                    Probably going to have to resolve with opening another window on another thread
-                    */
-                    showDialog();
-                }
-                
+        if(currentSeconds % 60 == 0){
+            updateTimer();
+            if(initialTimeInSeconds != currentSeconds){
+                /*
+                Current Issue with this implementation: seconds are not counting down until user hits "Ok" in the message dialog.
+                Probably going to have to resolve with opening another window on another thread
+                */
+                showDialog();
             }
-            return --currentSeconds;
+
+        }
+        return --currentSeconds;
     }   
     
     abstract void showDialog();
-    
-    //abstract void updateDisplay(JTextPane textPane);
-    
+
     void updateTimer() {
         timerWindow.updateTimer(currentMinutes);
     }

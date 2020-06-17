@@ -6,6 +6,7 @@
 package QueueInfo;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -22,10 +23,10 @@ public class NoInfoTimeUpdater extends TimeUpdater {
         JOptionPane.showMessageDialog(timerWindow, "Thank you for your patience.", "Update", 1);
     }
     
-    @Override
+    
+    
     void updateTimer(){
         
     }
-    
-    
+
 }

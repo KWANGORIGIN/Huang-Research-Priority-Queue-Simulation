@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JTextPane;
 /**
  *
  * @author wanga
@@ -41,7 +42,6 @@ public abstract class CountdownTimer {
         while(true){
             
             ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(createTimeUpdater(timeInSeconds, remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
-            //ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(new TimeUpdater(remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
             
             try{
                 remainingSeconds = updatedTime.get();
@@ -67,6 +67,7 @@ public abstract class CountdownTimer {
     }
     
     protected abstract TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow);
-      
+    abstract void updateDisplay(Integer currentTime, JTextPane timerDisplay);
+    
 }
 

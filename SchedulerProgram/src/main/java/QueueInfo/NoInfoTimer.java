@@ -1,5 +1,7 @@
 package QueueInfo;
 
+import javax.swing.JTextPane;
+
 /**
  *
  * @author wanga
@@ -18,6 +20,11 @@ public class NoInfoTimer extends CountdownTimer {
     @Override
     protected TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         return new NoInfoTimeUpdater(initialTimeInSeconds, remainingSeconds, timerWindow);
+    }
+    
+    @Override
+    void updateDisplay(Integer currentTime, JTextPane timerDisplay) {
+        timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay for registration for the class.");
     }
     
 }

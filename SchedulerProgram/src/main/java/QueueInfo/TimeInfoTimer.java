@@ -5,6 +5,8 @@
  */
 package QueueInfo;
 
+import javax.swing.JTextPane;
+
 /**
  *
  * @author Kevin Wang
@@ -27,6 +29,11 @@ public class TimeInfoTimer extends CountdownTimer{
     @Override
     protected QueueInfo.TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         return new TimeInfoUpdater(initialTimeInSeconds, remainingSeconds, timerWindow);
+    }
+    
+    @Override
+    void updateDisplay(Integer currentTime, JTextPane timerDisplay){
+        timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay of about "+ currentTime.toString() + " minute(s).");
     }
     
 }
