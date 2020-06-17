@@ -22,8 +22,6 @@ public class NoInfoTimeUpdater extends TimeUpdater {
         JOptionPane.showMessageDialog(timerWindow, "Thank you for your patience.", "Update", 1);
     }
     
-    
-    
     void updateTimer(){
         
     }

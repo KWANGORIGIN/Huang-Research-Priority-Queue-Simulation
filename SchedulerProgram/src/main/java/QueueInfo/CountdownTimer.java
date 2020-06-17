@@ -5,6 +5,7 @@
  */
 package QueueInfo;
 
+import java.io.Serializable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -14,7 +15,7 @@ import javax.swing.JTextPane;
  *
  * @author wanga
  */
-public abstract class CountdownTimer {
+public abstract class CountdownTimer implements Serializable {
     
     protected ScheduledExecutorService CountdownTimer; 
     protected int timeInSeconds;

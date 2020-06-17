@@ -20,8 +20,7 @@ public class SchedulingSystem implements Serializable {
     private static ArrayList<Student> systemUsers;
     private static String adminUsername;
     public static int lastInputtedRow;
-    private boolean timerOrPosition;
-    private CountdownTimer countdownTimer;//not currently serialized so not being saved
+    private CountdownTimer countdownTimer;
     
     //No-argument constructor
     public SchedulingSystem(){
@@ -91,20 +90,16 @@ public class SchedulingSystem implements Serializable {
         return null;
     }
     
-    /**
-     * 
-     * @return 
-     */
-    public boolean getTimerOrPosition(){
-        return timerOrPosition;
-    }
-    
     public void setTimer(CountdownTimer countdownTimer){
         this.countdownTimer = countdownTimer;
     }
     
     public CountdownTimer getTimer(){
         return countdownTimer;
+    }
+    
+    public void runTimer(){
+        countdownTimer.runCountdownTimer();
     }
     
     

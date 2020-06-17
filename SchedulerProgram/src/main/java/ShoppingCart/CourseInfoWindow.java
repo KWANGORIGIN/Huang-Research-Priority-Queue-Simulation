@@ -175,6 +175,11 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
             }
             else{
+                /*
+                Starts countdown timer
+                */
+                schedulingSystem.runTimer();
+                
                 //Add timestamp to Excel sheet for when student signs up for course
                 //Imports or creates workbook students.xlsx depending on if file exists
                 XSSFWorkbook workbook = new XSSFWorkbook();
