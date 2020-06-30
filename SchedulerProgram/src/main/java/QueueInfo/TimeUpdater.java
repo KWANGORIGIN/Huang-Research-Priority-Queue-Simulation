@@ -5,53 +5,87 @@
  */
 package QueueInfo;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.List;
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 /**
  *
  * @author Kevin Wang
  */
 public abstract class TimeUpdater implements Callable<Integer> {
+
     int initialTimeInSeconds;
     int currentSeconds;
     int currentMinutes;
     CountdownWindow timerWindow;
 
-    TimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow){
+    TimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         this.initialTimeInSeconds = initialTimeInSeconds;
         this.currentSeconds = remainingSeconds;
         this.currentMinutes = remainingSeconds / 60;
         this.timerWindow = timerWindow;
     }
 
-    TimeUpdater(int initialTimeInSeconds, int remainingSeconds){
+    TimeUpdater(int initialTimeInSeconds, int remainingSeconds) {
         this.initialTimeInSeconds = initialTimeInSeconds;
         this.currentSeconds = remainingSeconds;
         this.currentMinutes = remainingSeconds / 60;
     }
 
     @Override
-    public Integer call() throws Exception{
+    public Integer call() throws Exception {
+
         System.out.println("Updated timer with current second: " + currentSeconds + " at time: " + LocalDateTime.now().toString());
-        if(currentSeconds % 60 == 0){
-            updateTimer();
-            if(initialTimeInSeconds != currentSeconds){
-                /*
-                Current Issue with this implementation: seconds are not counting down until user hits "Ok" in the message dialog.
-                Probably going to have to resolve with opening another window on another thread
-                */
-                showDialog();
+        if (currentSeconds % 60 == 0) {
+            System.out.println("Current seconds: " + currentSeconds);
+            SwingUtilities.invokeLater(new Runnable() {
+
+                public void run() {
+                    try {
+                        updateTimer();
+                    } catch (Exception e) {
+                        System.out.println("Error with thread");
+                    }
+                }
+
+            });
+
+            if (initialTimeInSeconds != currentSeconds) {
+                printDialogToUser();
             }
 
         }
-        return --currentSeconds;
-    }   
-    
+
+        return currentSeconds - 1;
+    }
+
+    void printDialogToUser() {
+
+//        SwingUtilities.invokeLater(new Runnable() {
+//
+//            public void run() {
+//                try {
+                    showDialog();
+//                } catch (Exception e) {
+//                    System.out.println("Error with thread");
+//                }
+//            }
+//
+//        });
+//
+//        //showDialog();
+    }
+
     abstract void showDialog();
 
     void updateTimer() {
         timerWindow.updateTimer(currentMinutes);
     }
-    
+
 }

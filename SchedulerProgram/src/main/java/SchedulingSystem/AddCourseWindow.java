@@ -13,17 +13,20 @@ import Course.*;
  */
 public class AddCourseWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
+    private boolean addCourseButtonPressed;
 
     /**
      * Creates new form addCourseWindow
      */
     public AddCourseWindow() {
         initComponents();
+        addCourseButtonPressed = false;
     }
     
     public AddCourseWindow(SchedulingSystem schedulingSystem) {
         initComponents();
         this.schedulingSystem = schedulingSystem;
+        addCourseButtonPressed = false;
     }
 
     /**
@@ -126,6 +129,7 @@ public class AddCourseWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
+        addCourseButtonPressed = true;
         
         String deptName = deptNameTextField.getText();
         String courseName = courseNameTextField.getText();
@@ -135,15 +139,15 @@ public class AddCourseWindow extends javax.swing.JFrame {
         //adds Sections
         AddSectionsWindow sectionWindow = new AddSectionsWindow(newCourse, numOfSections, schedulingSystem);
         sectionWindow.setVisible(true);
-        this.setVisible(false);//Might change to close
-        
-        
+        this.dispose();
         
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
-        adminWindow.setVisible(true);
+        if(!addCourseButtonPressed){
+            AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+            adminWindow.setVisible(true);
+        } 
     }//GEN-LAST:event_formWindowClosed
 
     /**

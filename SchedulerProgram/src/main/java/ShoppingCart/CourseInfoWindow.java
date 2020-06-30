@@ -20,6 +20,7 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -31,20 +32,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author wanga
  */
 public class CourseInfoWindow extends javax.swing.JFrame {
+
     private Course currentCourse;
     private Section enrolledSection;
     private Student currentStudent;
     private ShoppingCartWindow Cart;
     private SchedulingSystem schedulingSystem;
-    
+
     /**
      * Creates new form CourseInfoWindow
      */
     public CourseInfoWindow() {
         initComponents();
     }
-    
-    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow Cart, SchedulingSystem schedulingSystem){
+
+    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow Cart, SchedulingSystem schedulingSystem) {
         initComponents();
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
@@ -161,25 +163,40 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
-        
+
         //Gets enrolledSection
         int sectionRow = courseTable.getSelectedRow();//I don't think this gets the row based off checkmark...gotta sort that out
         System.out.println("Section row selected: " + sectionRow);
-        if(sectionRow != -1){//getSelectedRow returns -1 if no row is selected
+        if (sectionRow != -1) {//getSelectedRow returns -1 if no row is selected
             enrolledSection = currentCourse.getSection(sectionRow);
-            
+
             //Add Course to student file
             boolean test = currentStudent.enrollCourse(currentCourse, enrolledSection);
             System.out.println("Test: " + test);//debugging purposes. Not working as expected. Need to update.
-            if(!test){//If course is already in Shopping Cart
+            if (!test) {//If course is already in Shopping Cart
                 JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
-            }
-            else{
+            } else {
                 /*
                 Starts countdown timer
-                */
-                schedulingSystem.runTimer();
+                 */
+//                SwingUtilities.invokeLater(new Runnable() {
+//
+//                    public void run() {
+                        
+//                    }
+//
+//                });
+
+                Runnable r = new Runnable(){
+                    @Override
+                    public void run() {
+                        schedulingSystem.runTimer();
+                    }
+                };
                 
+                Thread t = new Thread(r);
+                t.start();
+
                 //Add timestamp to Excel sheet for when student signs up for course
                 //Imports or creates workbook students.xlsx depending on if file exists
                 XSSFWorkbook workbook = new XSSFWorkbook();
@@ -187,14 +204,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                 XSSFRow newRow;
                 Cell cell;
 
-                try(FileInputStream in = new FileInputStream("students.xlsx")){
+                try (FileInputStream in = new FileInputStream("students.xlsx")) {
                     workbook = new XSSFWorkbook(in);
                     sheet = workbook.getSheet("Student Details");
 
                     in.close();
                     System.out.println("Successfully opened students.xlsx");
 
-                }catch(FileNotFoundException e){
+                } catch (FileNotFoundException e) {
                     System.out.println("File not found. Creating new file...");
 
                     //Creates a blank workbook and sheet
@@ -211,7 +228,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                     cell.setCellValue("Course Added TimeStamp");
 
                     System.out.println("Successfully created students.xlsx");
-                }catch(IOException e){
+                } catch (IOException e) {
                     System.out.println("Unknown error opening file.");
                 }
 
@@ -225,48 +242,51 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                 timeCell.setCellValue(dateTime);
 
                 //Autosizes columns
-                for(int count = 0; count < currentStudentRow.getLastCellNum(); count++){//changed from newRow...add contingencies later
+                for (int count = 0; count < currentStudentRow.getLastCellNum(); count++) {//changed from newRow...add contingencies later
                     sheet.autoSizeColumn(count);
                 }
 
                 //Saves to file
-                try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+                try (FileOutputStream out = new FileOutputStream(new File("students.xlsx"))) {
                     workbook.write(out);
                     out.close();
 
                     //Success message
                     System.out.println("Succesfully outputted to students.xlsx");
-                }catch(FileNotFoundException noFile){
+                } catch (FileNotFoundException noFile) {
                     System.out.println("Unable to create Student file.");
-                }catch(IOException e){
+                } catch (IOException e) {
                     System.out.println("Error closing fileoutputstream.");
                 }
             }
-            
+
             //Close window
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
-        
+
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        CountdownTimer timer = schedulingSystem.getTimer();
-        if(timer != null){
-            timer.runCountdownTimer();
-        }
+        /**
+         * I don't remember why the below block is here
+         */
+//        CountdownTimer timer = schedulingSystem.getTimer();
+//        if(timer != null){
+//            timer.runCountdownTimer();
+//        }
 
         //Updates student file
-        try(FileOutputStream outputFile = new FileOutputStream(currentStudent.getUsername() + ".ser")){
-                    try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
-                        output.writeObject(currentStudent);
-                        System.out.println("Student " + currentStudent.getUsername() + " successfully saved.");
-                    }
-                }catch(FileNotFoundException noFile){
-                    System.out.println("File not found");
-                }catch(IOException ioException){
-                    System.out.println("Error saving to file.");
-                }
-        
+        try (FileOutputStream outputFile = new FileOutputStream(currentStudent.getUsername() + ".ser")) {
+            try (ObjectOutputStream output = new ObjectOutputStream(outputFile)) {
+                output.writeObject(currentStudent);
+                System.out.println("Student " + currentStudent.getUsername() + " successfully saved.");
+            }
+        } catch (FileNotFoundException noFile) {
+            System.out.println("File not found");
+        } catch (IOException ioException) {
+            System.out.println("Error saving to file.");
+        }
+
         //Updates ShoppingCartWindow with changes
         Cart.printStudentEnrolledCourses();
     }//GEN-LAST:event_formWindowClosed
@@ -306,12 +326,12 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             }
         });
     }
-    
-    protected void populate_Table_with_Course_Info(){
+
+    protected void populate_Table_with_Course_Info() {
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
         this.setTitle(currentCourse.getDeptName() + ": " + currentCourse.getCourseName());
-        
-        for(int count = 0; count < currentCourse.getNumOfSections(); count++){
+
+        for (int count = 0; count < currentCourse.getNumOfSections(); count++) {
             Object courseRow[] = new Object[5];
             courseRow[0] = false;
             courseRow[1] = currentCourse.getSection(count).getSectionName();
@@ -320,7 +340,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             courseRow[4] = currentCourse.getSection(count).getInstructor();
             model.addRow(courseRow);
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

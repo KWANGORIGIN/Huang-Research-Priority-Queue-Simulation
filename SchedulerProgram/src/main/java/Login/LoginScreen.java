@@ -13,6 +13,7 @@ import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -59,7 +60,7 @@ public class LoginScreen extends javax.swing.JFrame {
         });
         
     }
-   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -277,9 +278,17 @@ public class LoginScreen extends javax.swing.JFrame {
         }
 
         //Creates ShoppingCartWindow screen
-        ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
-        cart.setVisible(true);
-        this.setVisible(false);
+        SwingUtilities.invokeLater(new Runnable(){
+            
+            public void run(){
+                ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
+                cart.setVisible(true);
+            }
+
+        });
+        
+        //this.setVisible(false);
+        this.dispose();
         
     }//GEN-LAST:event_loginButtonActionPerformed
 

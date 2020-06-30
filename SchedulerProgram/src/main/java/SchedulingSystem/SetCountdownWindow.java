@@ -129,7 +129,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTimerActionPerformed
-        numOfMinutes = Integer.parseInt(minutesTextField.getText());
+
         if(timer != null){
             schedulingSystem.setTimer(timer);
 
@@ -140,6 +140,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_setTimerActionPerformed
 
     private void timerCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerCheckboxActionPerformed
+        setTimerDuration();
         
         if(positionCheckbox.isSelected()){
             positionCheckbox.setSelected(false);
@@ -154,6 +155,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_timerCheckboxActionPerformed
 
     private void positionCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionCheckboxActionPerformed
+        setTimerDuration();
         
         if(timerCheckbox.isSelected()){
             timerCheckbox.setSelected(false);
@@ -168,6 +170,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_positionCheckboxActionPerformed
 
     private void noInfoCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noInfoCheckboxActionPerformed
+        setTimerDuration();
+        
         if(positionCheckbox.isSelected()){
             positionCheckbox.setSelected(false);
         }
@@ -181,10 +185,14 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_noInfoCheckboxActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
-        adminWindow.setVisible(true);
+//        AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+//        adminWindow.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
-
+    
+    void setTimerDuration(){
+        numOfMinutes = Integer.parseInt(minutesTextField.getText());
+    }
+    
     /**
      * @param args the command line arguments
      */

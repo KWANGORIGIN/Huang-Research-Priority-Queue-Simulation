@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -155,9 +156,16 @@ public class AdministratorWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_listAllCoursesButtonActionPerformed
 
     private void startExperimentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startExperimentActionPerformed
-        //Creates LoginScreen and makes it visible to user
-        LoginScreen loginScreen = new LoginScreen(schedulingSystem);
-        loginScreen.setVisible(true);
+        
+        SwingUtilities.invokeLater(new Runnable(){
+            
+            public void run(){
+                //Creates LoginScreen and makes it visible to user
+                LoginScreen loginScreen = new LoginScreen(schedulingSystem);
+                loginScreen.setVisible(true);
+            }
+        
+        });
         
         //Closes this administrator window instance
         this.dispose();

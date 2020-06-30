@@ -11,64 +11,61 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author wanga
  */
 public abstract class CountdownTimer implements Serializable {
-    
-    protected ScheduledExecutorService CountdownTimer; 
+
+    protected ScheduledExecutorService CountdownTimer;
     protected int timeInSeconds;
     protected int timeInMinutes;
     protected boolean queueJump;
-    
-    public CountdownTimer(int timeInMinutes){
-       this.timeInMinutes = timeInMinutes;
-       this.timeInSeconds = timeInMinutes * 60;
-       queueJump = false;
+
+    public CountdownTimer(int timeInMinutes) {
+        this.timeInMinutes = timeInMinutes;
+        this.timeInSeconds = timeInMinutes * 60;
+        queueJump = false;
     }
-    
-    public void runCountdownTimer(){
-        
+
+    public void runCountdownTimer() {
+
         CountdownTimer = Executors.newScheduledThreadPool(1);
-        
+
         CountdownWindow timerWindow = new CountdownWindow(this);
         timerWindow.setVisible(true);
-        
-        if(this instanceof NoInfoTimer){
-            timerWindow.updateTimer(0);
-        }
-        
+        timerWindow.updateTimer(timeInMinutes);
         int remainingSeconds = timeInSeconds;
-        while(true){
-            
+
+        while (true) {
+
             ScheduledFuture<Integer> updatedTime = CountdownTimer.schedule(createTimeUpdater(timeInSeconds, remainingSeconds, timerWindow), 1, TimeUnit.SECONDS);
-            
-            try{
+            try {
                 remainingSeconds = updatedTime.get();
-                if(remainingSeconds == 0){
+                if (remainingSeconds == 0) {
                     CountdownTimer.shutdown();
                     //CountdownTimer.awaitTermination(5, TimeUnit.SECONDS);
                     timerWindow.dispose();
                     break;
-                }
-                else if(((timeInSeconds - 120) == remainingSeconds) && !queueJump){
+                } else if (((timeInSeconds - 10) == remainingSeconds) && !queueJump) {
                     queueJump = true;
                     timeInSeconds += 120;
                     QueueJumpWindow jumpWindow = new QueueJumpWindow();
                     jumpWindow.setVisible(true);
                 }
-                
-            }catch(Exception e){
+
+            } catch (Exception e) {
                 System.out.println("Oops");
             }
-            
-        }
-        
-    }
-    
-    protected abstract TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow);
-    abstract void updateDisplay(Integer currentTime, JTextPane timerDisplay);
-    
-}
 
+        }
+
+    }
+
+    protected abstract TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow);
+
+    abstract void updateDisplay(Integer currentTime, JTextPane timerDisplay);
+
+}

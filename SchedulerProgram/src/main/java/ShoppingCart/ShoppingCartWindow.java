@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -210,8 +211,18 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid course name.");
             }
             else{
-               CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, this, schedulingSystem);
-               courseWindow.setVisible(true); 
+               
+               ShoppingCartWindow windowRef = this;
+               SwingUtilities.invokeLater(new Runnable(){
+                   
+                   public void run(){
+                       CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, windowRef, schedulingSystem);
+                       courseWindow.setVisible(true); 
+                       windowRef.dispose();
+                   }
+                   
+               });
+               
             }
         }
         else if(searchInput.matches("[A-Za-z]+\\d+")){//No space between course name and number(#): courseName#

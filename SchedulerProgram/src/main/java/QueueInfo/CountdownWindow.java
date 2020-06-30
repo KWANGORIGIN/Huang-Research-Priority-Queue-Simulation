@@ -12,7 +12,9 @@ import QueueInfo.CountdownTimer;
  * @author Kevin Wang
  */
 public class CountdownWindow extends javax.swing.JDialog {
+
     private CountdownTimer timer;
+
     /**
      * Creates new form CountdownDialog
      */
@@ -51,32 +53,33 @@ public class CountdownWindow extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * Creates new form CountdownWindow
      */
     public CountdownWindow() {
         initComponents();
     }
-    
-    public CountdownWindow(CountdownTimer timer){
+
+    public CountdownWindow(CountdownTimer timer) {
         initComponents();
         this.timer = timer;
     }
-    
-    public void updateTimer(Integer currentTime){
+
+    public void updateTimer(Integer currentTime) {
         timer.updateDisplay(currentTime, timerDisplay);
+
     }
-    
+
     /**
      * @param args the command line arguments
      */

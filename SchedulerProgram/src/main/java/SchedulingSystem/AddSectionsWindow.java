@@ -235,6 +235,7 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         }
         
         AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
+        adminWindow.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     /**
