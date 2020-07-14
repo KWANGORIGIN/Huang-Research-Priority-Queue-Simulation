@@ -148,15 +148,6 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-
-          /**
-           * Deprecated. Admin window now opens on startup
-           */
-//        if(SchedulingSystem.isAdmin(usernameTextField.getText())){
-//            //Opens adminWindow to add and remove Courses to the Scheduling System
-//            AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
-//            adminWindow.setVisible(true);
-//        }
         
         //Imports or creates workbook students.xlsx depending on if file exists
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -278,14 +269,8 @@ public class LoginScreen extends javax.swing.JFrame {
         }
 
         //Creates ShoppingCartWindow screen
-        SwingUtilities.invokeLater(new Runnable(){
-            
-            public void run(){
-                ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
-                cart.setVisible(true);
-            }
-
-        });
+        ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
+        cart.setVisible(true);
         
         //this.setVisible(false);
         this.dispose();

@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Course;
+import Student.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 /**
  *
  * @author wanga
@@ -13,13 +15,13 @@ import java.util.ArrayList;
 public class Course implements Serializable{
     private String courseName;
     private String deptName;
-    ArrayList <Section> sections = new ArrayList();
-    //Add ArrayList of Student objects? Maybe in Sections?
+    private ArrayList <Section> sections;
     
     //Constructors
     public Course(String deptName, String courseName){
         this.deptName = deptName;
         this.courseName = courseName;
+        this.sections = new ArrayList();
     }
     
     //Setters
@@ -43,7 +45,5 @@ public class Course implements Serializable{
     public Section getSection(int sectionNum){
         return sections.get(sectionNum);
     }
-    
-    
     
 }

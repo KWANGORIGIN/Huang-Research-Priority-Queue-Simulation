@@ -7,7 +7,6 @@ package ShoppingCart;
 
 import Course.Course;
 import Course.Section;
-import QueueInfo.CountdownTimer;
 import SchedulingSystem.SchedulingSystem;
 import Student.Student;
 import java.awt.event.WindowEvent;
@@ -20,7 +19,6 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -171,21 +169,10 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             enrolledSection = currentCourse.getSection(sectionRow);
 
             //Add Course to student file
-            boolean test = currentStudent.enrollCourse(currentCourse, enrolledSection);
-            System.out.println("Test: " + test);//debugging purposes. Not working as expected. Need to update.
-            if (!test) {//If course is already in Shopping Cart
+            boolean studentEnrolled = currentStudent.enrollCourse(currentCourse, enrolledSection);
+            if (studentEnrolled) {//If course is already in Shopping Cart
                 JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
             } else {
-                /*
-                Starts countdown timer
-                 */
-//                SwingUtilities.invokeLater(new Runnable() {
-//
-//                    public void run() {
-                        
-//                    }
-//
-//                });
 
                 Runnable r = new Runnable(){
                     @Override
@@ -267,13 +254,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        /**
-         * I don't remember why the below block is here
-         */
-//        CountdownTimer timer = schedulingSystem.getTimer();
-//        if(timer != null){
-//            timer.runCountdownTimer();
-//        }
 
         //Updates student file
         try (FileOutputStream outputFile = new FileOutputStream(currentStudent.getUsername() + ".ser")) {
@@ -330,7 +310,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     protected void populate_Table_with_Course_Info() {
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
         this.setTitle(currentCourse.getDeptName() + ": " + currentCourse.getCourseName());
-
+        
         for (int count = 0; count < currentCourse.getNumOfSections(); count++) {
             Object courseRow[] = new Object[5];
             courseRow[0] = false;
@@ -340,7 +320,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             courseRow[4] = currentCourse.getSection(count).getInstructor();
             model.addRow(courseRow);
         }
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

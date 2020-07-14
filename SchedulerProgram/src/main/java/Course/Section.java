@@ -5,8 +5,9 @@
  */
 package Course;
 
+import Student.Student;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Section implements Serializable {
     private String time;
     private String room;
     private String instructor;
-    //Add ArrayList of Student objects? Maybe in Sections?
+    private HashMap <String, Student> studentsEnrolled;
     
     //Constructor
     public Section(String sectionName, String days, String time, String room, String instructor){
@@ -28,6 +29,7 @@ public class Section implements Serializable {
         this.time = time;
         this.room = room;
         this.instructor = instructor;
+        this.studentsEnrolled = new HashMap();
     }
     
     //Getters
@@ -50,6 +52,16 @@ public class Section implements Serializable {
     public String getInstructor(){
         return instructor;
     }
+    
+    public void addStudent(Student newStudent){
+        studentsEnrolled.put(newStudent.getUsername(), newStudent);
+    }
+    
+    public boolean containsStudent(String studentUsername){
+        return studentsEnrolled.containsKey(studentUsername);
+    }
+    
+    
     
     
 }

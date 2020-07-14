@@ -6,7 +6,6 @@
 package QueueInfo;
 
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -14,15 +13,15 @@ import javax.swing.SwingUtilities;
  */
 public class TimeInfoTimer extends CountdownTimer {
 
-    public TimeInfoTimer(int timeInMinutes) {
-        super(timeInMinutes);
+    public TimeInfoTimer(int timeInMinutes, int timeToJump) {
+        super(timeInMinutes, timeToJump);
     }
 
     public static void main(String[] args) {
 //        CountdownWindow timerWindow = new CountdownWindow();
 //        timerWindow.setVisible(true);
 
-        CountdownTimer testTimer = new TimeInfoTimer(3);
+        CountdownTimer testTimer = new TimeInfoTimer(3, 2);
         testTimer.runCountdownTimer();
     }
 
@@ -32,10 +31,16 @@ public class TimeInfoTimer extends CountdownTimer {
     }
 
     @Override
-    void updateDisplay(Integer currentTime, JTextPane timerDisplay) {
+    void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay) {
 
         timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay of about " + currentTime.toString() + " minute(s).");
 
+    }
+    
+    @Override
+    void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay){
+        
+        queueJumpDisplay.setText("Due to a new senior in the system that is considering the same course,\nthere will be a delay of about " + currentTime.toString() + " minute(s).\nThank you for your patience.");
     }
 
 }

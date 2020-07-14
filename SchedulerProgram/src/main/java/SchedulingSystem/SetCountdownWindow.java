@@ -18,7 +18,7 @@ import java.awt.event.WindowEvent;
 public class SetCountdownWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
     CountdownTimer timer;
-    int numOfMinutes;
+    int numOfMinutesTimer, numOfMinutesQueueJump;
     
     /**
      * Creates new form SetCountdownWindow
@@ -42,6 +42,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         minutesLabel = new javax.swing.JLabel();
         minutesTextField = new javax.swing.JTextField();
@@ -49,6 +50,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
         timerCheckbox = new javax.swing.JCheckBox();
         positionCheckbox = new javax.swing.JCheckBox();
         noInfoCheckbox = new javax.swing.JCheckBox();
+        jumpTimeLabel = new javax.swing.JLabel();
+        jumpTimeTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -57,8 +60,24 @@ public class SetCountdownWindow extends javax.swing.JFrame {
                 formWindowClosed(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         minutesLabel.setText("Minutes/Queue Position:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(135, 88, 0, 0);
+        getContentPane().add(minutesLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 72;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(132, 4, 0, 0);
+        getContentPane().add(minutesTextField, gridBagConstraints);
 
         setTimer.setText("Set");
         setTimer.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +85,14 @@ public class SetCountdownWindow extends javax.swing.JFrame {
                 setTimerActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(2, 4, 62, 0);
+        getContentPane().add(setTimer, gridBagConstraints);
 
         timerCheckbox.setText("Timer");
         timerCheckbox.setBorderPaintedFlat(true);
@@ -74,6 +101,12 @@ public class SetCountdownWindow extends javax.swing.JFrame {
                 timerCheckboxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 4, 0, 0);
+        getContentPane().add(timerCheckbox, gridBagConstraints);
 
         positionCheckbox.setText("Queue Position");
         positionCheckbox.setBorderPaintedFlat(true);
@@ -82,6 +115,13 @@ public class SetCountdownWindow extends javax.swing.JFrame {
                 positionCheckboxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 127);
+        getContentPane().add(positionCheckbox, gridBagConstraints);
 
         noInfoCheckbox.setText("No Info");
         noInfoCheckbox.addActionListener(new java.awt.event.ActionListener() {
@@ -89,40 +129,30 @@ public class SetCountdownWindow extends javax.swing.JFrame {
                 noInfoCheckboxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 0);
+        getContentPane().add(noInfoCheckbox, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(minutesLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(noInfoCheckbox)
-                    .addComponent(positionCheckbox)
-                    .addComponent(setTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timerCheckbox)
-                    .addComponent(minutesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(minutesLabel)
-                    .addComponent(minutesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(timerCheckbox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(positionCheckbox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(noInfoCheckbox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(setTimer)
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
+        jumpTimeLabel.setText("Time until Queue Jump:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(9, 93, 0, 0);
+        getContentPane().add(jumpTimeLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 72;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 4, 0, 0);
+        getContentPane().add(jumpTimeTextField, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -150,7 +180,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             noInfoCheckbox.setSelected(false);
         }
         
-        timer = new TimeInfoTimer(numOfMinutes);
+        timer = new TimeInfoTimer(numOfMinutesTimer, numOfMinutesQueueJump);
         
     }//GEN-LAST:event_timerCheckboxActionPerformed
 
@@ -165,7 +195,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             noInfoCheckbox.setSelected(false);
         }
         
-        timer = new QueuePositionTimer(numOfMinutes);
+        timer = new QueuePositionTimer(numOfMinutesTimer, numOfMinutesQueueJump);
         
     }//GEN-LAST:event_positionCheckboxActionPerformed
 
@@ -180,7 +210,7 @@ public class SetCountdownWindow extends javax.swing.JFrame {
             timerCheckbox.setSelected(false);
         }
         
-        timer = new NoInfoTimer(numOfMinutes);
+        timer = new NoInfoTimer(numOfMinutesTimer, numOfMinutesQueueJump);
         
     }//GEN-LAST:event_noInfoCheckboxActionPerformed
 
@@ -190,7 +220,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
     
     void setTimerDuration(){
-        numOfMinutes = Integer.parseInt(minutesTextField.getText());
+        numOfMinutesTimer = Integer.parseInt(minutesTextField.getText());
+        numOfMinutesQueueJump = Integer.parseInt(jumpTimeTextField.getText());
     }
     
     /**
@@ -229,6 +260,8 @@ public class SetCountdownWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jumpTimeLabel;
+    private javax.swing.JTextField jumpTimeTextField;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JTextField minutesTextField;
     private javax.swing.JCheckBox noInfoCheckbox;

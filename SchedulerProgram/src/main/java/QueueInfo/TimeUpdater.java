@@ -5,14 +5,9 @@
  */
 package QueueInfo;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.List;
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
+import javax.swing.SwingUtilities; 
 
 /**
  *
@@ -57,7 +52,7 @@ public abstract class TimeUpdater implements Callable<Integer> {
             });
 
             if (initialTimeInSeconds != currentSeconds) {
-                printDialogToUser();
+                showDialog();
             }
 
         }
@@ -65,25 +60,13 @@ public abstract class TimeUpdater implements Callable<Integer> {
         return currentSeconds - 1;
     }
 
-    void printDialogToUser() {
-
-//        SwingUtilities.invokeLater(new Runnable() {
+//    void printDialogToUser() {
 //
-//            public void run() {
-//                try {
-                    showDialog();
-//                } catch (Exception e) {
-//                    System.out.println("Error with thread");
-//                }
-//            }
+//        showDialog();
 //
-//        });
-//
-//        //showDialog();
-    }
+//    }
 
     abstract void showDialog();
-
     void updateTimer() {
         timerWindow.updateTimer(currentMinutes);
     }

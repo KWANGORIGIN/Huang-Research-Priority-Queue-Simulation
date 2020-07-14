@@ -76,7 +76,7 @@ public class CountdownWindow extends javax.swing.JDialog {
     }
 
     public void updateTimer(Integer currentTime) {
-        timer.updateDisplay(currentTime, timerDisplay);
+        timer.updateTimerDisplay(currentTime, timerDisplay);
 
     }
 
