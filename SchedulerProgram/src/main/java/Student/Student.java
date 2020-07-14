@@ -6,7 +6,6 @@
 package Student;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import Course.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -47,13 +46,16 @@ public class Student implements Serializable {
 
     public boolean enrollCourse(Course newCourse, Section enrolledSection) {
         if(enrolledSection.containsStudent(username)){
-            enrolledCourses.put(newCourse, enrolledSection);
+            System.out.println("Student already enrolled in course");
             return true;
         }
+        enrolledSection.addStudent(this);
+        enrolledCourses.put(newCourse, enrolledSection);
         return false;
     }
     
-    public DefaultTableModel printEnrolledCoursesToTable(DefaultTableModel model){
+    public void printEnrolledCoursesToTable(DefaultTableModel model){
+        
         for(Map.Entry<Course, Section> entry : enrolledCourses.entrySet()){
             Course courseKey = entry.getKey();
             Section sectionValue = entry.getValue();
@@ -64,21 +66,7 @@ public class Student implements Serializable {
             courseRow[3] = sectionValue.getInstructor();
             model.addRow(courseRow);
         }
-        return model;
     }
-//    /**
-//     * Returns an Course the Student has enrolled in
-//     *
-//     * @param listPosition
-//     * @return An enrolled Course at position listPosition in the ArrayList
-//     */
-//    public Course getEnrolledCourse(int listPosition) {
-//        return enrolledCourses.get(listPosition);
-//    }
-
-//    public Section getEnrolledSection(int listPosition) {
-//        return enrolledSections.get(listPosition);
-//    }
 
     public int numOfEnrolledCourses() {
         return enrolledCourses.size();

@@ -14,8 +14,8 @@ public class NoInfoTimer extends CountdownTimer {
     }
 
     public static void main(String[] args) {
-        CountdownTimer testTimer = new NoInfoTimer(2, 2);
-        testTimer.runCountdownTimer();
+//        CountdownTimer testTimer = new NoInfoTimer(2, 2);
+//        testTimer.runCountdownTimer();
     }
 
     @Override

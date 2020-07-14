@@ -15,8 +15,8 @@ public class QueuePositionTimer extends CountdownTimer {
     }
 
     public static void main(String[] args) {
-        CountdownTimer testTimer = new QueuePositionTimer(2, 2);
-        testTimer.runCountdownTimer();
+//        CountdownTimer testTimer = new QueuePositionTimer(2, 2);
+//        testTimer.runCountdownTimer();
     }
 
     @Override

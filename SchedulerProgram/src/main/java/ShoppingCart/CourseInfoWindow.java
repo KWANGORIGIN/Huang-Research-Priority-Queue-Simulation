@@ -34,7 +34,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     private Course currentCourse;
     private Section enrolledSection;
     private Student currentStudent;
-    private ShoppingCartWindow Cart;
+    private ShoppingCartWindow shoppingCart;
     private SchedulingSystem schedulingSystem;
 
     /**
@@ -44,11 +44,11 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         initComponents();
     }
 
-    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow Cart, SchedulingSystem schedulingSystem) {
+    public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow shoppingCart, SchedulingSystem schedulingSystem) {
         initComponents();
         this.currentCourse = currentCourse;
         this.currentStudent = currentStudent;
-        this.Cart = Cart;
+        this.shoppingCart = shoppingCart;
         this.schedulingSystem = schedulingSystem;
         populate_Table_with_Course_Info();
     }
@@ -171,13 +171,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             //Add Course to student file
             boolean studentEnrolled = currentStudent.enrollCourse(currentCourse, enrolledSection);
             if (studentEnrolled) {//If course is already in Shopping Cart
+                System.out.println("ERROR! Course already in Shopping Cart!");
                 JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
             } else {
-
+                System.out.println("********Succesfully enrolled student to course********");
                 Runnable r = new Runnable(){
                     @Override
                     public void run() {
-                        schedulingSystem.runTimer();
+                        schedulingSystem.runTimer(shoppingCart, currentStudent);
                     }
                 };
                 
@@ -267,8 +268,8 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             System.out.println("Error saving to file.");
         }
 
-        //Updates ShoppingCartWindow with changes
-        Cart.printStudentEnrolledCourses();
+//        //Updates ShoppingCartWindow with changes
+//        shoppingCart.printStudentEnrolledCourses();
     }//GEN-LAST:event_formWindowClosed
 
     /**

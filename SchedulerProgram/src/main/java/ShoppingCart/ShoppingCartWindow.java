@@ -215,7 +215,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                    public void run(){
                        CourseInfoWindow courseWindow = new CourseInfoWindow(searchedCourse, student, windowRef, schedulingSystem);
                        courseWindow.setVisible(true); 
-                       windowRef.dispose();
+//                       windowRef.dispose();
                    }
                    
                });
@@ -285,11 +285,11 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         });
     }
     
-    protected void printStudentEnrolledCourses(){
+    public void printStudentEnrolledCourses(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         System.out.println("Num of enrolled courses: " + student.numOfEnrolledCourses());
         model.setRowCount(0);//This initializes the number of rows to 0 in case updating rows in table. Essentially clears jTable data
-        model = student.printEnrolledCoursesToTable(model);
+        student.printEnrolledCoursesToTable(model);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

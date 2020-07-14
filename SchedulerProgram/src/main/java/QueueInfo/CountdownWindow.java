@@ -5,7 +5,9 @@
  */
 package QueueInfo;
 
-import QueueInfo.CountdownTimer;
+import SchedulingSystem.SchedulingSystem;
+import ShoppingCart.ShoppingCartWindow;
+import Student.Student;
 
 /**
  *
@@ -14,6 +16,9 @@ import QueueInfo.CountdownTimer;
 public class CountdownWindow extends javax.swing.JDialog {
 
     private CountdownTimer timer;
+    private SchedulingSystem schedulingSystem;
+    private Student currentStudent;
+    private ShoppingCartWindow shoppingCart;
 
     /**
      * Creates new form CountdownDialog
@@ -21,6 +26,26 @@ public class CountdownWindow extends javax.swing.JDialog {
     public CountdownWindow(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    /**
+     * Creates new form CountdownWindow
+     */
+    public CountdownWindow() {
+        initComponents();
+    }
+
+    public CountdownWindow(CountdownTimer timer) {
+        initComponents();
+        this.timer = timer;
+    }
+    
+    public CountdownWindow(CountdownTimer timer, SchedulingSystem schedulingSystem, Student currentStudent, ShoppingCartWindow shoppingCart){
+        initComponents();
+        this.timer = timer;
+        this.schedulingSystem = schedulingSystem;
+        this.currentStudent = currentStudent;
+        this.shoppingCart = shoppingCart;
     }
 
     /**
@@ -37,6 +62,11 @@ public class CountdownWindow extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         timerDisplay.setEditable(false);
         timerDisplay.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -63,17 +93,13 @@ public class CountdownWindow extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Creates new form CountdownWindow
-     */
-    public CountdownWindow() {
-        initComponents();
-    }
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+        shoppingCart.printStudentEnrolledCourses();
+        
+    }//GEN-LAST:event_formWindowClosed
 
-    public CountdownWindow(CountdownTimer timer) {
-        initComponents();
-        this.timer = timer;
-    }
+    
 
     public void updateTimer(Integer currentTime) {
         timer.updateTimerDisplay(currentTime, timerDisplay);

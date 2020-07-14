@@ -5,6 +5,9 @@
  */
 package QueueInfo;
 
+import SchedulingSystem.SchedulingSystem;
+import ShoppingCart.ShoppingCartWindow;
+import Student.Student;
 import java.io.Serializable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -33,11 +36,11 @@ public abstract class CountdownTimer implements Serializable {
         queueJump = false;
     }
 
-    public void runCountdownTimer() {
+    public void runCountdownTimer(SchedulingSystem schedulingSystem, Student currentStudent, ShoppingCartWindow shoppingCart) {
 
         CountdownTimer = Executors.newScheduledThreadPool(1);
-
-        CountdownWindow timerWindow = new CountdownWindow(this);
+        
+        CountdownWindow timerWindow = new CountdownWindow(this, schedulingSystem, currentStudent, shoppingCart);
         timerWindow.setVisible(true);
         timerWindow.updateTimer(timeInMinutes);
         int remainingSeconds = timeInSeconds;

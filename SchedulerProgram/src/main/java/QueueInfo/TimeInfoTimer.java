@@ -21,8 +21,8 @@ public class TimeInfoTimer extends CountdownTimer {
 //        CountdownWindow timerWindow = new CountdownWindow();
 //        timerWindow.setVisible(true);
 
-        CountdownTimer testTimer = new TimeInfoTimer(3, 2);
-        testTimer.runCountdownTimer();
+//        CountdownTimer testTimer = new TimeInfoTimer(3, 2);
+//        testTimer.runCountdownTimer();
     }
 
     @Override

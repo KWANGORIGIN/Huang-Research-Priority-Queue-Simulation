@@ -10,6 +10,7 @@ import Course.Section;
 import Student.Student;
 import java.io.Serializable;
 import QueueInfo.CountdownTimer;
+import ShoppingCart.ShoppingCartWindow;
 
 /**
  *
@@ -98,8 +99,8 @@ public class SchedulingSystem implements Serializable {
         return countdownTimer;
     }
     
-    public void runTimer(){
-        countdownTimer.runCountdownTimer();
+    public void runTimer(ShoppingCartWindow shoppingCart, Student currentStudent){
+        countdownTimer.runCountdownTimer(this, currentStudent, shoppingCart);
     }
     
     
