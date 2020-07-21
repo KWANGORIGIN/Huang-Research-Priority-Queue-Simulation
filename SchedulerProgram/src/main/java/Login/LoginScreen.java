@@ -201,7 +201,7 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         }catch(FileNotFoundException fileNotFound){//if existing student not found, then creates new student and saves to file
             rowPosition = SchedulingSystem.lastInputtedRow + 1;
-            student = new Student(username, rowPosition);
+            student = new Student(username, rowPosition, schedulingSystem.getTimer());
 
             //Saves new Student object
             try(FileOutputStream outputFile = new FileOutputStream(username + ".ser")){
@@ -266,12 +266,12 @@ public class LoginScreen extends javax.swing.JFrame {
         }catch(IOException e){
             System.out.println("Error closing fileoutputstream.");
         }
-
+        
         //Creates ShoppingCartWindow screen
+        schedulingSystem.setCurrentStudent(student);
         ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);
         cart.setVisible(true);
         
-        //this.setVisible(false);
         this.dispose();
         
     }//GEN-LAST:event_loginButtonActionPerformed

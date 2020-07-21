@@ -46,6 +46,7 @@ public class Main {
             System.out.println("Creating new Scheduling System...");
         }
         
+        schedulingSystem.printSectionInfo();
         AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);
         adminWindow.setVisible(true);
         

@@ -61,6 +61,9 @@ public class Section implements Serializable {
         return studentsEnrolled.containsKey(studentUsername);
     }
     
+    public void printSectionInfo(){
+        System.out.println("Number of Students enrolled in this section: " + studentsEnrolled.size());
+    }
     
     
     

@@ -22,6 +22,8 @@ public class SchedulingSystem implements Serializable {
     private static String adminUsername;
     public static int lastInputtedRow;
     private CountdownTimer countdownTimer;
+    private Student currentStudent;
+    
     
     //No-argument constructor
     public SchedulingSystem(){
@@ -42,6 +44,14 @@ public class SchedulingSystem implements Serializable {
     
     public void removeCourse(){
         
+    }
+    
+    public void printSectionInfo(){
+        for(int count = 0; count < availableCourses.size(); count++){
+            for(int counter = 0; counter < availableCourses.get(count).getNumOfSections(); counter++){
+                availableCourses.get(count).getSection(counter).printSectionInfo();
+            }
+        }
     }
     
     /**
@@ -103,5 +113,12 @@ public class SchedulingSystem implements Serializable {
         countdownTimer.runCountdownTimer(this, currentStudent, shoppingCart);
     }
     
+    public void setCurrentStudent(Student student){
+        this.currentStudent = student;
+    }
+    
+    public void exportToExcel(){
+        
+    }
     
 }

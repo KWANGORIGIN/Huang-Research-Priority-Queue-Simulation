@@ -38,7 +38,7 @@ public abstract class TimeUpdater implements Callable<Integer> {
 
         System.out.println("Updated timer with current second: " + currentSeconds + " at time: " + LocalDateTime.now().toString());
         if (currentSeconds % 60 == 0) {
-            System.out.println("Current seconds: " + currentSeconds);
+//            System.out.println("Current seconds: " + currentSeconds);
             SwingUtilities.invokeLater(new Runnable() {
 
                 public void run() {

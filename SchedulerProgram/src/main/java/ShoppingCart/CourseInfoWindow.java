@@ -170,9 +170,16 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
             //Add Course to student file
             boolean studentEnrolled = currentStudent.enrollCourse(currentCourse, enrolledSection);
-            if (studentEnrolled) {//If course is already in Shopping Cart
-                System.out.println("ERROR! Course already in Shopping Cart!");
-                JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
+            if (!studentEnrolled) {//If course is already in Shopping Cart
+                Runnable r = new Runnable(){
+                    @Override
+                    public void run(){
+                        JOptionPane.showMessageDialog(null, "Error! Course already in Shopping Cart.");
+                    }
+                };
+                
+                Thread warning = new Thread(r);
+                warning.start();
             } else {
                 System.out.println("********Succesfully enrolled student to course********");
                 Runnable r = new Runnable(){

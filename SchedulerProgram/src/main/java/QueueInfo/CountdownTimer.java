@@ -13,9 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JLabel;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -75,5 +73,17 @@ public abstract class CountdownTimer implements Serializable {
     abstract void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay);
 
     abstract void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay);
+
+    public String getType(){
+        return this.getClass().getName();
+    }
+    
+    public String getDuration(){
+        return Integer.toString(timeInMinutes);
+    }
+    
+    public String getQueueJumpTime(){
+        return Integer.toString(timeToJump / 60);
+    }
 
 }
