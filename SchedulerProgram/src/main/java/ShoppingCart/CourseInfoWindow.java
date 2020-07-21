@@ -10,20 +10,12 @@ import Course.Section;
 import SchedulingSystem.SchedulingSystem;
 import Student.Student;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -181,84 +173,24 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                 Thread warning = new Thread(r);
                 warning.start();
             } else {
-                System.out.println("********Succesfully enrolled student to course********");
-                Runnable r = new Runnable(){
-                    @Override
-                    public void run() {
-                        schedulingSystem.runTimer(shoppingCart, currentStudent);
-                    }
-                };
+                System.out.println("********Succesfully enrolling student to course********");
                 
-                Thread t = new Thread(r);
-                t.start();
+                if(currentStudent.runTimerCondition()){
+                    Runnable r = new Runnable(){
+                        @Override
+                        public void run() {
+                            schedulingSystem.runTimer(shoppingCart, currentStudent);
+                        }
+                    };
 
-                //Add timestamp to Excel sheet for when student signs up for course
-                //Imports or creates workbook students.xlsx depending on if file exists
-                XSSFWorkbook workbook = new XSSFWorkbook();
-                XSSFSheet sheet = workbook.createSheet();
-                XSSFRow newRow;
-                Cell cell;
-
-                try (FileInputStream in = new FileInputStream("students.xlsx")) {
-                    workbook = new XSSFWorkbook(in);
-                    sheet = workbook.getSheet("Student Details");
-
-                    in.close();
-                    System.out.println("Successfully opened students.xlsx");
-
-                } catch (FileNotFoundException e) {
-                    System.out.println("File not found. Creating new file...");
-
-                    //Creates a blank workbook and sheet
-                    workbook = new XSSFWorkbook();
-                    sheet = workbook.createSheet("Student Details");
-
-                    //Creates titles for columns
-                    newRow = sheet.createRow(0);
-                    cell = newRow.createCell(0);
-                    cell.setCellValue("Username");
-                    cell = newRow.createCell(1);
-                    cell.setCellValue("Login Timestamp");
-                    cell = newRow.createCell(2);
-                    cell.setCellValue("Course Added TimeStamp");
-
-                    System.out.println("Successfully created students.xlsx");
-                } catch (IOException e) {
-                    System.out.println("Unknown error opening file.");
-                }
-
-                XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
-
-                //Adds timestamp
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-                LocalDateTime now = LocalDateTime.now();
-                String dateTime = dtf.format(now);
-                Cell timeCell = currentStudentRow.createCell(2);
-                timeCell.setCellValue(dateTime);
-
-                //Autosizes columns
-                for (int count = 0; count < currentStudentRow.getLastCellNum(); count++) {//changed from newRow...add contingencies later
-                    sheet.autoSizeColumn(count);
-                }
-
-                //Saves to file
-                try (FileOutputStream out = new FileOutputStream(new File("students.xlsx"))) {
-                    workbook.write(out);
-                    out.close();
-
-                    //Success message
-                    System.out.println("Succesfully outputted to students.xlsx");
-                } catch (FileNotFoundException noFile) {
-                    System.out.println("Unable to create Student file.");
-                } catch (IOException e) {
-                    System.out.println("Error closing fileoutputstream.");
+                    Thread t = new Thread(r);
+                    t.start();
                 }
             }
 
             //Close window
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
-
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -275,8 +207,6 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             System.out.println("Error saving to file.");
         }
 
-//        //Updates ShoppingCartWindow with changes
-//        shoppingCart.printStudentEnrolledCourses();
     }//GEN-LAST:event_formWindowClosed
 
     /**

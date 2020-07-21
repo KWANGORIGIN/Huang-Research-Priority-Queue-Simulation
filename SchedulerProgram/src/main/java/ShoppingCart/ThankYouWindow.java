@@ -5,12 +5,20 @@
  */
 package ShoppingCart;
 
+import SchedulingSystem.SchedulingSystem;
+
 /**
  *
  * @author Kevin Wang
  */
 public class ThankYouWindow extends javax.swing.JFrame {
-
+    private SchedulingSystem schedulingSystem;
+    
+    public ThankYouWindow(SchedulingSystem schedulingSystem){
+        initComponents();
+        this.schedulingSystem = schedulingSystem;
+    }
+    
     /**
      * Creates new form ThankYouWindow
      */

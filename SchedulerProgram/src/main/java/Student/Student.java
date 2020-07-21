@@ -119,7 +119,11 @@ public class Student implements Serializable {
     public int numOfEnrolledCourses() {
         return enrolledCourses.size();
     }
-
+    
+    public boolean runTimerCondition(){
+        return enrolledCourses.size() == 3;
+    }
+    
     /**
      * Returns the integer position of the Student's username position in Excel
      * Document
