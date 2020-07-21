@@ -39,6 +39,7 @@ public abstract class CountdownTimer implements Serializable {
         CountdownTimer = Executors.newScheduledThreadPool(1);
         
         CountdownWindow timerWindow = new CountdownWindow(this, schedulingSystem, currentStudent, shoppingCart);
+        schedulingSystem.getCurrentStudent().setCountdownTimerStartedTime();
         timerWindow.setVisible(true);
         timerWindow.updateTimer(timeInMinutes);
         int remainingSeconds = timeInSeconds;
@@ -49,6 +50,7 @@ public abstract class CountdownTimer implements Serializable {
                 remainingSeconds = updatedTime.get();
                 if (remainingSeconds == 0) {
                     CountdownTimer.shutdown();
+                    schedulingSystem.getCurrentStudent().setCountdowntimerEndedTime();
                     //CountdownTimer.awaitTermination(5, TimeUnit.SECONDS);
                     timerWindow.dispose();
                     break;

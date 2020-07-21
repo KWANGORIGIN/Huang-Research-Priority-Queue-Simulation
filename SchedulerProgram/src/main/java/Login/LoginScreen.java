@@ -232,41 +232,42 @@ public class LoginScreen extends javax.swing.JFrame {
 //            }
 
 
-        newRow = sheet.createRow(rowPosition);
-        cell = newRow.createCell(0);
-        cell.setCellValue(username);
-
-        //Adds timestamp
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTime = dtf.format(now);
-        Cell timeCell = newRow.createCell(1);
-        timeCell.setCellValue(dateTime);
-
-        //Autosizes columns
-        for(int count = 0; count < newRow.getLastCellNum(); count++){
-            sheet.autoSizeColumn(count);
-        }
-
-        //Saves to file
-        try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
-            workbook.write(out);
-            out.close();
-
-            //Success message
-            System.out.println("Succesfully outputted to students.xlsx");
-        }catch(FileNotFoundException noFile){
-            System.out.println("Unable to create file.");
-            /*
-            Include Error dialog message asking user if Excel file is open
-
-            */
-            JOptionPane.showMessageDialog(null, "Error: Unable to write to students.xlsx. Please close students.xlsx if it is currently open.");
-
-        }catch(IOException e){
-            System.out.println("Error closing fileoutputstream.");
-        }
+//        newRow = sheet.createRow(rowPosition);
+//        cell = newRow.createCell(0);
+//        cell.setCellValue(username);
+//
+//        //Adds timestamp
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+//        LocalDateTime now = LocalDateTime.now();
+//        String dateTime = dtf.format(now);
+//        Cell timeCell = newRow.createCell(1);
+//        timeCell.setCellValue(dateTime);
+//
+//        //Autosizes columns
+//        for(int count = 0; count < newRow.getLastCellNum(); count++){
+//            sheet.autoSizeColumn(count);
+//        }
+//
+//        //Saves to file
+//        try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
+//            workbook.write(out);
+//            out.close();
+//
+//            //Success message
+//            System.out.println("Succesfully outputted to students.xlsx");
+//        }catch(FileNotFoundException noFile){
+//            System.out.println("Unable to create file.");
+//            /*
+//            Include Error dialog message asking user if Excel file is open
+//
+//            */
+//            JOptionPane.showMessageDialog(null, "Error: Unable to write to students.xlsx. Please close students.xlsx if it is currently open.");
+//
+//        }catch(IOException e){
+//            System.out.println("Error closing fileoutputstream.");
+//        }
         
+        student.setLogInTime();
         //Creates ShoppingCartWindow screen
         schedulingSystem.setCurrentStudent(student);
         ShoppingCartWindow cart = new ShoppingCartWindow(student, schedulingSystem);

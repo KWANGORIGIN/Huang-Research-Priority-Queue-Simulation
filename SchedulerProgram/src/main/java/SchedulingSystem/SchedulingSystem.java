@@ -20,7 +20,7 @@ public class SchedulingSystem implements Serializable {
     private final ArrayList<Course> availableCourses;
     private static ArrayList<Student> systemUsers;
     private static String adminUsername;
-    public static int lastInputtedRow;
+    public static int lastInputtedRow;//Maybe get rid of? Just write to new row regardless? To avoid overwriting
     private CountdownTimer countdownTimer;
     private Student currentStudent;
     
@@ -115,6 +115,10 @@ public class SchedulingSystem implements Serializable {
     
     public void setCurrentStudent(Student student){
         this.currentStudent = student;
+    }
+    
+    public Student getCurrentStudent(){
+        return this.currentStudent;
     }
     
     public void exportToExcel(){

@@ -58,6 +58,10 @@ public class Student implements Serializable {
         this.countdownTimerEndedTime = setTime();
     }
     
+    public void addCourseSignUpTime(Course newCourse){
+        this.timeCourseSignedUp.put(newCourse, setTime());
+    }
+    
     public void setLoggedOutTime(){
         this.loggedOutTime = setTime();
     }
@@ -93,6 +97,7 @@ public class Student implements Serializable {
         }
         enrolledSection.addStudent(this);
         enrolledCourses.put(newCourse, enrolledSection);
+        addCourseSignUpTime(newCourse);
         return true;
     }
     

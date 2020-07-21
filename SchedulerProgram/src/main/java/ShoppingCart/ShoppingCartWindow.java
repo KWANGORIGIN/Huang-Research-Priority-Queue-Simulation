@@ -71,7 +71,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         searchbar = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        enrollButton = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -140,7 +140,12 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        enrollButton.setText("Enroll");
+        enrollButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,8 +162,8 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(385, 385, 385)
-                .addComponent(jButton1)
+                .addGap(412, 412, 412)
+                .addComponent(enrollButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,7 +176,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(shoppingCartTable, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(enrollButton)
                 .addGap(7, 7, 7))
         );
 
@@ -249,6 +254,12 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    private void enrollButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollButtonActionPerformed
+        ThankYouWindow thankYouWindow = new ThankYouWindow();
+        thankYouWindow.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_enrollButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,8 +304,8 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton enrollButton;
     private javax.swing.JDialog invalidCourseNameDialogWindow;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
