@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 
 /**
  *
@@ -46,24 +48,68 @@ public class Student implements Serializable {
         this.logInTime = setTime();
     }
     
+    public String getLogInTime(){
+        return this.logInTime;
+    }
+    
     public void setCountdownTimerStartedTime(){
         this.countdownTimerStartedTime = setTime();
+    }
+    
+    public String getCountdownTimerStartedTime(){
+        return this.countdownTimerStartedTime;
     }
     
     public void setQueueJumpTime(){
         this.queueJumpTime = setTime();
     }
     
+    public String getQueueJumpTime(){
+        return this.queueJumpTime;
+    }
+    
     public void setCountdowntimerEndedTime(){
         this.countdownTimerEndedTime = setTime();
+    }
+    
+    public String getCountdowntimerEndedTime(){
+        return this.countdownTimerEndedTime;
+    }
+    
+    public String getTimerType(){
+        return this.timer.getType();
+    }
+    
+    public String getTimeToWait(){
+        return this.timer.getDuration();
+    }
+    
+    public String getTimeToQueueJump(){
+        return this.timer.getQueueJumpTime();
     }
     
     public void addCourseSignUpTime(Course newCourse){
         this.timeCourseSignedUp.put(newCourse, setTime());
     }
     
+    public void exportCourseSignUpTimes(XSSFRow row, int columnPosition){
+        Cell cell;
+        for(Map.Entry<Course, String> entry : timeCourseSignedUp.entrySet()){
+            cell = row.createCell(columnPosition);
+            cell.setCellValue(entry.getKey().getCourseName());
+            columnPosition++;
+            cell = row.createCell(columnPosition);
+            cell.setCellValue(entry.getValue());
+            columnPosition++;
+        }
+    } 
+    
     public void setLoggedOutTime(){
         this.loggedOutTime = setTime();
+    }
+    
+    public String getLoggedOutTime(){
+        return this.loggedOutTime;
     }
 
     //Constructor (used in LoginScreen)
@@ -135,7 +181,7 @@ public class Student implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
 }

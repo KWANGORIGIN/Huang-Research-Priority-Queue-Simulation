@@ -132,7 +132,7 @@ public class SchedulingSystem implements Serializable {
     }
     
     /*
-    exportToExcel Helper method
+    exportToExcel Helper methods
     */
     private void setHeaders(XSSFRow newRow){
         for(int column = 0; column < 19; column++){
@@ -191,10 +191,55 @@ public class SchedulingSystem implements Serializable {
                     cell.setCellValue("Fifth Course");
                     break;
                 case 17:
+                    cell.setCellValue("Fifth Course added");
+                    break;
+                case 18:
                     cell.setCellValue("Logged Out");
                     break;
             } 
         } 
+    }
+    
+    private void exportStudentInfo(XSSFRow row){
+        for(int column = 0; column < 19; column++){
+            Cell cell = row.createCell(column);
+            
+            switch(column){
+                case 0:
+                    cell.setCellValue(currentStudent.getUsername());
+                    break;
+                case 1:
+                    cell.setCellValue(currentStudent.getLogInTime());
+                    break;
+                case 2:
+                    cell.setCellValue(currentStudent.getCountdownTimerStartedTime());
+                    break;
+                case 3:
+                    cell.setCellValue(currentStudent.getQueueJumpTime());
+                    break;
+                case 4:
+                    cell.setCellValue(currentStudent.getTimerType());
+                    break;
+                case 5:
+                    cell.setCellValue(currentStudent.getTimeToWait());
+                    break;
+                case 6:
+                    cell.setCellValue(currentStudent.getTimeToQueueJump());
+                    break;
+                case 7:
+                    cell.setCellValue(currentStudent.getCountdowntimerEndedTime());
+                    break;
+                case 8:
+                    currentStudent.exportCourseSignUpTimes(row, column);
+                    column += 8;
+                    break;
+                case 18:
+                    System.out.println(currentStudent.getLoggedOutTime());
+                    System.out.println("Column: " + column);
+                    cell.setCellValue(currentStudent.getLoggedOutTime());
+                    break;
+            } 
+        }  
     }
     
     public void exportToExcel(){
@@ -228,14 +273,9 @@ public class SchedulingSystem implements Serializable {
             System.out.println("Unknown error opening file.");
         }
 
-        XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
-
-        //Adds timestamp
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTime = dtf.format(now);
-        Cell timeCell = currentStudentRow.createCell(2);
-        timeCell.setCellValue(dateTime);
+//        XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
+        XSSFRow currentStudentRow = sheet.createRow(1);
+        exportStudentInfo(currentStudentRow);
 
         //Autosizes columns
         for (int count = 0; count < currentStudentRow.getLastCellNum(); count++) {//changed from newRow...add contingencies later

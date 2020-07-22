@@ -255,7 +255,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void enrollButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollButtonActionPerformed
-        ThankYouWindow thankYouWindow = new ThankYouWindow();
+        ThankYouWindow thankYouWindow = new ThankYouWindow(schedulingSystem);
         thankYouWindow.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_enrollButtonActionPerformed
