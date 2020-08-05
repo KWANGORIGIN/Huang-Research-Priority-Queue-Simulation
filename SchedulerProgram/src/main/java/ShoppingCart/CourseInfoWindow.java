@@ -161,8 +161,8 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             enrolledSection = currentCourse.getSection(sectionRow);
 
             //Add Course to student file
-            boolean studentEnrolled = currentStudent.enrollCourse(currentCourse, enrolledSection);
-            if (!studentEnrolled) {//If course is already in Shopping Cart
+            boolean studentEnrolled = currentStudent.isStudentEnrolledInCourse(currentCourse, enrolledSection);
+            if (studentEnrolled) {//If course is already in Shopping Cart
                 Runnable r = new Runnable(){
                     @Override
                     public void run(){
@@ -180,11 +180,15 @@ public class CourseInfoWindow extends javax.swing.JFrame {
                         @Override
                         public void run() {
                             schedulingSystem.runTimer(shoppingCart, currentStudent);
+                            currentStudent.enrollCourse(currentCourse, enrolledSection);
                         }
                     };
 
                     Thread t = new Thread(r);
                     t.start();
+                }
+                else{
+                    currentStudent.enrollCourse(currentCourse, enrolledSection);
                 }
             }
 
@@ -194,7 +198,9 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
+        
+        this.shoppingCart.printStudentEnrolledCourses();
+        
         //Updates student file
         try (FileOutputStream outputFile = new FileOutputStream(currentStudent.getUsername() + ".ser")) {
             try (ObjectOutputStream output = new ObjectOutputStream(outputFile)) {
@@ -205,6 +211,8 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             System.out.println("File not found");
         } catch (IOException ioException) {
             System.out.println("Error saving to file.");
+            ioException.printStackTrace();
+            System.out.println(ioException.getMessage());    
         }
 
     }//GEN-LAST:event_formWindowClosed
@@ -247,7 +255,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
     protected void populate_Table_with_Course_Info() {
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
-        this.setTitle(currentCourse.getDeptName() + ": " + currentCourse.getCourseName());
+        this.setTitle(currentCourse.getDeptName() + "- " + currentCourse.getCourseName());
         
         for (int count = 0; count < currentCourse.getNumOfSections(); count++) {
             Object courseRow[] = new Object[5];

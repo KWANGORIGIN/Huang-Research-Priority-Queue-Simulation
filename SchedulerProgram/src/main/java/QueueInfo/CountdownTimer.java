@@ -56,6 +56,7 @@ public abstract class CountdownTimer implements Serializable {
                     break;
                 } else if (((timeInSeconds - timeToJump) == remainingSeconds) && !queueJump) {
                     if (!(this instanceof NoInfoTimer)) {
+                        currentStudent.setQueueJumpTime();
                         queueJump = true;
                         remainingSeconds += timeToJump;
                         QueueJumpWindow jumpWindow = new QueueJumpWindow(this, remainingSeconds / 60);

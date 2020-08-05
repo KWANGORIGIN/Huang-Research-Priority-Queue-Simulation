@@ -48,7 +48,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
         startExperiment = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -153,6 +152,8 @@ public class AdministratorWindow extends javax.swing.JFrame {
 
     private void listAllCoursesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAllCoursesButtonActionPerformed
         schedulingSystem.printCourses();
+        CourseListWindow courseListWindow = new CourseListWindow(schedulingSystem.getCourses());
+        courseListWindow.setVisible(true);
     }//GEN-LAST:event_listAllCoursesButtonActionPerformed
 
     private void startExperimentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startExperimentActionPerformed

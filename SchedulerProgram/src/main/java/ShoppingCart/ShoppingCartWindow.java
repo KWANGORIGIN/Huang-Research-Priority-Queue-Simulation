@@ -206,7 +206,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         //CountdownTimer timer = schedulingSystem.getTimer();
         
         String searchInput = searchbar.getText();
-        if(searchInput.matches("[A-Za-z]+\\s\\d+")){//Space between course name and number(#): courseName #
+        if(searchInput.matches("[A-Za-z]+\\s\\d+[A-Za-z]*")){//Space between course name and number(#): courseName #
             Course searchedCourse = schedulingSystem.getCourse(searchInput.toUpperCase());
             //System.out.println(searchedCourse.getCourseName());
             if(searchedCourse == null){
@@ -227,7 +227,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                
             }
         }
-        else if(searchInput.matches("[A-Za-z]+\\d+")){//No space between course name and number(#): courseName#
+        else if(searchInput.matches("[A-Za-z]+\\d+[A-Za-z]*")){//No space between course name and number(#): courseName#
             //Add space between courseName and number
             for(int count = 0; count < searchInput.length(); count++){
                 if(Character.isDigit(searchInput.charAt(count))){

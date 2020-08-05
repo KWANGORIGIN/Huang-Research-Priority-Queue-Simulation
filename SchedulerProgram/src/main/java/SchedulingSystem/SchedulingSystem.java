@@ -41,6 +41,35 @@ public class SchedulingSystem implements Serializable {
         systemUsers = new ArrayList<>();
         adminUsername = "administrator";
         lastInputtedRow = 0;
+        
+        //Default 5 courses
+        Course stressManagement = new Course("KINES 82", "Actions Methods for Stress Management");
+        Section stressManagement_Section = new Section("001 LEC-Regular", "MoWe", "11 AM - 12 PM", "Nick 156", "Joseph Tristan");
+        
+        Course materialScience = new Course("MATSE 259", "Properties and Processing of Engineering Materials");
+        Section materialScience_Section = new Section("001 LEC-Regular", "TuTh", "10:35 AM - 11:50 AM", "AMIC 121", "Xiawa Wu");
+        
+        Course englishCourse = new Course("ENGL 202C", "Effective Writing: Technical Writing");
+        Section englishCourse_Section = new Section("001-LEC Regular", "MoWeFr", "8:00 AM - 8:50 AM", "Nick 152", "Tammie Merino");
+        
+        Course industrialEngineering = new Course("IE 405", "Deterministic Models in Operations Research");
+        Section industrialEngineering_Section = new Section("001-LEC Regular", "MoWeFr", "11:15 AM - 12:05 PM", "AMIC 208", "Hsin-Li Chan");
+        
+        Course compSci = new Course("CMPSC 121", "Introduction to Programming Techniques");
+        Section compSci_Section = new Section("001-LEC Regular", "MoWe", "12:20 PM - 1:10 PM", "Reed Building 026", "Teck Meng Liaw");
+        
+        stressManagement.addSection(stressManagement_Section);
+        materialScience.addSection(materialScience_Section);
+        englishCourse.addSection(englishCourse_Section);
+        industrialEngineering.addSection(industrialEngineering_Section);
+        compSci.addSection(compSci_Section);
+        
+        availableCourses.add(stressManagement);
+        availableCourses.add(materialScience);
+        availableCourses.add(englishCourse);
+        availableCourses.add(industrialEngineering);
+        availableCourses.add(compSci);
+        
     }
     
     /**
@@ -54,6 +83,10 @@ public class SchedulingSystem implements Serializable {
     
     public void removeCourse(){
         
+    }
+    
+    public ArrayList<Course> getCourses(){
+        return this.availableCourses;
     }
     
     public void printSectionInfo(){
@@ -111,7 +144,7 @@ public class SchedulingSystem implements Serializable {
         return null;
     }
     
-    public void setTimer(CountdownTimer countdownTimer){
+    public void setTimer(CountdownTimer countdownTimer){  
         this.countdownTimer = countdownTimer;
     }
     
@@ -234,7 +267,7 @@ public class SchedulingSystem implements Serializable {
                     column += 8;
                     break;
                 case 18:
-                    System.out.println(currentStudent.getLoggedOutTime());
+//                    System.out.println(currentStudent.getLoggedOutTime());
                     System.out.println("Column: " + column);
                     cell.setCellValue(currentStudent.getLoggedOutTime());
                     break;

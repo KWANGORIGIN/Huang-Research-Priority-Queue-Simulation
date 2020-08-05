@@ -94,6 +94,8 @@ public class Student implements Serializable {
     
     public void exportCourseSignUpTimes(XSSFRow row, int columnPosition){
         Cell cell;
+        System.out.println("Number of course times: " + timeCourseSignedUp.size());
+        
         for(Map.Entry<Course, String> entry : timeCourseSignedUp.entrySet()){
             cell = row.createCell(columnPosition);
             cell.setCellValue(entry.getKey().getCourseName());
@@ -101,6 +103,7 @@ public class Student implements Serializable {
             cell = row.createCell(columnPosition);
             cell.setCellValue(entry.getValue());
             columnPosition++;
+            System.out.println(entry.getValue());
         }
     } 
     
@@ -136,15 +139,18 @@ public class Student implements Serializable {
         return this.username.matches(username);
     }
 
-    public boolean enrollCourse(Course newCourse, Section enrolledSection) {
-        if(enrolledSection.containsStudent(this.username)){
-            System.out.println("Student already enrolled in course");
-            return false;
-        }
+    public void enrollCourse(Course newCourse, Section enrolledSection) {
         enrolledSection.addStudent(this);
         enrolledCourses.put(newCourse, enrolledSection);
         addCourseSignUpTime(newCourse);
-        return true;
+    }
+    
+    public boolean isStudentEnrolledInCourse(Course newCourse, Section enrolledSection){
+        if(enrolledSection.containsStudent(this.username)){
+            System.out.println("Student already enrolled in course");
+            return true;
+        }
+        return false;
     }
     
     public void printEnrolledCoursesToTable(DefaultTableModel model){
@@ -167,7 +173,8 @@ public class Student implements Serializable {
     }
     
     public boolean runTimerCondition(){
-        return enrolledCourses.size() == 3;
+        return false;
+//        return enrolledCourses.size() == 2;//2 courses have been added. So when trying to add third course timer runs
     }
     
     /**
