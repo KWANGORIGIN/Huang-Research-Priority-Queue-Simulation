@@ -19,7 +19,19 @@ public class QueuePositionTimeUpdater extends TimeUpdater{
 
     @Override
     void showDialog() {
-        JOptionPane.showMessageDialog(timerWindow, "Now at position " + currentMinutes + " in the line.", "Update", 1);
+        
+        Runnable messageDialog = new Runnable(){
+            
+            @Override
+            public void run(){
+                JOptionPane.showMessageDialog(timerWindow, "Now at position " + currentMinutes + " in the line.", "Update", 1);
+            }
+            
+        };
+        
+        Thread message = new Thread(messageDialog);
+        message.start();
+        
     }
     
 }

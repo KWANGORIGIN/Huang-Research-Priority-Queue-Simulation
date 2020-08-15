@@ -30,12 +30,14 @@ public class LoginScreen extends javax.swing.JFrame {
      */
     public LoginScreen() {
         initComponents();
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
     }
     
     public LoginScreen(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
-        
+
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         usernameTextField.addKeyListener(new KeyAdapter(){
                 
             @Override
@@ -78,6 +80,7 @@ public class LoginScreen extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -220,52 +223,6 @@ public class LoginScreen extends javax.swing.JFrame {
         }catch(IOException e){
             JOptionPane.showMessageDialog(null, "Unknown error trying to load in student. File possibly corrupted.");
         }
-
-        /*
-        Might deprecate
-        Checks if user puts in username in standard Penn State username format
-        */
-        //Input validation
-//            if(!username.matches("[a-z]+/d+")){
-//                JOptionPane.showMessageDialog(null, "Invalid username");
-//                username = "Invalid Username!";
-//            }
-
-
-//        newRow = sheet.createRow(rowPosition);
-//        cell = newRow.createCell(0);
-//        cell.setCellValue(username);
-//
-//        //Adds timestamp
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-//        LocalDateTime now = LocalDateTime.now();
-//        String dateTime = dtf.format(now);
-//        Cell timeCell = newRow.createCell(1);
-//        timeCell.setCellValue(dateTime);
-//
-//        //Autosizes columns
-//        for(int count = 0; count < newRow.getLastCellNum(); count++){
-//            sheet.autoSizeColumn(count);
-//        }
-//
-//        //Saves to file
-//        try(FileOutputStream out = new FileOutputStream(new File("students.xlsx"))){
-//            workbook.write(out);
-//            out.close();
-//
-//            //Success message
-//            System.out.println("Succesfully outputted to students.xlsx");
-//        }catch(FileNotFoundException noFile){
-//            System.out.println("Unable to create file.");
-//            /*
-//            Include Error dialog message asking user if Excel file is open
-//
-//            */
-//            JOptionPane.showMessageDialog(null, "Error: Unable to write to students.xlsx. Please close students.xlsx if it is currently open.");
-//
-//        }catch(IOException e){
-//            System.out.println("Error closing fileoutputstream.");
-//        }
         
         student.setLogInTime();
         //Creates ShoppingCartWindow screen

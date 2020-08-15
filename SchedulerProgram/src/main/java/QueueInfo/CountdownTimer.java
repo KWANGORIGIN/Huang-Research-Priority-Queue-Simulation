@@ -59,8 +59,29 @@ public abstract class CountdownTimer implements Serializable {
                         currentStudent.setQueueJumpTime();
                         queueJump = true;
                         remainingSeconds += timeToJump;
-                        QueueJumpWindow jumpWindow = new QueueJumpWindow(this, remainingSeconds / 60);
-                        jumpWindow.setVisible(true);
+                        
+                        final CountdownTimer timer = this;
+                        final int secondsRemaining = remainingSeconds;
+                        
+                        
+                        System.out.println("Thread: " + Thread.currentThread().getName());
+                        /*
+                        Did not work to resolve timer being stopped when jumpWindow opens
+                        */
+                        Runnable r = new Runnable(){
+                            
+                            @Override
+                            public void run(){
+                                QueueJumpWindow jumpWindow = new QueueJumpWindow(timer, secondsRemaining / 60);
+                                jumpWindow.setVisible(true);
+                                System.out.println("Thread: " + Thread.currentThread().getName());
+                            }
+    
+                        };
+                        
+                        Thread t = new Thread(r);
+                        t.start();
+                        
                     }
                 }
 

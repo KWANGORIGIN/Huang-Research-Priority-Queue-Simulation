@@ -19,7 +19,17 @@ public class NoInfoTimeUpdater extends TimeUpdater {
 
     @Override
     void showDialog() {
-        JOptionPane.showMessageDialog(timerWindow, "Thank you for your patience.", "Update", 1);
+        Runnable messageDialog = new Runnable(){
+            
+            @Override
+            public void run(){
+                JOptionPane.showMessageDialog(timerWindow, "Thank you for your patience.", "Update", 1);
+            }
+            
+        };
+        
+        Thread message = new Thread(messageDialog);
+        message.start();  
     }
     
     void updateTimer(){

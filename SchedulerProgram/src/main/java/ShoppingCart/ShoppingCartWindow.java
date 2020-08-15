@@ -24,6 +24,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     
     public ShoppingCartWindow(){
         initComponents();
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
     }
     
     public ShoppingCartWindow(SchedulingSystem schedulingSystem){
@@ -251,6 +252,9 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Invalid course name.");
         }
+        
+        //Clears searchbar
+        searchbar.setText("");
         
     }//GEN-LAST:event_searchButtonActionPerformed
 

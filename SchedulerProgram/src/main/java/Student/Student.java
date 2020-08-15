@@ -173,8 +173,8 @@ public class Student implements Serializable {
     }
     
     public boolean runTimerCondition(){
-        return false;
-//        return enrolledCourses.size() == 2;//2 courses have been added. So when trying to add third course timer runs
+//        return false;
+        return enrolledCourses.size() == 2;//2 courses have been added. So when trying to add third course timer runs
     }
     
     /**

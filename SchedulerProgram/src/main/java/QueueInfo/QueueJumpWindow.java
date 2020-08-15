@@ -20,6 +20,7 @@ public class QueueJumpWindow extends javax.swing.JFrame {
     public QueueJumpWindow(CountdownTimer timer, Integer currentTime){
         initComponents();
         timer.setQueueJumpDisplay(currentTime, queueJumpDisplay);
+        System.out.println("Thread: " + Thread.currentThread().getName());
     }
     
     /**
