@@ -18,7 +18,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -34,6 +36,7 @@ public class SchedulingSystem implements Serializable {
     public static int lastInputtedRow;//Maybe get rid of? Just write to new row regardless? To avoid overwriting
     private CountdownTimer countdownTimer;
     private Student currentStudent;
+    private boolean enableTimer;
     
     //No-argument constructor
     public SchedulingSystem(){
@@ -41,6 +44,7 @@ public class SchedulingSystem implements Serializable {
         systemUsers = new ArrayList<>();
         adminUsername = "administrator";
         lastInputtedRow = 0;
+        enableTimer();
         
         //Default 5 courses
         Course stressManagement = new Course("KINES 82", "Actions Methods for Stress Management");
@@ -154,6 +158,18 @@ public class SchedulingSystem implements Serializable {
     
     public void runTimer(ShoppingCartWindow shoppingCart, Student currentStudent){
         countdownTimer.runCountdownTimer(this, currentStudent, shoppingCart);
+    }
+    
+    public void enableTimer(){
+        this.enableTimer = true;
+    }
+    
+    public void disableTimer(){
+        this.enableTimer = false;
+    }
+    
+    public boolean timerEnabled(){
+        return this.enableTimer;
     }
     
     public void setCurrentStudent(Student student){
@@ -275,6 +291,16 @@ public class SchedulingSystem implements Serializable {
         }  
     }
     
+    public int findLastInputtedRow(XSSFSheet sheet){
+        int row = 0;
+        Iterator<Row> iterator = sheet.iterator();
+        while(iterator.hasNext()){
+            Row nextRow = iterator.next();
+            row++;
+        }
+        return row;
+    }
+    
     public void exportToExcel(){
                 
         //Imports or creates workbook students.xlsx depending on if file exists
@@ -307,7 +333,9 @@ public class SchedulingSystem implements Serializable {
         }
 
 //        XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
-        XSSFRow currentStudentRow = sheet.createRow(1);
+        lastInputtedRow = findLastInputtedRow(sheet);
+        currentStudent.setRowPosition(lastInputtedRow);
+        XSSFRow currentStudentRow = sheet.createRow(lastInputtedRow);
         exportStudentInfo(currentStudentRow);
 
         //Autosizes columns
@@ -318,6 +346,7 @@ public class SchedulingSystem implements Serializable {
         //Saves to file
         try (FileOutputStream out = new FileOutputStream(new File("students.xlsx"))) {
             workbook.write(out);
+            workbook.close();
             out.close();
 
             //Success message

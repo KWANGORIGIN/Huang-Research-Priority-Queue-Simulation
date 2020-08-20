@@ -175,7 +175,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             } else {
                 System.out.println("********Succesfully enrolling student to course********");
                 
-                if(currentStudent.runTimerCondition()){
+                if(currentStudent.runTimerCondition() && schedulingSystem.timerEnabled()){
                     Runnable r = new Runnable(){
                         @Override
                         public void run() {

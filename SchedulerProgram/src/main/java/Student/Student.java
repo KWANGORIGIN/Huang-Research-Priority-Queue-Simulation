@@ -177,6 +177,10 @@ public class Student implements Serializable {
         return enrolledCourses.size() == 2;//2 courses have been added. So when trying to add third course timer runs
     }
     
+    public void setRowPosition(int row){
+        this.excelRowPosition = row;
+    }
+    
     /**
      * Returns the integer position of the Student's username position in Excel
      * Document

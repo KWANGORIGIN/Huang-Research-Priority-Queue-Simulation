@@ -37,7 +37,7 @@ public class LoginScreen extends javax.swing.JFrame {
         initComponents();
         this.schedulingSystem = schedulingSystem;
 
-        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+//        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         usernameTextField.addKeyListener(new KeyAdapter(){
                 
             @Override
@@ -78,6 +78,7 @@ public class LoginScreen extends javax.swing.JFrame {
         usernameTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -90,19 +91,19 @@ public class LoginScreen extends javax.swing.JFrame {
 
         usernameLabel.setText("Username:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(93, 114, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(275, 36, 0, 0);
         getContentPane().add(usernameLabel, gridBagConstraints);
 
         passwordLabel.setText("Password:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(9, 114, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(11, 36, 0, 0);
         getContentPane().add(passwordLabel, gridBagConstraints);
 
         usernameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -111,12 +112,12 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 105;
+        gridBagConstraints.ipadx = 167;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(90, 4, 0, 145);
+        gridBagConstraints.insets = new java.awt.Insets(272, 4, 0, 62);
         getContentPane().add(usernameTextField, gridBagConstraints);
 
         loginButton.setText("Login");
@@ -126,20 +127,32 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 55;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 117;
+        gridBagConstraints.ipady = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 4, 130, 145);
+        gridBagConstraints.insets = new java.awt.Insets(11, 4, 0, 62);
         getContentPane().add(loginButton, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 105;
+        gridBagConstraints.ipadx = 167;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 4, 0, 145);
+        gridBagConstraints.insets = new java.awt.Insets(11, 4, 0, 62);
         getContentPane().add(passwordField, gridBagConstraints);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\wanga\\Documents\\NetBeansProjects\\Dynamic-queue-scheduler\\SchedulerProgram\\src\\main\\resources\\KSU_8027.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 6;
+        gridBagConstraints.ipadx = -215;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -288,6 +301,7 @@ public class LoginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;

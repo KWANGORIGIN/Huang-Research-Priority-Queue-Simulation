@@ -6,6 +6,8 @@
 package SchedulingSystem;
 
 import Login.LoginScreen;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,6 +31,26 @@ public class AdministratorWindow extends javax.swing.JFrame {
     public AdministratorWindow(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
+        this.schedulingSystem.enableTimer();
+        
+        ItemListener disableTimerListener = new ItemListener(){
+            
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent){
+                int state = itemEvent.getStateChange();
+        
+                if (state == ItemEvent.SELECTED) {
+                    schedulingSystem.disableTimer();
+                } else {
+                    schedulingSystem.enableTimer();
+                }
+                
+            }
+            
+        };
+        
+        disableTimerButton.addItemListener(disableTimerListener);
+        
     }
       
     /**
@@ -46,6 +68,7 @@ public class AdministratorWindow extends javax.swing.JFrame {
         changeQueueTime = new javax.swing.JButton();
         listAllCoursesButton = new javax.swing.JButton();
         startExperiment = new javax.swing.JButton();
+        disableTimerButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -92,6 +115,8 @@ public class AdministratorWindow extends javax.swing.JFrame {
             }
         });
 
+        disableTimerButton.setText("Disable Timer");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,7 +129,8 @@ public class AdministratorWindow extends javax.swing.JFrame {
                     .addComponent(adminWelcomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addCourseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(removeCourseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(changeQueueTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(changeQueueTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(disableTimerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -116,13 +142,15 @@ public class AdministratorWindow extends javax.swing.JFrame {
                 .addComponent(addCourseButton)
                 .addGap(6, 6, 6)
                 .addComponent(removeCourseButton)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(disableTimerButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(changeQueueTime)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(listAllCoursesButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startExperiment)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,6 +247,7 @@ public class AdministratorWindow extends javax.swing.JFrame {
     private javax.swing.JButton addCourseButton;
     private javax.swing.JLabel adminWelcomeLabel;
     private javax.swing.JButton changeQueueTime;
+    private javax.swing.JToggleButton disableTimerButton;
     private javax.swing.JButton listAllCoursesButton;
     private javax.swing.JButton removeCourseButton;
     private javax.swing.JButton startExperiment;
