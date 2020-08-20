@@ -280,11 +280,9 @@ public class SchedulingSystem implements Serializable {
                     break;
                 case 8:
                     currentStudent.exportCourseSignUpTimes(row, column);
-                    column += 8;
+                    column += 9;
                     break;
                 case 18:
-//                    System.out.println(currentStudent.getLoggedOutTime());
-                    System.out.println("Column: " + column);
                     cell.setCellValue(currentStudent.getLoggedOutTime());
                     break;
             } 
@@ -332,14 +330,13 @@ public class SchedulingSystem implements Serializable {
             System.out.println("Unknown error opening file.");
         }
 
-//        XSSFRow currentStudentRow = sheet.getRow(currentStudent.getRowPosition());
         lastInputtedRow = findLastInputtedRow(sheet);
         currentStudent.setRowPosition(lastInputtedRow);
         XSSFRow currentStudentRow = sheet.createRow(lastInputtedRow);
         exportStudentInfo(currentStudentRow);
 
         //Autosizes columns
-        for (int count = 0; count < currentStudentRow.getLastCellNum(); count++) {//changed from newRow...add contingencies later
+        for (int count = 0; count < currentStudentRow.getLastCellNum(); count++) {
             sheet.autoSizeColumn(count);
         }
 
