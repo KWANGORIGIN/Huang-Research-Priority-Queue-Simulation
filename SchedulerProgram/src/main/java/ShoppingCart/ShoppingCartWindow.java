@@ -62,7 +62,14 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                 }
             }
             
-        }); 
+        });
+        
+        String iconPath = "C:/Users/wanga/Documents/NetBeansProjects/Dynamic-queue-scheduler/SchedulerProgram/src/main/resources/psuIcon.jpg";
+//        String iconPath = "../src/main/resources/psuIcon.jpg";
+        
+        Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
+        this.setIconImage(icon);
+        
         printStudentEnrolledCourses();
     }
     
