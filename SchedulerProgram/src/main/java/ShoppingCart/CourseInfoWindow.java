@@ -75,14 +75,14 @@ public class CourseInfoWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "", "Class", "Date/Time", "Room", "Instructor"
+                "", "Class", "Days", "Time", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -108,6 +108,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
             courseTable.getColumnModel().getColumn(2).setResizable(false);
             courseTable.getColumnModel().getColumn(3).setResizable(false);
             courseTable.getColumnModel().getColumn(4).setResizable(false);
+            courseTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jPanel1.setName(""); // NOI18N
@@ -258,12 +259,13 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         this.setTitle(currentCourse.getDeptName() + "- " + currentCourse.getCourseName());
         
         for (int count = 0; count < currentCourse.getNumOfSections(); count++) {
-            Object courseRow[] = new Object[5];
+            Object courseRow[] = new Object[6];
             courseRow[0] = false;
             courseRow[1] = currentCourse.getSection(count).getSectionName();
-            courseRow[2] = currentCourse.getSection(count).getDays() + "          " + currentCourse.getSection(count).getTime();//Change spacing later
-            courseRow[3] = currentCourse.getSection(count).getRoom();
-            courseRow[4] = currentCourse.getSection(count).getInstructor();
+            courseRow[2] = currentCourse.getSection(count).getDays();
+            courseRow[3] = currentCourse.getSection(count).getTime();
+            courseRow[4] = currentCourse.getSection(count).getRoom();
+            courseRow[5] = currentCourse.getSection(count).getInstructor();
             model.addRow(courseRow);
         }
     }

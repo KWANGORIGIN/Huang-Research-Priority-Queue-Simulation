@@ -9,6 +9,8 @@ import SchedulingSystem.SchedulingSystem;
 import javax.swing.table.DefaultTableModel;
 import Course.Course;
 import Student.Student;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -25,6 +27,12 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     public ShoppingCartWindow(){
         initComponents();
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+        
+        String iconPath = "C:/Users/wanga/Documents/NetBeansProjects/Dynamic-queue-scheduler/SchedulerProgram/src/main/resources/psuIcon.jpg";
+//        String iconPath = "../src/main/resources/psuIcon.jpg";
+        
+        Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
+        this.setIconImage(icon);
     }
     
     public ShoppingCartWindow(SchedulingSystem schedulingSystem){
@@ -110,14 +118,14 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Course", "Date/Time", "Room", "Instructor"
+                "Course", "Days", "Time", "Room", "Instructor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

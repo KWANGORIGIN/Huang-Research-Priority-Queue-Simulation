@@ -77,16 +77,38 @@ public class Student implements Serializable {
     }
     
     public String getTimerType(){
+        if(timerDisabled()){
+            return timerDisabledMessage();
+        }
         return this.timer.getType();
     }
     
     public String getTimeToWait(){
+        if(timerDisabled()){
+            return timerDisabledMessage();
+        }
         return this.timer.getDuration();
     }
     
     public String getTimeToQueueJump(){
+        if(timerDisabled()){
+            return timerDisabledMessage();
+        }
         return this.timer.getQueueJumpTime();
     }
+    
+    public boolean timerDisabled(){
+        if(this.timer == null){
+            return true;
+        }
+        return false;
+    }
+    
+    public String timerDisabledMessage(){
+        return "Timer Disabled";
+    }
+    
+    
     
     public void addCourseSignUpTime(Course newCourse){
         this.timeCourseSignedUp.put(newCourse, setTime());
@@ -158,11 +180,12 @@ public class Student implements Serializable {
         for(Map.Entry<Course, Section> entry : enrolledCourses.entrySet()){
             Course courseKey = entry.getKey();
             Section sectionValue = entry.getValue();
-            Object courseRow[] = new Object[4];
+            Object courseRow[] = new Object[5];
             courseRow[0] = courseKey.getDeptName();
-            courseRow[1] = sectionValue.getDays() + "          " + sectionValue.getTime();//Change spacing later
-            courseRow[2] = sectionValue.getRoom();
-            courseRow[3] = sectionValue.getInstructor();
+            courseRow[1] = sectionValue.getDays();
+            courseRow[2] = sectionValue.getTime();
+            courseRow[3] = sectionValue.getRoom();
+            courseRow[4] = sectionValue.getInstructor();
             model.addRow(courseRow);
         }
         
