@@ -6,6 +6,10 @@
 package ShoppingCart;
 
 import SchedulingSystem.SchedulingSystem;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -74,6 +78,19 @@ public class ThankYouWindow extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         schedulingSystem.getCurrentStudent().setLoggedOutTime();
         schedulingSystem.exportToExcel();
+//        schedulingSystem.printSectionInfo();
+
+        try(FileOutputStream outputFile = new FileOutputStream("SchedulingSystem.ser")){
+            try(ObjectOutputStream output = new ObjectOutputStream(outputFile)){
+                output.writeObject(schedulingSystem);
+                System.out.println("Changes from this session have been saved.");
+            }
+            
+        }catch(FileNotFoundException fileNotFound){
+            System.out.println("File not found"); 
+        }catch(IOException ioException){
+            System.out.println("Error saving to file.");
+        }
     }//GEN-LAST:event_formWindowClosing
 
     /**

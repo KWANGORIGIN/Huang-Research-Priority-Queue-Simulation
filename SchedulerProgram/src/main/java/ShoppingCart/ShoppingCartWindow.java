@@ -69,6 +69,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         });
         
         schedulingSystem.setPSU_Icon(this);
+        printStudentEnrolledCourses();
     }
     
     /**

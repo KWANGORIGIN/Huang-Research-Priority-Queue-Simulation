@@ -33,7 +33,6 @@
                   <Component id="startExperiment" alignment="0" max="32767" attributes="0"/>
                   <Component id="adminWelcomeLabel" max="32767" attributes="0"/>
                   <Component id="addCourseButton" max="32767" attributes="0"/>
-                  <Component id="removeCourseButton" max="32767" attributes="0"/>
                   <Component id="changeQueueTime" max="32767" attributes="0"/>
                   <Component id="disableTimerButton" max="32767" attributes="0"/>
               </Group>
@@ -48,8 +47,6 @@
               <Component id="adminWelcomeLabel" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="addCourseButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="removeCourseButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="disableTimerButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -58,7 +55,7 @@
               <Component id="listAllCoursesButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="startExperiment" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,14 +67,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCourseButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="removeCourseButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Remove Course"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeCourseButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="adminWelcomeLabel">

@@ -65,7 +65,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         addCourseButton = new javax.swing.JButton();
-        removeCourseButton = new javax.swing.JButton();
         adminWelcomeLabel = new javax.swing.JLabel();
         changeQueueTime = new javax.swing.JButton();
         listAllCoursesButton = new javax.swing.JButton();
@@ -83,13 +82,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
         addCourseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCourseButtonActionPerformed(evt);
-            }
-        });
-
-        removeCourseButton.setText("Remove Course");
-        removeCourseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCourseButtonActionPerformed(evt);
             }
         });
 
@@ -130,7 +122,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
                     .addComponent(startExperiment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adminWelcomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addCourseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(removeCourseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(changeQueueTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(disableTimerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -142,8 +133,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
                 .addComponent(adminWelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(addCourseButton)
-                .addGap(6, 6, 6)
-                .addComponent(removeCourseButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(disableTimerButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -152,16 +141,12 @@ public class AdministratorWindow extends javax.swing.JFrame {
                 .addComponent(listAllCoursesButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startExperiment)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void removeCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCourseButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeCourseButtonActionPerformed
 
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         AddCourseWindow newAddCourseWindow = new AddCourseWindow(schedulingSystem);
@@ -251,7 +236,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
     private javax.swing.JButton changeQueueTime;
     private javax.swing.JToggleButton disableTimerButton;
     private javax.swing.JButton listAllCoursesButton;
-    private javax.swing.JButton removeCourseButton;
     private javax.swing.JButton startExperiment;
     // End of variables declaration//GEN-END:variables
 }

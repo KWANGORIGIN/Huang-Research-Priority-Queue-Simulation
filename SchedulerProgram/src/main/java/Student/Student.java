@@ -127,7 +127,13 @@ public class Student implements Serializable {
             columnPosition++;
             System.out.println(entry.getValue());
         }
-    } 
+    }
+    
+    public void printCoursesEnrolled(){
+        for(Map.Entry<Course, String> entry : timeCourseSignedUp.entrySet()){
+            System.out.println(entry.getKey().getCourseName() + ": " + entry.getValue());
+        }
+    }
     
     public void setLoggedOutTime(){
         this.loggedOutTime = setTime();

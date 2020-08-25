@@ -214,6 +214,9 @@ public class LoginScreen extends javax.swing.JFrame {
                 student = (Student) inputStudent.readObject();
 
                 rowPosition = student.getRowPosition();
+                
+                System.out.println(student.getUsername() + " loaded in successfully");
+                student.printCoursesEnrolled();
 
             }
         }catch(FileNotFoundException fileNotFound){//if existing student not found, then creates new student and saves to file

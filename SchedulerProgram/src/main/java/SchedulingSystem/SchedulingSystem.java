@@ -101,6 +101,7 @@ public class SchedulingSystem implements Serializable {
     public void printSectionInfo() {
         for (int count = 0; count < availableCourses.size(); count++) {
             for (int counter = 0; counter < availableCourses.get(count).getNumOfSections(); counter++) {
+                System.out.println(availableCourses.get(count).getSection(counter).getInstructor());
                 availableCourses.get(count).getSection(counter).printSectionInfo();
             }
         }
