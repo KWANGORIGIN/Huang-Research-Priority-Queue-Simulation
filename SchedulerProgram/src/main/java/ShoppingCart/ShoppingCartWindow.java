@@ -90,6 +90,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         enrolledCoursesTable = new javax.swing.JTable();
         searchbar = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         enrollButton = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
@@ -162,20 +163,28 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 920;
-        gridBagConstraints.ipady = 453;
+        gridBagConstraints.ipadx = 1506;
+        gridBagConstraints.ipady = 449;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 0);
         getContentPane().add(shoppingCartTable, gridBagConstraints);
+
+        searchbar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
+        searchbar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchbarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 426;
+        gridBagConstraints.ipady = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         getContentPane().add(searchbar, gridBagConstraints);
@@ -190,12 +199,13 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 73;
+        gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(9, 6, 0, 0);
         getContentPane().add(searchButton, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         enrollButton.setText("Enroll");
         enrollButton.addActionListener(new java.awt.event.ActionListener() {
@@ -205,13 +215,19 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 96;
-        gridBagConstraints.ipady = 15;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 544;
+        gridBagConstraints.ipady = 24;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 403, 11, 0);
-        getContentPane().add(enrollButton, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(8, 10, 0, 10);
+        jPanel1.add(enrollButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 74, 16, 0);
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -288,6 +304,10 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    private void searchbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchbarActionPerformed
+
     private void enrollButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollButtonActionPerformed
         ThankYouWindow thankYouWindow = new ThankYouWindow(schedulingSystem);
         thankYouWindow.setVisible(true);
@@ -342,6 +362,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     private javax.swing.JTable enrolledCoursesTable;
     private javax.swing.JDialog invalidCourseNameDialogWindow;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton searchButton;
