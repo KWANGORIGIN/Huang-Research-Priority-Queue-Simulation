@@ -12,12 +12,15 @@ import Student.Student;
 import java.io.Serializable;
 import QueueInfo.CountdownTimer;
 import ShoppingCart.ShoppingCartWindow;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -372,6 +375,13 @@ public class SchedulingSystem implements Serializable {
             e.toString();
         }
 
+    }
+    
+    public void setPSU_Icon(JFrame targetWindow){
+        String iconPath = "C:/Users/wanga/Documents/NetBeansProjects/Dynamic-queue-scheduler/SchedulerProgram/src/main/resources/psuIcon.jpg";
+        
+        Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
+        targetWindow.setIconImage(icon);
     }
 
 }

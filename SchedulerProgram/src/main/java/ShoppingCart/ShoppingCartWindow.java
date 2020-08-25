@@ -29,10 +29,14 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         
         String iconPath = "C:/Users/wanga/Documents/NetBeansProjects/Dynamic-queue-scheduler/SchedulerProgram/src/main/resources/psuIcon.jpg";
-//        String iconPath = "../src/main/resources/psuIcon.jpg";
+//        String iconPath = getClass().getResource("/psuIcon.jpg").toString();
+//        System.out.println(iconPath);
         
         Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
         this.setIconImage(icon);
+        
+//        enrolledCoursesTable.setRowHeight(0, 32);
+        
     }
     
     public ShoppingCartWindow(SchedulingSystem schedulingSystem){
@@ -64,13 +68,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
             
         });
         
-        String iconPath = "C:/Users/wanga/Documents/NetBeansProjects/Dynamic-queue-scheduler/SchedulerProgram/src/main/resources/psuIcon.jpg";
-//        String iconPath = "../src/main/resources/psuIcon.jpg";
-        
-        Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
-        this.setIconImage(icon);
-        
-        printStudentEnrolledCourses();
+        schedulingSystem.setPSU_Icon(this);
     }
     
     /**
@@ -88,7 +86,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         shoppingCartTable = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        enrolledCoursesTable = new javax.swing.JTable();
         searchbar = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         enrollButton = new javax.swing.JButton();
@@ -120,7 +118,8 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        enrolledCoursesTable.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        enrolledCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -143,18 +142,22 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setInheritsPopupMenu(true);
-        jTable1.setSelectionBackground(java.awt.SystemColor.textHighlightText);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowGrid(true);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        enrolledCoursesTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        enrolledCoursesTable.setInheritsPopupMenu(true);
+        enrolledCoursesTable.setRowHeight(32);
+        enrolledCoursesTable.setSelectionBackground(java.awt.SystemColor.textHighlightText);
+        enrolledCoursesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        enrolledCoursesTable.setShowGrid(true);
+        enrolledCoursesTable.getTableHeader().setReorderingAllowed(false);
+        enrolledCoursesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                enrolledCoursesTableMouseClicked(evt);
             }
         });
-        shoppingCartTable.setViewportView(jTable1);
+        shoppingCartTable.setViewportView(enrolledCoursesTable);
+        if (enrolledCoursesTable.getColumnModel().getColumnCount() > 0) {
+            enrolledCoursesTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -213,7 +216,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void enrolledCoursesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enrolledCoursesTableMouseClicked
         
         //Deprecated. Misunderstood original requirements
 //        if(evt.getClickCount() == 2){//If double click on a row
@@ -227,7 +230,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
 //        }
         
         
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_enrolledCoursesTableMouseClicked
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         //CountdownTimer timer = schedulingSystem.getTimer();
@@ -327,7 +330,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }
     
     public void printStudentEnrolledCourses(){
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) enrolledCoursesTable.getModel();
         System.out.println("Num of enrolled courses: " + student.numOfEnrolledCourses());
         model.setRowCount(0);//This initializes the number of rows to 0 in case updating rows in table. Essentially clears jTable data
         student.printEnrolledCoursesToTable(model);
@@ -335,10 +338,10 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enrollButton;
+    private javax.swing.JTable enrolledCoursesTable;
     private javax.swing.JDialog invalidCourseNameDialogWindow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchbar;

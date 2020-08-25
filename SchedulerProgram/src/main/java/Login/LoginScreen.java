@@ -36,6 +36,8 @@ public class LoginScreen extends javax.swing.JFrame {
     public LoginScreen(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
+        
+        schedulingSystem.setPSU_Icon(this);
 
 //        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         usernameTextField.addKeyListener(new KeyAdapter(){

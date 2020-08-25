@@ -33,6 +33,8 @@ public class AdministratorWindow extends javax.swing.JFrame {
         this.schedulingSystem = schedulingSystem;
         this.schedulingSystem.enableTimer();
         
+        schedulingSystem.setPSU_Icon(this);
+        
         ItemListener disableTimerListener = new ItemListener(){
             
             @Override

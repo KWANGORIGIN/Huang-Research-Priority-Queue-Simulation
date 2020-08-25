@@ -18,6 +18,7 @@ public class ThankYouWindow extends javax.swing.JFrame {
     public ThankYouWindow(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
+        schedulingSystem.setPSU_Icon(this);
     }
     
     /**

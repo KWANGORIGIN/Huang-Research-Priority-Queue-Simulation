@@ -42,6 +42,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         this.currentStudent = currentStudent;
         this.shoppingCart = shoppingCart;
         this.schedulingSystem = schedulingSystem;
+        schedulingSystem.setPSU_Icon(this);
         populate_Table_with_Course_Info();
     }
 
