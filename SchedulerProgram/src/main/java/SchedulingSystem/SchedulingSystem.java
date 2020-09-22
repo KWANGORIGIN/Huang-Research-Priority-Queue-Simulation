@@ -52,25 +52,47 @@ public class SchedulingSystem implements Serializable {
 
         //Default 5 courses
         Course stressManagement = new Course("KINES 82", "Actions Methods for Stress Management");
-        Section stressManagement_Section = new Section("001 LEC-Regular", "MoWe", "11 AM - 12 PM", "Nick 156", "Joseph Tristan");
-
+        Section stressManagement_Section = new Section("001 LEC-Regular", "MoWe", "11:00 AM - 12:00 PM", "Nick 156", "Joseph Tristan");
+        Section stressManagement_Section2 = new Section("002 LEC-Regular", "TuTh", "11:00 AM - 12:00 PM", "Nick 156", "Joseph Tristan");
+        Section stressManagement_Section3 = new Section("003 LEC-Regular", "WeFr", "12:00 PM - 1:00 PM", "Nick 156", "Allen Urich");
+        Section stressManagement_Section4 = new Section("004 Lec-Regular", "TuFr", "2:00 PM - 3:00 PM", "Nick 156", "Andrea Randolph");
+        
+        stressManagement.addSection(stressManagement_Section);
+        stressManagement.addSection(stressManagement_Section2);
+        stressManagement.addSection(stressManagement_Section3);
+        stressManagement.addSection(stressManagement_Section4);
+        
         Course materialScience = new Course("MATSE 259", "Properties and Processing of Engineering Materials");
         Section materialScience_Section = new Section("001 LEC-Regular", "TuTh", "10:35 AM - 11:50 AM", "AMIC 121", "Xiawa Wu");
-
+        Section materialScience_Section2 = new Section("002 LEC-Regular", "TuTh", "12:05 PM - 1:20 PM", "AMIC 121", "Xiawa Wu");
+        Section materialScience_Section3 = new Section("003 LEC-Regular", "MoWe", "1:00 PM - 2:00 PM", "AMIC 176", "Todd Palmer");
+        
+        materialScience.addSection(materialScience_Section);
+        materialScience.addSection(materialScience_Section2);
+        materialScience.addSection(materialScience_Section3);
+        
         Course englishCourse = new Course("ENGL 202C", "Effective Writing: Technical Writing");
         Section englishCourse_Section = new Section("001-LEC Regular", "MoWeFr", "8:00 AM - 8:50 AM", "Nick 152", "Tammie Merino");
+        Section englishCourse_Section2 = new Section("002-LEC Regular", "TuTh", "3:00 PM - 4:50 PM", "Nick 152", "Tammie Merino");
+        Section englishCourse_Section3 = new Section("003-LEC Regular", "MoWeFr", "2:30 PM - 3:20 PM", "Nick 156", "Sharon Gallagher");
+        
+        englishCourse.addSection(englishCourse_Section);
+        englishCourse.addSection(englishCourse_Section2);
+        englishCourse.addSection(englishCourse_Section3);
 
         Course industrialEngineering = new Course("IE 405", "Deterministic Models in Operations Research");
         Section industrialEngineering_Section = new Section("001-LEC Regular", "MoWeFr", "11:15 AM - 12:05 PM", "AMIC 208", "Hsin-Li Chan");
+        Section industrialEngineering_Section2 = new Section("002-LEC Regular", "TuTh", "10:35 AM - 11:50 AM", "AMIC 206", "Sarah Root");
+        
+        industrialEngineering.addSection(industrialEngineering_Section);
+        industrialEngineering.addSection(industrialEngineering_Section2);
 
         Course compSci = new Course("CMPSC 121", "Introduction to Programming Techniques");
         Section compSci_Section = new Section("001-LEC Regular", "MoWe", "12:20 PM - 1:10 PM", "Reed Building 026", "Teck Meng Liaw");
-
-        stressManagement.addSection(stressManagement_Section);
-        materialScience.addSection(materialScience_Section);
-        englishCourse.addSection(englishCourse_Section);
-        industrialEngineering.addSection(industrialEngineering_Section);
+        Section compSci_Section2 = new Section("002-LEC Regular", "MoWe", "3:35 PM - 4:25 PM", "Reed Building 117", "Thomas Rossi");
+        
         compSci.addSection(compSci_Section);
+        compSci.addSection(compSci_Section2);
 
         availableCourses.add(stressManagement);
         availableCourses.add(materialScience);
@@ -360,7 +382,7 @@ public class SchedulingSystem implements Serializable {
 
                 //Success message
                 System.out.println("Succesfully outputted to students.xlsx");
-                JOptionPane.showMessageDialog(null, "Succesfully outputted to students.xlsx");
+//                JOptionPane.showMessageDialog(null, "Succesfully outputted to students.xlsx");
             } catch (FileNotFoundException noFile) {
                 System.out.println("Unable to create Student file.");
                 JOptionPane.showMessageDialog(null, "Unable to create Student file.");
