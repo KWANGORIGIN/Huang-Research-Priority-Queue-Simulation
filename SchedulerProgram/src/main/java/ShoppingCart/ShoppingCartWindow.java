@@ -68,6 +68,21 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
             
         });
         
+        enrollButton.setEnabled(false);//Disables JButton
+        
+        Runnable buttonEnabler = new Runnable(){
+            @Override
+            public void run(){
+                while(student.numOfEnrolledCourses() != 5){
+//                    System.out.println("Not Enabled yet");
+                }
+                enrollButton.setEnabled(true);
+            }
+        };
+        
+        Thread buttonThread = new Thread(buttonEnabler);
+        buttonThread.start();
+        
         schedulingSystem.setPSU_Icon(this);
         printStudentEnrolledCourses();
     }
@@ -309,9 +324,11 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_searchbarActionPerformed
 
     private void enrollButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollButtonActionPerformed
+        
         ThankYouWindow thankYouWindow = new ThankYouWindow(schedulingSystem);
         thankYouWindow.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_enrollButtonActionPerformed
 
     /**
