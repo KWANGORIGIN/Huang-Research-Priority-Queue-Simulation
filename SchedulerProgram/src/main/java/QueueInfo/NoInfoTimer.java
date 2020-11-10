@@ -25,8 +25,8 @@ public class NoInfoTimer extends CountdownTimer {
 
     @Override
     void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay) {
-        
-        timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay for registration for the class.");
+        String fontFamily = timerDisplay.getFont().getFamily();
+        timerDisplay.setText("<body style=\"font-size: 18px\"; \"font-family: " + fontFamily + "\"<body> Due to some seniors that are considering the course,<br><br>there will be a delay for registration for the class.");
         
     }
     

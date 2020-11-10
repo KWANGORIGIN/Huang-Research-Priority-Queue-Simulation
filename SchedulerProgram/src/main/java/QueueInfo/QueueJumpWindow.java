@@ -39,10 +39,12 @@ public class QueueJumpWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 51, 51));
+        setPreferredSize(new java.awt.Dimension(675, 285));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 51));
 
+        queueJumpDisplay.setContentType("text/html"); // NOI18N
         jScrollPane1.setViewportView(queueJumpDisplay);
 
         okButton.setText("OK");

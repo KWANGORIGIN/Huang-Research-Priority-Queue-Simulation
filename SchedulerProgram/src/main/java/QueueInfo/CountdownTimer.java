@@ -97,7 +97,7 @@ public abstract class CountdownTimer implements Serializable {
     abstract void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay);
 
     abstract void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay);
-
+    
     public String getType(){
         return this.getClass().getName();
     }

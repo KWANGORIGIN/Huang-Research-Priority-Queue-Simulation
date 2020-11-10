@@ -26,12 +26,14 @@ public class QueuePositionTimer extends CountdownTimer {
 
     @Override
     void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay) {
-        timerDisplay.setText("Due to some seniors that are considering the course,\nyou are in position " + currentTime.toString() + " of the line.");
+        String fontFamily = timerDisplay.getFont().getFamily();
+        timerDisplay.setText("<body style=\"font-size: 18px\";\"font-family: " + fontFamily + "\"<body> Due to some seniors that are considering the course,<br><br>you are in position <b><u>" + currentTime.toString() + " of the line</b></u>.</body>");
     }
     
     @Override
     void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay){
-        queueJumpDisplay.setText("Due to a new senior in the system that is considering the same course\nyou are now in position " + currentTime.toString() + " of the line.\nThank you for your patience.");
+        String fontFamily = queueJumpDisplay.getFont().getFamily();
+        queueJumpDisplay.setText("<body style=\"font-size: 18px\";\"font-family: " + fontFamily + "\"<body> Due to a new senior in the system that is considering the same course, <br><br> you are now in position <b><u>" + currentTime.toString() + " of the line</b></u>. <br><br> Thank you for your patience.</body>");
     }
 
 }
