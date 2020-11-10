@@ -120,7 +120,7 @@ public class Student implements Serializable {
         
         for(Map.Entry<Course, String> entry : timeCourseSignedUp.entrySet()){
             cell = row.createCell(columnPosition);
-            cell.setCellValue(entry.getKey().getCourseName());
+            cell.setCellValue(entry.getKey().getDeptName() + ": " + entry.getKey().getCourseName());
             columnPosition++;
             cell = row.createCell(columnPosition);
             cell.setCellValue(entry.getValue());

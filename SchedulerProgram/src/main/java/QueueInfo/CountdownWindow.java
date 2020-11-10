@@ -69,7 +69,8 @@ public class CountdownWindow extends javax.swing.JDialog {
         });
 
         timerDisplay.setEditable(false);
-        timerDisplay.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        timerDisplay.setContentType("text/html"); // NOI18N
+        timerDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jScrollPane1.setViewportView(timerDisplay);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -98,8 +99,6 @@ public class CountdownWindow extends javax.swing.JDialog {
         shoppingCart.printStudentEnrolledCourses();
         
     }//GEN-LAST:event_formWindowClosed
-
-    
 
     public void updateTimer(Integer currentTime) {
         timer.updateTimerDisplay(currentTime, timerDisplay);

@@ -68,20 +68,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
             
         });
         
-        enrollButton.setEnabled(false);//Disables JButton
-        
-        Runnable buttonEnabler = new Runnable(){
-            @Override
-            public void run(){
-                while(student.numOfEnrolledCourses() != 5){
-//                    System.out.println("Not Enabled yet");
-                }
-                enrollButton.setEnabled(true);
-            }
-        };
-        
-        Thread buttonThread = new Thread(buttonEnabler);
-        buttonThread.start();
+        disableEnrollButton();
         
         schedulingSystem.setPSU_Icon(this);
         printStudentEnrolledCourses();
@@ -166,11 +153,6 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         enrolledCoursesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         enrolledCoursesTable.setShowGrid(true);
         enrolledCoursesTable.getTableHeader().setReorderingAllowed(false);
-        enrolledCoursesTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                enrolledCoursesTableMouseClicked(evt);
-            }
-        });
         shoppingCartTable.setViewportView(enrolledCoursesTable);
         if (enrolledCoursesTable.getColumnModel().getColumnCount() > 0) {
             enrolledCoursesTable.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -248,22 +230,6 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void enrolledCoursesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enrolledCoursesTableMouseClicked
-        
-        //Deprecated. Misunderstood original requirements
-//        if(evt.getClickCount() == 2){//If double click on a row
-//            JTable target = (JTable) evt.getSource();
-//            int row = target.getSelectedRow();
-//            System.out.println("Row Selected: " + row);//for debugging
-//            
-//            //Opens up new window with additional course information
-//            new CourseInfoWindow().setVisible(true);
-//            
-//        }
-        
-        
-    }//GEN-LAST:event_enrolledCoursesTableMouseClicked
-
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         //CountdownTimer timer = schedulingSystem.getTimer();
         
@@ -330,7 +296,28 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_enrollButtonActionPerformed
-
+    
+    private void disableEnrollButton(){
+        enrollButton.setEnabled(false);//Disables JButton
+        
+        /*
+        Very expensive implementation. Will need to rework for performance
+        */
+        Runnable buttonEnabler = new Runnable(){
+            @Override
+            public void run(){
+                while(student.numOfEnrolledCourses() != 5){
+                    System.out.println("Num of enrolled courses: " + student.numOfEnrolledCourses());
+                }
+                enrollButton.setEnabled(true);
+                System.out.println("Button Enabled");
+            }
+        };
+        
+        Thread buttonThread = new Thread(buttonEnabler);
+        buttonThread.start();
+    }
+    
     /**
      * @param args the command line arguments
      */

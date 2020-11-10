@@ -33,14 +33,13 @@ public class TimeInfoTimer extends CountdownTimer {
     @Override
     void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay) {
 
-        timerDisplay.setText("Due to some seniors that are considering the course,\nthere will be a delay of about " + currentTime.toString() + " minute(s).");
+        timerDisplay.setText("<html>Due to some seniors that are considering the course,\nthere will be a delay of about " + "<b><u>" + currentTime.toString() + " minute(s).</u></b>");
 
     }
     
     @Override
     void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay){
-        
-        queueJumpDisplay.setText("Due to a new senior in the system that is considering the same course,\nthere will be a delay of about " + currentTime.toString() + " minute(s).\nThank you for your patience.");
+        queueJumpDisplay.setText("<html>Due to a new senior in the system that is considering the same <b>course</b>,\nthere will be a delay of about" + currentTime.toString() + " minute(s).\nThank you for your patience.");
     }
 
 }
