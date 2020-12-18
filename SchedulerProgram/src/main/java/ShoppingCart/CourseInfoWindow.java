@@ -96,15 +96,13 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         });
         courseTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         courseTable.setInheritsPopupMenu(true);
-        courseTable.setSelectionBackground(java.awt.SystemColor.textHighlightText);
+        courseTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         courseTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         courseTable.setShowGrid(true);
         courseTable.getTableHeader().setReorderingAllowed(false);
         courseTableScrollPane.setViewportView(courseTable);
         if (courseTable.getColumnModel().getColumnCount() > 0) {
-            courseTable.getColumnModel().getColumn(0).setMinWidth(30);
             courseTable.getColumnModel().getColumn(0).setPreferredWidth(30);
-            courseTable.getColumnModel().getColumn(0).setMaxWidth(30);
             courseTable.getColumnModel().getColumn(1).setResizable(false);
             courseTable.getColumnModel().getColumn(2).setResizable(false);
             courseTable.getColumnModel().getColumn(3).setResizable(false);
