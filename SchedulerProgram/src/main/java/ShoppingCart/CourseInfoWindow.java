@@ -17,11 +17,12 @@ import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author wanga
  */
-public class CourseInfoWindow extends javax.swing.JFrame {
+public class CourseInfoWindow extends javax.swing.JFrame{
 
     private Course currentCourse;
     private Section enrolledSection;
@@ -44,6 +45,9 @@ public class CourseInfoWindow extends javax.swing.JFrame {
         this.schedulingSystem = schedulingSystem;
         schedulingSystem.setPSU_Icon(this);
         populate_Table_with_Course_Info();
+//        courseTable.setModel(new CourseInfoTable());
+        courseTable.getModel().addTableModelListener(new CourseInfoTableListener());
+//        populate_Table_with_Course_Info();
     }
 
     /**
@@ -254,6 +258,7 @@ public class CourseInfoWindow extends javax.swing.JFrame {
     }
 
     protected void populate_Table_with_Course_Info() {
+//        CourseInfoTable model = (CourseInfoTable) courseTable.getModel();
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
         this.setTitle(currentCourse.getDeptName() + "- " + currentCourse.getCourseName());
         

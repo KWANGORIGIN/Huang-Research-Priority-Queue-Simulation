@@ -307,7 +307,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
             @Override
             public void run(){
                 while(student.numOfEnrolledCourses() != 5){
-                    System.out.println("Num of enrolled courses: " + student.numOfEnrolledCourses());
+//                    System.out.println("Num of enrolled courses: " + student.numOfEnrolledCourses());
                 }
                 enrollButton.setEnabled(true);
                 System.out.println("Button Enabled");
