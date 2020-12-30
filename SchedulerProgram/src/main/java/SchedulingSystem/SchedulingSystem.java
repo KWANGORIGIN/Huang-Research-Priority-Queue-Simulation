@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
@@ -401,10 +402,8 @@ public class SchedulingSystem implements Serializable {
     }
     
     public void setPSU_Icon(JFrame targetWindow){
-        String iconPath = "C:/Users/wanga/Documents/NetBeansProjects/Dynamic-queue-scheduler/SchedulerProgram/src/main/resources/psuIcon.jpg";
-        
-        Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
-        targetWindow.setIconImage(icon);
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("psuIcon.jpg"));
+        targetWindow.setIconImage(icon.getImage());
     }
 
 }
