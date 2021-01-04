@@ -35,6 +35,14 @@ public class Student implements Serializable {
     private LinkedHashMap<Course, String> timeCourseSignedUp = new LinkedHashMap();
     private String loggedOutTime;
     
+    //Constructor (used in LoginScreen)
+    public Student(String username, int rowPosition, CountdownTimer timer) {
+        this.username = username;
+        excelRowPosition = rowPosition;
+        this.enrolledCourses = new LinkedHashMap();
+        this.timer = timer;
+    }
+    
     /*
     Set Time Helper Method
     */
@@ -141,14 +149,6 @@ public class Student implements Serializable {
     
     public String getLoggedOutTime(){
         return this.loggedOutTime;
-    }
-
-    //Constructor (used in LoginScreen)
-    public Student(String username, int rowPosition, CountdownTimer timer) {
-        this.username = username;
-        excelRowPosition = rowPosition;
-        this.enrolledCourses = new LinkedHashMap();
-        this.timer = timer;
     }
 
     public Student() {
