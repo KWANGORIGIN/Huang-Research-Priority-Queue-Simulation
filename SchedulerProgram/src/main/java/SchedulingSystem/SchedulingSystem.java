@@ -12,8 +12,6 @@ import Student.Student;
 import java.io.Serializable;
 import QueueInfo.CountdownTimer;
 import ShoppingCart.ShoppingCartWindow;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,17 +34,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class SchedulingSystem implements Serializable {
 
     private final ArrayList<Course> availableCourses;
-    private static ArrayList<Student> systemUsers;
     private static String adminUsername;
-    public static int lastInputtedRow;//Maybe get rid of? Just write to new row regardless? To avoid overwriting
     private CountdownTimer countdownTimer;
     private Student currentStudent;
+    public static int lastInputtedRow;
     private boolean enableTimer;
 
     //No-argument constructor
     public SchedulingSystem() {
         availableCourses = new ArrayList<>();
-        systemUsers = new ArrayList<>();
         adminUsername = "administrator";
         lastInputtedRow = 0;
         enableTimer();
@@ -111,10 +107,6 @@ public class SchedulingSystem implements Serializable {
     public void addCourse(Course newCourse) {
         availableCourses.add(newCourse);
         System.out.println("Successfully added: " + newCourse.getDeptName());
-    }
-
-    public void removeCourse() {
-
     }
 
     public ArrayList<Course> getCourses() {

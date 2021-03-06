@@ -20,7 +20,7 @@ public class QueuePositionTimer extends CountdownTimer {
     }
 
     @Override
-    protected QueueInfo.TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
+    protected TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         return new QueuePositionTimeUpdater(initialTimeInSeconds, remainingSeconds, timerWindow);
     }
 

@@ -26,7 +26,7 @@ public class TimeInfoTimer extends CountdownTimer {
     }
 
     @Override
-    protected QueueInfo.TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
+    protected TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         return new TimeInfoUpdater(initialTimeInSeconds, remainingSeconds, timerWindow);
     }
 

@@ -30,6 +30,12 @@ public class NoInfoTimer extends CountdownTimer {
         
     }
     
+    /**
+     * Blank because for a NoInfoTimer there is no QueueJumpDisplay to show
+     * @param currentTime
+     * @param queueJumpDisplay
+     * 
+     */
     @Override
     void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay){
         
