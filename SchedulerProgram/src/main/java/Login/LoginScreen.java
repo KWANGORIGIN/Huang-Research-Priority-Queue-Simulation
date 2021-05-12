@@ -20,7 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- *
+ * JFrame that acts as the LoginScreen for the program
  * @author Kevin Wang
  */
 public class LoginScreen extends javax.swing.JFrame {
@@ -34,6 +34,10 @@ public class LoginScreen extends javax.swing.JFrame {
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
     }
     
+    /**
+     * This is the constructor to be used. It takes in a SchedulingSystem object
+     * @param schedulingSystem SchedulingSystem object that will be used throughout the system
+     */
     public LoginScreen(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
@@ -107,12 +111,6 @@ public class LoginScreen extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 36, 0, 0);
         getContentPane().add(passwordLabel, gridBagConstraints);
-
-        usernameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameTextFieldActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -145,7 +143,7 @@ public class LoginScreen extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 4, 0, 62);
         getContentPane().add(passwordField, gridBagConstraints);
 
-        jLabel1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("KSU_8027.jpg")));
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\wanga\\Documents\\NetBeansProjects\\Dynamic-queue-scheduler\\SchedulerProgram\\src\\main\\resources\\KSU_8027.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -159,11 +157,11 @@ public class LoginScreen extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameTextFieldActionPerformed
-
+    
+    /**
+     * Event handler for when the loginButton is pressed. Creates a ShoppingCartWindow for user to sign up to courses with.
+     * @param evt 
+     */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
         //Imports or creates workbook students.xlsx depending on if file exists
@@ -251,7 +249,11 @@ public class LoginScreen extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_loginButtonActionPerformed
-
+    
+    /**
+     * Event handler that ensures the SchedulingSystem object is saved to a file when the LoginScreen is closed
+     * @param evt 
+     */
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         //Outputs scheduling system to file
         

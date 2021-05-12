@@ -16,7 +16,15 @@ import SchedulingSystem.*;
 import java.io.*;
 import javax.swing.JOptionPane;
 
+/**
+ * Main class for the program that contains the main method.
+ * @author Kevin Wang 
+ */
 public class Main {
+    /**
+     * Main method for the entire program. Creates a SchedulingSystem object if one doesn't already exist before opening an AdministratorWindow.
+     * @param args 
+     */
     public static void main(String[] args){
         
         Scanner input = new Scanner(System.in);
