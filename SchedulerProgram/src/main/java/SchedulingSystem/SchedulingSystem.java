@@ -356,7 +356,7 @@ public class SchedulingSystem implements Serializable {
 
                 in.close();
                 System.out.println("Successfully opened students.xlsx");
-                JOptionPane.showMessageDialog(null, "Successfully opened new students.xlsx");
+                JOptionPane.showMessageDialog(null, "Successfully opened students.xlsx");
             } catch (FileNotFoundException e) {
                 System.out.println("File not found. Creating new file...");
 
