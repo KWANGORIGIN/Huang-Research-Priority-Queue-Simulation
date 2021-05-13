@@ -12,8 +12,8 @@ import QueueInfo.TimeInfoTimer;
 import java.awt.event.WindowEvent;
 
 /**
- *
- * @author wanga
+ * JFrame that is used to set the countdown timer
+ * @author Kevin Wang
  */
 public class SetCountdownWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;

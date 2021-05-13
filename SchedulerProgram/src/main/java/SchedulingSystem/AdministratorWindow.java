@@ -15,19 +15,24 @@ import java.io.ObjectOutputStream;
 import javax.swing.SwingUtilities;
 
 /**
- *
- * @author wanga
+ * JFrame that acts as the Administrator Window for the program. It allows the user to do several things such as enabling/disabling the timer, 
+ * setting the Countdown timer, and the duration of that CountdownTimer.
+ * @author Kevin Wang
  */
 public class AdministratorWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
     
     /**
-     * Creates new form adminWindow
+     * Creates new form AdministratorWindow
      */
     public AdministratorWindow() {
         initComponents();
     }
     
+    /**
+     * Constructor to be used for creating a new form AdministratorWindow
+     * @param schedulingSystem SchedulingSystem object that is being used throughout the system
+     */
     public AdministratorWindow(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
@@ -72,11 +77,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
         disableTimerButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         addCourseButton.setText("Add Course");
         addCourseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +148,10 @@ public class AdministratorWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * (Should not be needed since default courses are currently hardcoded). Opens AddCourseWindow to add a course to the Scheduling System.
+     * @param evt 
+     */
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         AddCourseWindow newAddCourseWindow = new AddCourseWindow(schedulingSystem);
         newAddCourseWindow.setVisible(true);
@@ -155,6 +159,10 @@ public class AdministratorWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
+    /**
+     * Opens SetCountdownWindow to set countdown timer
+     * @param evt 
+     */
     private void changeQueueTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeQueueTimeActionPerformed
         //Get number of minutes and seconds for Timer countdown
         SetCountdownWindow newCountdownWindow = new SetCountdownWindow(schedulingSystem);
@@ -165,12 +173,20 @@ public class AdministratorWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_changeQueueTimeActionPerformed
 
+    /**
+     * Lists all Courses that the scheduling system contains
+     * @param evt 
+     */
     private void listAllCoursesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAllCoursesButtonActionPerformed
         schedulingSystem.printCourses();
         CourseListWindow courseListWindow = new CourseListWindow(schedulingSystem.getCourses());
         courseListWindow.setVisible(true);
     }//GEN-LAST:event_listAllCoursesButtonActionPerformed
 
+    /**
+     * Starts the experiment based off set parameters
+     * @param evt 
+     */
     private void startExperimentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startExperimentActionPerformed
         
         SwingUtilities.invokeLater(new Runnable(){
@@ -186,13 +202,6 @@ public class AdministratorWindow extends javax.swing.JFrame {
         //Closes this administrator window instance
         this.dispose();
     }//GEN-LAST:event_startExperimentActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-                                        
-        //Outputs info to Excel sheet
-        
-        
-    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

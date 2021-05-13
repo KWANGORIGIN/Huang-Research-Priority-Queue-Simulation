@@ -8,21 +8,25 @@ package SchedulingSystem;
 import Course.*;
 
 /**
- *
- * @author wanga
+ * JFrame that allows user to add courses to SchedulingSystem
+ * @author Kevin Wang
  */
 public class AddCourseWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
     private boolean addCourseButtonPressed;
 
     /**
-     * Creates new form addCourseWindow
+     * Creates new form AddCourseWindow
      */
     public AddCourseWindow() {
         initComponents();
         addCourseButtonPressed = false;
     }
     
+    /**
+     * Constructor that should be used to create a new form AddCourseWindow
+     * @param schedulingSystem SchedulingSystem object that is being used throughout the system
+     */
     public AddCourseWindow(SchedulingSystem schedulingSystem) {
         initComponents();
         this.schedulingSystem = schedulingSystem;
@@ -128,6 +132,10 @@ public class AddCourseWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handler that adds Course object to SchedulingSystem from info inputted
+     * @param evt 
+     */
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
         addCourseButtonPressed = true;
         
@@ -143,6 +151,10 @@ public class AddCourseWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
+    /**
+     * Event handler that handles the closing of the AddCourseWindow. It returns back to the adminWindow
+     * @param evt 
+     */
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if(!addCourseButtonPressed){
             AdministratorWindow adminWindow = new AdministratorWindow(schedulingSystem);

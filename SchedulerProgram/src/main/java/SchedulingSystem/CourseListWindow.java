@@ -9,7 +9,7 @@ import Course.Course;
 import java.util.ArrayList;
 
 /**
- *
+ * Window that appears when a user wants to view all the courses the scheduling system contains from AdministratorWindow.
  * @author Kevin Wang
  */
 public class CourseListWindow extends javax.swing.JFrame {
@@ -23,6 +23,10 @@ public class CourseListWindow extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Proper constructor for listing all the Courses the SchedulingSystem contains
+     * @param availableCourses List of availableCourses the scheduling system contains
+     */
     public CourseListWindow(ArrayList<Course> availableCourses){
         initComponents();
         this.availableCourses = availableCourses;
@@ -104,6 +108,9 @@ public class CourseListWindow extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Lists all the courses onto the window
+     */
     private void listCourses(){
         
         for(int course = 0; course < availableCourses.size(); course++){

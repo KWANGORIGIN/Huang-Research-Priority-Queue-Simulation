@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 /**
- *
- * @author wanga
+ * JFrame that allows user to add Sections to a Course object
+ * @author Kevin Wang
  */
 public class AddSectionsWindow extends javax.swing.JFrame {
     private Course workingCourse;
@@ -24,12 +24,18 @@ public class AddSectionsWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
     
     /**
-     * Creates new form addLectureWindow
+     * Creates new form AddSectionsWindow
      */
     public AddSectionsWindow() {
         initComponents();
     }
     
+    /**
+     * Constructor to be used to create new form AddSectionsWindow
+     * @param newCourse
+     * @param numOfSections
+     * @param schedulingSystem SchedulingSystem object that is being used throughout the system
+     */
     public AddSectionsWindow(Course newCourse, int numOfSections, SchedulingSystem schedulingSystem){
         initComponents();
         workingCourse = newCourse;
@@ -185,6 +191,10 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Adds a Section to Course object from the information provided
+     * @param evt 
+     */
     private void addSectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSectionButtonActionPerformed
         /*Insert info
         Then clear data as many times as there are sections and update counter so that I know how many more sections to add data for
@@ -219,6 +229,10 @@ public class AddSectionsWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addSectionButtonActionPerformed
 
+    /**
+     * Event handler that handles when the window closes. In this case, it writes the SchedulingSystem to a file and then reopens the AdminWindow
+     * @param evt 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //Outputs scheduling system to file
         

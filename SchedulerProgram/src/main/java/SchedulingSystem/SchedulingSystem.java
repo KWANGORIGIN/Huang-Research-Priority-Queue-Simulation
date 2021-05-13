@@ -28,8 +28,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- *
- * @author wanga
+ * Class that is utilized throughout the program. 
+ * It is used to keep track of all available courses, to keep track of the current student running the system, and managing the countdown timer.
+ * @author Kevin Wang
  */
 public class SchedulingSystem implements Serializable {
 
@@ -147,7 +148,8 @@ public class SchedulingSystem implements Serializable {
 
     /**
      * Checks whether the entered username is the Admin
-     *
+     * 
+     * @deprecated 
      * @param username
      * @return true if username is the adminUsername or false if not
      */
@@ -206,6 +208,10 @@ public class SchedulingSystem implements Serializable {
 
     /*
     exportToExcel Helper methods
+     */
+    /**
+     * exportToExcel() helper method that sets the headers for the Excel file
+     * @param newRow 
      */
     private void setHeaders(XSSFRow newRow) {
         for (int column = 0; column < 19; column++) {
@@ -273,6 +279,10 @@ public class SchedulingSystem implements Serializable {
         }
     }
 
+    /**
+     * exportToExcel() helper method that exports the current Student's info to the Excel file
+     * @param row 
+     */
     private void exportStudentInfo(XSSFRow row) {
         for (int column = 0; column < 19; column++) {
             Cell cell = row.createCell(column);
@@ -313,6 +323,11 @@ public class SchedulingSystem implements Serializable {
         }
     }
 
+    /**
+     * exportToExcel() helper method that finds the last inputted row in the Excel file. This is to ensure that the data is always inserted on the first row without data in it.
+     * @param sheet
+     * @return 
+     */
     public int findLastInputtedRow(XSSFSheet sheet) {
         int row = 0;
         Iterator<Row> iterator = sheet.iterator();
@@ -323,6 +338,9 @@ public class SchedulingSystem implements Serializable {
         return row;
     }
 
+    /**
+     * Exports experiment's results to an Excel file titled "students.xlsx"
+     */
     public void exportToExcel() {
 
         //Imports or creates workbook students.xlsx depending on if file exists
@@ -393,6 +411,10 @@ public class SchedulingSystem implements Serializable {
 
     }
     
+    /**
+     * Sets Penn State Icon on the JFrame passed into it
+     * @param targetWindow 
+     */
     public void setPSU_Icon(JFrame targetWindow){
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("psuIcon.jpg"));
         targetWindow.setIconImage(icon.getImage());
