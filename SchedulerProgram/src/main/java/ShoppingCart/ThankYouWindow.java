@@ -13,12 +13,16 @@ import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Window that displays "Thank You" and exports the experiment's data to the Excel file.
  * @author Kevin Wang
  */
 public class ThankYouWindow extends javax.swing.JFrame {
     private SchedulingSystem schedulingSystem;
     
+    /**
+     * Proper constructor to be used for creating ThankYouWindow.
+     * @param schedulingSystem 
+     */
     public ThankYouWindow(SchedulingSystem schedulingSystem){
         initComponents();
         this.schedulingSystem = schedulingSystem;
@@ -75,6 +79,10 @@ public class ThankYouWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handler for when the JFrame is closed that exports the data to an Excel file.
+     * @param evt 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         schedulingSystem.getCurrentStudent().setLoggedOutTime();
         schedulingSystem.exportToExcel();

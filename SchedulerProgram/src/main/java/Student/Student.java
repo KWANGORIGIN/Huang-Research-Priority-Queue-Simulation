@@ -10,7 +10,6 @@ import Course.*;
 import QueueInfo.CountdownTimer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +17,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 
 /**
- *
- * @author wanga
+ * Student class that is used to hold data about the user
+ * @author Kevin Wang
  */
 public class Student implements Serializable {
 
@@ -46,44 +45,80 @@ public class Student implements Serializable {
     /*
     Set Time Helper Method
     */
+    /**
+     * Returns the current time as a String formatted as "MM/dd/yyyy HH:mm:ss"
+     * @return 
+     */
     private String setTime(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
     
+    /**
+     * Sets the time the user logged in
+     */
     public void setLogInTime(){
         this.logInTime = setTime();
     }
     
+    /**
+     * Gets the time the user logged in as a String
+     * @return 
+     */
     public String getLogInTime(){
         return this.logInTime;
     }
     
+    /**
+     * Sets the time the countdown timer started
+     */
     public void setCountdownTimerStartedTime(){
         this.countdownTimerStartedTime = setTime();
     }
     
+    /**
+     * Gets the time the countdown timer started as a String
+     * @return 
+     */
     public String getCountdownTimerStartedTime(){
         return this.countdownTimerStartedTime;
     }
     
+    /**
+     * Sets the time the queue jump occurred
+     */
     public void setQueueJumpTime(){
         this.queueJumpTime = setTime();
     }
     
+    /**
+     * Gets the time the countdown timer started as a String
+     * @return 
+     */
     public String getQueueJumpTime(){
         return this.queueJumpTime;
     }
     
+    /**
+     * Sets the time the countdown timer ended
+     */
     public void setCountdowntimerEndedTime(){
         this.countdownTimerEndedTime = setTime();
     }
     
+    /**
+     * Gets the time the countdown timer started as a String
+     * @return 
+     */
     public String getCountdowntimerEndedTime(){
         return this.countdownTimerEndedTime;
     }
     
+    /**
+     * Gets the timer type assigned to this Student
+     * @return 
+     */
     public String getTimerType(){
         if(timerDisabled()){
             return timerDisabledMessage();
@@ -91,6 +126,10 @@ public class Student implements Serializable {
         return this.timer.getType();
     }
     
+    /**
+     * Gets the timer duration as a String
+     * @return 
+     */
     public String getTimeToWait(){
         if(timerDisabled()){
             return timerDisabledMessage();
@@ -98,6 +137,10 @@ public class Student implements Serializable {
         return this.timer.getDuration();
     }
     
+    /**
+     * Gets the time the queue jump will occur as a String
+     * @return 
+     */
     public String getTimeToQueueJump(){
         if(timerDisabled()){
             return timerDisabledMessage();
@@ -105,6 +148,10 @@ public class Student implements Serializable {
         return this.timer.getQueueJumpTime();
     }
     
+    /**
+     * Checks if timer is disabled
+     * @return 
+     */
     public boolean timerDisabled(){
         if(this.timer == null){
             return true;
@@ -112,16 +159,27 @@ public class Student implements Serializable {
         return false;
     }
     
+    /**
+     * Returns "Timer Disabled" String
+     * @return 
+     */
     public String timerDisabledMessage(){
         return "Timer Disabled";
     }
     
-    
-    
+    /**
+     * Saves time newCourse is signed up
+     * @param newCourse 
+     */
     public void addCourseSignUpTime(Course newCourse){
         this.timeCourseSignedUp.put(newCourse, setTime());
     }
     
+    /**
+     * Exports the times each courses was signed up for to the Excel file
+     * @param row
+     * @param columnPosition 
+     */
     public void exportCourseSignUpTimes(XSSFRow row, int columnPosition){
         Cell cell;
         System.out.println("Number of course times: " + timeCourseSignedUp.size());
@@ -137,16 +195,26 @@ public class Student implements Serializable {
         }
     }
     
+    /**
+     * Prints to Console all the Courses the Student is enrolled in. Used mostly for debugging.
+     */
     public void printCoursesEnrolled(){
         for(Map.Entry<Course, String> entry : timeCourseSignedUp.entrySet()){
             System.out.println(entry.getKey().getCourseName() + ": " + entry.getValue());
         }
     }
     
+    /**
+     * Sets the time the user logged out
+     */
     public void setLoggedOutTime(){
         this.loggedOutTime = setTime();
     }
     
+    /**
+     * Gets the timer the user logged out as String
+     * @return 
+     */
     public String getLoggedOutTime(){
         return this.loggedOutTime;
     }
@@ -167,12 +235,23 @@ public class Student implements Serializable {
         return this.username.matches(username);
     }
 
+    /**
+     * Enrolls Student in the Section and its associated Course
+     * @param newCourse
+     * @param enrolledSection 
+     */
     public void enrollCourse(Course newCourse, Section enrolledSection) {
         enrolledSection.addStudent(this);
         enrolledCourses.put(newCourse, enrolledSection);
         addCourseSignUpTime(newCourse);
     }
     
+    /**
+     * Checks if the Student is enrolled in the enrolled Section
+     * @param newCourse
+     * @param enrolledSection
+     * @return 
+     */
     public boolean isStudentEnrolledInCourse(Course newCourse, Section enrolledSection){
         if(enrolledSection.containsStudent(this.username)){
             System.out.println("Student already enrolled in course");
@@ -181,6 +260,10 @@ public class Student implements Serializable {
         return false;
     }
     
+    /**
+     * Prints the Student's enrolled courses to a table
+     * @param model 
+     */
     public void printEnrolledCoursesToTable(DefaultTableModel model){
         
         for(Map.Entry<Course, Section> entry : enrolledCourses.entrySet()){
@@ -196,16 +279,28 @@ public class Student implements Serializable {
         }
         
     }
-
+    
+    /**
+     * Gets the number of courses the Student is enrolled in
+     * @return 
+     */
     public int numOfEnrolledCourses() {
         return enrolledCourses.size();
     }
     
+    /**
+     * Checks if 2 courses have been added. This is so that when trying to add the third course the timer runs
+     * @return 
+     */
     public boolean runTimerCondition(){
 //        return false;
         return enrolledCourses.size() == 2;//2 courses have been added. So when trying to add third course timer runs
     }
     
+    /**
+     * Sets the row position the Student is in in the Excel file
+     * @param row 
+     */
     public void setRowPosition(int row){
         this.excelRowPosition = row;
     }
@@ -220,6 +315,10 @@ public class Student implements Serializable {
         return excelRowPosition;
     }
 
+    /**
+     * Gets the username of the Student
+     * @return 
+     */
     public String getUsername() {
         return this.username;
     }

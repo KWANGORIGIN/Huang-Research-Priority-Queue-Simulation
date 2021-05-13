@@ -10,11 +10,15 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 /**
- *
+ * Table Listener for the CourseInfoWindow's table
  * @author Kevin Wang
  */
 public class CourseInfoTableListener implements TableModelListener{
     
+    /**
+     * Event listener that resets all other rows to false when another row is selected
+     * @param e 
+     */
     @Override
     public void tableChanged(TableModelEvent e){
         int row = e.getFirstRow();

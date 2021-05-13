@@ -19,8 +19,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- *
- * @author wanga
+ * JFrame that displays all available Sections for user to select from
+ * @author Kevin Wang
  */
 public class CourseInfoWindow extends javax.swing.JFrame{
 
@@ -37,6 +37,13 @@ public class CourseInfoWindow extends javax.swing.JFrame{
         initComponents();
     }
 
+    /**
+     * Correct constructor to be used to create a new form CourseInfoWindow
+     * @param currentCourse
+     * @param currentStudent
+     * @param shoppingCart
+     * @param schedulingSystem 
+     */
     public CourseInfoWindow(Course currentCourse, Student currentStudent, ShoppingCartWindow shoppingCart, SchedulingSystem schedulingSystem) {
         initComponents();
         this.currentCourse = currentCourse;
@@ -156,6 +163,10 @@ public class CourseInfoWindow extends javax.swing.JFrame{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Adds course to shopping cart. Countdown timer will run if it is the third course being added.
+     * @param evt 
+     */
     private void addCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCourseButtonActionPerformed
 
         //Gets enrolledSection
@@ -201,6 +212,10 @@ public class CourseInfoWindow extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_addCourseButtonActionPerformed
 
+    /**
+     * Event listener that handles when the JFrame is being closed. It ensures the ShoppingCart updates the enrolled courses and saves the data about the Student to its file.
+     * @param evt 
+     */
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         
         this.shoppingCart.printStudentEnrolledCourses();
@@ -257,6 +272,9 @@ public class CourseInfoWindow extends javax.swing.JFrame{
         });
     }
 
+    /**
+     * Fills the table with all the Sections and their info for the particular Course
+     */
     protected void populate_Table_with_Course_Info() {
 //        CourseInfoTable model = (CourseInfoTable) courseTable.getModel();
         DefaultTableModel model = (DefaultTableModel) courseTable.getModel();

@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
- *
- * @author wanga
+ * JFrame that represents the Shopping cart for the user. The Enroll button is only enabled after 5 courses are added to the Shopping Cart.
+ * @author Kevin Wang
  */
 public class ShoppingCartWindow extends javax.swing.JFrame {
     private Student student;
@@ -46,7 +46,7 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
     }
     
     /**
-     * Creates new form ShoppingCart
+     * The proper constructor to be used. Creates new form ShoppingCart
      * @param student
      * @param schedulingSystem
      */
@@ -172,11 +172,6 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         getContentPane().add(shoppingCartTable, gridBagConstraints);
 
         searchbar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
-        searchbar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchbarActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -230,6 +225,10 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Searches for the course based off the user input. Will show "Invalid course name" if the course doesn't exist
+     * @param evt 
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         //CountdownTimer timer = schedulingSystem.getTimer();
         
@@ -284,11 +283,11 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         searchbar.setText("");
         
     }//GEN-LAST:event_searchButtonActionPerformed
-
-    private void searchbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchbarActionPerformed
-
+    
+    /**
+     * Event listener for the enroll button
+     * @param evt 
+     */
     private void enrollButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollButtonActionPerformed
         
         ThankYouWindow thankYouWindow = new ThankYouWindow(schedulingSystem);
@@ -297,6 +296,9 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_enrollButtonActionPerformed
     
+    /**
+     * Disables the enroll button until the user enrolls in 5 courses.
+     */
     private void disableEnrollButton(){
         enrollButton.setEnabled(false);//Disables JButton
         
@@ -354,6 +356,9 @@ public class ShoppingCartWindow extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Prints the courses the student has enrolled in into the JFrame's table.
+     */
     public void printStudentEnrolledCourses(){
         DefaultTableModel model = (DefaultTableModel) enrolledCoursesTable.getModel();
         System.out.println("Num of enrolled courses: " + student.numOfEnrolledCourses());
