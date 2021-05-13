@@ -8,11 +8,17 @@ package QueueInfo;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Time Updater for when No Information is to be displayed
  * @author Kevin Wang
  */
 public class NoInfoTimeUpdater extends TimeUpdater {
     
+    /**
+     * Constructor for the NoInfoTimeUpdater
+     * @param initialTimeInSeconds
+     * @param remainingSeconds
+     * @param timerWindow 
+     */
     public NoInfoTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         super(initialTimeInSeconds, remainingSeconds, timerWindow);
     }

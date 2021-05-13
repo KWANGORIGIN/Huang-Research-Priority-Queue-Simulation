@@ -10,7 +10,7 @@ import ShoppingCart.ShoppingCartWindow;
 import Student.Student;
 
 /**
- *
+ * JDialog window that is used to display Countdown. It contains a JTextPane called timerDisplay that is updated by the timer
  * @author Kevin Wang
  */
 public class CountdownWindow extends javax.swing.JDialog {
@@ -21,7 +21,7 @@ public class CountdownWindow extends javax.swing.JDialog {
     private ShoppingCartWindow shoppingCart;
 
     /**
-     * Creates new form CountdownDialog
+     * Creates new form CountdownWindow
      */
     public CountdownWindow(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -29,17 +29,28 @@ public class CountdownWindow extends javax.swing.JDialog {
     }
     
     /**
-     * Creates new form CountdownWindow
+     * Creates new form CountdownWindow. NOT RECOMMENDED FOR USE
      */
     public CountdownWindow() {
         initComponents();
     }
 
+    /**
+     * Creates new form CountdownWindow. NOT RECOMMENDED FOR USE
+     * @param timer 
+     */
     public CountdownWindow(CountdownTimer timer) {
         initComponents();
         this.timer = timer;
     }
     
+    /**
+     * Constructor to be used for creating new form CountdownWindow
+     * @param timer
+     * @param schedulingSystem
+     * @param currentStudent
+     * @param shoppingCart 
+     */
     public CountdownWindow(CountdownTimer timer, SchedulingSystem schedulingSystem, Student currentStudent, ShoppingCartWindow shoppingCart){
         initComponents();
         this.timer = timer;
@@ -94,13 +105,21 @@ public class CountdownWindow extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Event handler that ensures the ShoppingCartWindow updates its enrolled courses
+     * @param evt 
+     */
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         
         shoppingCart.printStudentEnrolledCourses();
         
     }//GEN-LAST:event_formWindowClosed
 
+    /**
+     * Updates timer display (JTextPane) with the latest current time
+     * @param currentTime Integer object to update the timer display with
+     */
     public void updateTimer(Integer currentTime) {
         timer.updateTimerDisplay(currentTime, timerDisplay);
 

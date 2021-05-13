@@ -6,7 +6,7 @@
 package QueueInfo;
 
 /**
- *
+ * JFrame that shows up when a queue jump occurs
  * @author Kevin Wang
  */
 public class QueueJumpWindow extends javax.swing.JFrame {
@@ -17,6 +17,11 @@ public class QueueJumpWindow extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Constructor to use that creates new form QueueJumpWindow
+     * @param timer CountdownTimer that will be used for setting the queueJumpDisplay JTextPane
+     * @param currentTime 
+     */
     public QueueJumpWindow(CountdownTimer timer, Integer currentTime){
         initComponents();
         timer.setQueueJumpDisplay(currentTime, queueJumpDisplay);
@@ -92,6 +97,10 @@ public class QueueJumpWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event listener that disposes the window when the OK button is pressed
+     * @param evt 
+     */
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         
         this.dispose();

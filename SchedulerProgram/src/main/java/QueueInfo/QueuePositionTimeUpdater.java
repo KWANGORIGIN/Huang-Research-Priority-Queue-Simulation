@@ -8,7 +8,7 @@ package QueueInfo;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Time Updater when Queue Position info is selected in AdminWindow
  * @author Kevin Wang
  */
 public class QueuePositionTimeUpdater extends TimeUpdater{

@@ -4,15 +4,24 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
 /**
- *
- * @author wanga
+ * NoInfoTimer that is used when the No Info option is selected in AdminWindow
+ * @author Kevin Wang
  */
 public class NoInfoTimer extends CountdownTimer {
 
+    /**
+     * Constructor for NoInfoTimer
+     * @param timeInMinutes
+     * @param timeToJump 
+     */
     public NoInfoTimer(int timeInMinutes, int timeToJump) {
         super(timeInMinutes, timeToJump);
     }
-
+    
+    /**
+     * Main method used for debugging
+     * @param args 
+     */
     public static void main(String[] args) {
 //        CountdownTimer testTimer = new NoInfoTimer(2, 2);
 //        testTimer.runCountdownTimer();

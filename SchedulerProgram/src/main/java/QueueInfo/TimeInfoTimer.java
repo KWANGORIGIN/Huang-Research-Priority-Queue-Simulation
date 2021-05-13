@@ -8,7 +8,7 @@ package QueueInfo;
 import javax.swing.JTextPane;
 
 /**
- *
+ * CountdownTimer for when Timer option is selected in SetCountdownWindow
  * @author Kevin Wang
  */
 public class TimeInfoTimer extends CountdownTimer {

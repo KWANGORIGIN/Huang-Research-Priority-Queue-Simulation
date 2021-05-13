@@ -1,12 +1,10 @@
 package QueueInfo;
 
-import javax.swing.JLabel;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 
 /**
- *
- * @author wanga
+ * CountdownTimer for when Queue Position information is selected in SetCountdownWindow
+ * @author Kevin Wang
  */
 public class QueuePositionTimer extends CountdownTimer {
 

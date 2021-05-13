@@ -10,7 +10,7 @@ import java.util.concurrent.Callable;
 import javax.swing.SwingUtilities; 
 
 /**
- *
+ * Abstract Class of TimeUpdater that is utilized when updating the timer
  * @author Kevin Wang
  */
 public abstract class TimeUpdater implements Callable<Integer> {
@@ -20,19 +20,35 @@ public abstract class TimeUpdater implements Callable<Integer> {
     int currentMinutes;
     CountdownWindow timerWindow;
 
+    /**
+     * Constructor that should be used for generic TimeUpdater
+     * @param initialTimeInSeconds integer of initial time in seconds
+     * @param remainingSeconds integer of remaining seconds
+     * @param timerWindow CountdownWindow to be updated
+     */
     TimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow) {
         this.initialTimeInSeconds = initialTimeInSeconds;
         this.currentSeconds = remainingSeconds;
         this.currentMinutes = remainingSeconds / 60;
         this.timerWindow = timerWindow;
     }
-
+    
+    /**
+     * Constructor for generic TimeUpdater
+     * @param initialTimeInSeconds
+     * @param remainingSeconds 
+     */
     TimeUpdater(int initialTimeInSeconds, int remainingSeconds) {
         this.initialTimeInSeconds = initialTimeInSeconds;
         this.currentSeconds = remainingSeconds;
         this.currentMinutes = remainingSeconds / 60;
     }
 
+    /**
+     * Called in CountdownTimer in runCountdownTimer by ScheduledFuture schedule()
+     * @return Integer of currentSeconds - 1
+     * @throws Exception 
+     */
     @Override
     public Integer call() throws Exception {
 
@@ -65,8 +81,15 @@ public abstract class TimeUpdater implements Callable<Integer> {
 //        showDialog();
 //
 //    }
-
+    
+    /**
+     * Shows JDialog of information depending on type of TimeUpdater
+     */
     abstract void showDialog();
+    
+    /**
+     * Updates timer unless NoInfoTimeUpdater
+     */
     void updateTimer() {
         timerWindow.updateTimer(currentMinutes);
     }

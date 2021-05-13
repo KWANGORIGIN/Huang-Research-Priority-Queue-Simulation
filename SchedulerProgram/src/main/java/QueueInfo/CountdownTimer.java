@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JTextPane;
 
 /**
- *
+ * Abstract class that defines methods for several CountdownTimers. It contains all the logic for running a Countdown timer.
  * @author wanga
  */
 public abstract class CountdownTimer implements Serializable {
@@ -27,6 +27,11 @@ public abstract class CountdownTimer implements Serializable {
     protected int timeToJump;
     protected boolean queueJump;
 
+    /**
+     * CountdownTimer constructor. Ex.) If timeToJump = 5 while timeInMinutes = 10 then after 5 minutes the timer should jump from 5 to 10 minutes as per Dr. Huang's specification
+     * @param timeInMinutes integer of how long the timer should run for in minutes
+     * @param timeToJump integer that represents when the timer should jump. 
+     */
     public CountdownTimer(int timeInMinutes, int timeToJump) {
         this.timeInMinutes = timeInMinutes;
         this.timeInSeconds = timeInMinutes * 60;
@@ -34,6 +39,12 @@ public abstract class CountdownTimer implements Serializable {
         queueJump = false;
     }
 
+    /**
+     * Method that runs the countdown timer.
+     * @param schedulingSystem SchedulingSystem object
+     * @param currentStudent Student who is currently running the system
+     * @param shoppingCart ShoppingCartWindow that is currently open
+     */
     public void runCountdownTimer(SchedulingSystem schedulingSystem, Student currentStudent, ShoppingCartWindow shoppingCart) {
 
         CountdownTimer = Executors.newScheduledThreadPool(1);
@@ -91,21 +102,50 @@ public abstract class CountdownTimer implements Serializable {
         }
 
     }
-
+    
+    /**
+     * Creates a time updater that helps update the time on the CountdownWindow
+     * @param initialTimeInSeconds integer of the initial time in seconds
+     * @param remainingSeconds integer of the remaining seconds
+     * @param timerWindow CountdownWindow to be updated
+     * @return 
+     */
     protected abstract TimeUpdater createTimeUpdater(int initialTimeInSeconds, int remainingSeconds, CountdownWindow timerWindow);
 
+    /**
+     * Updates timer display. Provides a message that contains information if not a NoInfoTimer
+     * @param currentTime Integer object of current time
+     * @param timerDisplay JTextPane of timerDisplay to be updated
+     */
     abstract void updateTimerDisplay(Integer currentTime, JTextPane timerDisplay);
 
+    /**
+     * Updates timer display when queue jump occurs. Provides a message that contains information if not a NoInfoTimer
+     * @param currentTime
+     * @param queueJumpDisplay 
+     */
     abstract void setQueueJumpDisplay(Integer currentTime, JTextPane queueJumpDisplay);
     
+    /**
+     * Gets String about type of timer
+     * @return String about type of timer
+     */
     public String getType(){
         return this.getClass().getName();
     }
     
+    /**
+     * Gets String of the timer's duration
+     * @return String of the timer's duration
+     */
     public String getDuration(){
         return Integer.toString(timeInMinutes);
     }
     
+    /**
+     * Gets String of when queue jump is to occur
+     * @return String of when queue jump is to occur
+     */
     public String getQueueJumpTime(){
         return Integer.toString(timeToJump / 60);
     }
