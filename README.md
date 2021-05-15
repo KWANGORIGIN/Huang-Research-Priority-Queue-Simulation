@@ -1,5 +1,12 @@
 # Interactive Evaluations for Enhanced Priority Queues Process
 
+## Team Members:
+
+**Kevin Wang (kvw5270@psu.edu)**
+- Software Engineering, Mathematics
+- Senior @ Penn State Behrend
+
+## Overall Description
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This program was developed for Dr. Yuan-Han Huang, of Penn State Behrend, for his research project: ‘Interactive Evaluations for Priority Queues Process’. This program is a simulation of a course scheduling system for a school. The program is simulating a system that implements a priority queue, where students with higher priority than other students can enroll in courses before the lower priority students. Examples of high priority students include athletes, fourth year / senior students, and honor students.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because high priority students will be able to jump ahead in a queue, lower priority students may have to deal with longer queue times when signing up for a course. However, queue data can be presented to these low priority students in several different ways. For this program, the experiment organizer can select three ways to present queue data to a user: estimated time remaining, the position in a queue, or no information provided. All three ways are set up as timers that need to be set up before the experiment can be run. This is further elaborated in Step 1.
