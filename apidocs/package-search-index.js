@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Course"},{"l":"Login"},{"l":"QueueInfo"},{"l":"SchedulingSystem"},{"l":"ShoppingCart"},{"l":"Student"}]
