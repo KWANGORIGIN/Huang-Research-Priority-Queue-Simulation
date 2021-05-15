@@ -15,4 +15,4 @@
 
 Additional Notes:\
 •	Code documentation can be found in the apidocs folder by clicking index.html.\
-•	Java 8 and above is required to run SchedulerProgram-Final.jar
+•	Java 8 and above is required to run the jar file
