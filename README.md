@@ -2,9 +2,12 @@
 
 ## Team Members:
 
-**Kevin Wang (kvw5270@psu.edu)**
+**Student Developer: Kevin Wang (kvw5270@psu.edu)**
 - Software Engineering, Mathematics
 - Senior @ Penn State Behrend
+
+**Faculty Researcher: Dr. Yuan-Han Huang (yxh25@psu.edu)**
+- Associate Professor of Industrial Engineering, Industrial Engineering and MMM Programs
 
 ## Overall Description
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This program was developed for Dr. Yuan-Han Huang, of Penn State Behrend, for his research project: ‘Interactive Evaluations for Priority Queues Process’. This program is a simulation of a course scheduling system for a school. The program is simulating a system that implements a priority queue, where students with higher priority than other students can enroll in courses before the lower priority students. Examples of high priority students include athletes, fourth year / senior students, and honor students.
