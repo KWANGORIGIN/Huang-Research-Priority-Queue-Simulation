@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.apache.poi.ss.usermodel.Cell;
@@ -143,7 +144,14 @@ public class LoginScreen extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 4, 0, 62);
         getContentPane().add(passwordField, gridBagConstraints);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\wanga\\Documents\\NetBeansProjects\\Dynamic-queue-scheduler\\SchedulerProgram\\src\\main\\resources\\KSU_8027.jpg")); // NOI18N
+//        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\wanga\\Documents\\NetBeansProjects\\Dynamic-queue-scheduler\\SchedulerProgram\\src\\main\\resources\\KSU_8027.jpg")); // NOI18N
+        try{
+            jLabel1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("KSU_8027.jpg")));
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Unable to load image");
+        }
+
         jLabel1.setText("jLabel1");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         gridBagConstraints = new java.awt.GridBagConstraints();
